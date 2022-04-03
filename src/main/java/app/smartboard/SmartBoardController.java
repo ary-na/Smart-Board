@@ -3,7 +3,7 @@ package app.smartboard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class SmartBoardController {
     @FXML
     private Label welcomeText;
 
