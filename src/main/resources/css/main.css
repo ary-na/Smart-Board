@@ -1,3 +1,30 @@
-.root {
-background-color: red;
+@font-face {
+    font-family: Lato-Thin;
+    src: url('../fonts/lato-thin.ttf');
 }
+
+@font-face {
+    font-family: Lato-Light;
+    src: url('../fonts/lato-light.ttf');
+}
+
+@font-face {
+    font-family: Lato-LightItalic;
+    src: url('../fonts/lato-light-italic.ttf');
+}
+
+@font-face {
+    font-family: Lato-Regular;
+    src: url('../fonts/lato-regular.ttf');
+}
+
+@font-face {
+    font-family: Lato-Bold;
+    src: url('../fonts/lato-bold.ttf');
+}
+
+.root {
+    -fx-background-color: pink;
+    -fx-font-family: Lato-Light;
+}
+
