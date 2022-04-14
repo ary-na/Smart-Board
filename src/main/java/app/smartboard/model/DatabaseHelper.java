@@ -10,6 +10,7 @@ public class DatabaseHelper {
     private static final String DATABASE_PASSWORD = "ArianS3910902";
     private static final String INSERT_QUERY = "INSERT INTO user (user_name, psw, first_name, last_name, profile_photo) VALUES (?, ?, ?, ?, ?)";
     private static final String SELECT_QUERY = "SELECT * FROM user WHERE user_name = ? AND psw = ?";
+    private static final String SELECT_QUOTE_QUERY = "SELECT * FROM quote WHERE quote_id = ?";
 
     private DatabaseHelper() { }
 
@@ -56,5 +57,25 @@ public class DatabaseHelper {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public String getQuote(int quoteID){
+        String quote = null;
+        try {
+            connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            if(connection != null){
+                PreparedStatement values = connection.prepareStatement(SELECT_QUOTE_QUERY); {
+                    values.setInt(1, quoteID);
+                    ResultSet result = values.executeQuery();
+                    if(result.next()){
+                        quote = result.getString(2);
+                    }
+                }
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return quote;
     }
 }

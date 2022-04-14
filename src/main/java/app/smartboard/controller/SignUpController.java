@@ -5,13 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CreateUserController {
+public class SignUpController {
 
     @FXML
-    private Button closeButton;
+    private Button cancelButton;
     @FXML
     private TextField userName;
     @FXML
@@ -23,16 +24,16 @@ public class CreateUserController {
     @FXML
     private TextField profilePhoto;
 
+    private Stage stage;
 
-    public void onCreateUserButtonClick() {
+
+    public void onSignUpButtonClick() {
 //        DatabaseHelper.createUser(userName.getText(), firstName.getText(), lastName.getText(), psw.getText(), profilePhoto.getText());
 //        System.out.println("User created");
     }
 
-    public void onCloseButtonClick(ActionEvent event) throws IOException {
-//        Stage stage = (Stage) closeButton.getScene().getWindow();
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/login-view.fxml"));
-//        stage.setScene(new Scene(fxmlLoader.load()));
-        SceneHelper.getSceneHelperInstance().changeScene("view/login-view.fxml");
+    public void onCancelButtonClick(ActionEvent event) throws IOException {
+        stage = (Stage) cancelButton.getScene().getWindow();
+        SceneHelper.getSceneHelperInstance().changeScene(stage, "view/log-in-view.fxml");
     }
 }

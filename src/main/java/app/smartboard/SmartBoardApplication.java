@@ -16,12 +16,11 @@ public class SmartBoardApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // Set the primary stage and get scene, switch root node
-        SceneHelper.getSceneHelperInstance().setStage(stage);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/log-in-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1100, 800);
         stage.setTitle("Smart Board");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 }

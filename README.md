@@ -3,11 +3,17 @@ Smart Board is a desktop-based Kanban-style application for managing personal wo
 
 ## References
 
+A.b, 2022. close fxml window by code, javafx. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/13567019/close-fxml-window-by-code-javafx> [Accessed 13 April 2022].
+
+Bucky, 2022. JavaFX Java GUI Tutorial. [online] Youtube.com. Available at: <https://www.youtube.com/watch?v=FLkOX4Eez6o&t=14s> [Accessed 13 April 2022].
+
 Chappell, G. and Hildebrandt, N., 2022. Getting Started with JavaFX: Using FXML to Create a User Interface | JavaFX 2 Tutorials and Documentation. [online] Docs.oracle.com. Available at: <https://docs.oracle.com/javafx/2/get_started/fxml_tutorial.htm> [Accessed 3 April 2022].
 
 Diwan, A., 2022. Connecting to a MySQL database with Java. [online] Tutorialspoint.com. Available at: <https://www.tutorialspoint.com/connecting-to-a-mysql-database-with-java> [Accessed 11 April 2022].
 
 Fadatare, R., 2022. Login Form Using JavaFX with MySQL Database. [online] Javaguides.net. Available at: <https://www.javaguides.net/2019/07/login-form-using-javafx-with-mysql-database.html> [Accessed 11 April 2022].
+
+Goodreads.com. 2022. Inspirational Quotes (65374 quotes). [online] Available at: <https://www.goodreads.com/quotes/tag/inspirational?page=2> [Accessed 14 April 2022].
 
 Google Fonts. 2022. Google Fonts. [online] Available at: <https://fonts.google.com/> [Accessed 3 April 2022].
 
@@ -21,11 +27,19 @@ Jetbrains.com. 2022. IntelliJ IDEA Ultimate – the IDE for Spring development. 
 
 Kozlova, A., 2022. Support for JavaFX 2 CSS in IntelliJ IDEA 12.1 | The IntelliJ IDEA Blog. [online] The JetBrains Blog. Available at: <https://blog.jetbrains.com/idea/2013/03/support-for-javafx-2-css-in-intellij-idea-121/> [Accessed 3 April 2022].
 
+MadProgrammer, 2022. retrieving value from database in java. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/12773076/retrieving-value-from-database-in-java> [Accessed 14 April 2022].
+
+Mandliya, A., 2022. java random number between 1 and 10 - Java2Blog. [online] Java2Blog. Available at: <https://java2blog.com/java-random-number-1-10/> [Accessed 14 April 2022].
+
+Mevada, R., 2022. How can I style a JavaFX menu and its items in CSS?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/21912946/how-can-i-style-a-javafx-menu-and-its-items-in-css?noredirect=1&lq=1> [Accessed 14 April 2022].
+
 Pethani, A., 2022. Switching between Scenes (Screens) in JavaFx using the FXML. [online] Gist. Available at: <https://gist.github.com/pethaniakshay/302072fda98098a24ce382a361bdf477> [Accessed 11 April 2022].
 
 Reddy, A., 2022. Create a new database with MySQL Workbench?. [online] Tutorialspoint.com. Available at: <https://www.tutorialspoint.com/create-a-new-database-with-mysql-workbench> [Accessed 11 April 2022].
 
 Ruzicka, V., 2022. JavaFX Tutorial: CSS Styling. [online] Vojtech Ruzicka's Programming Blog. Available at: <https://www.vojtechruzicka.com/javafx-css/> [Accessed 3 April 2022].
+
+Slaw, 2022. Can I only target bottom border at JavaFX Styling?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/60682935/can-i-only-target-bottom-border-at-javafx-styling> [Accessed 14 April 2022].
 
 Sourcecodeexamples.net. 2022. JavaFX JDBC MySQL Database Example. [online] Available at: <https://www.sourcecodeexamples.net/2020/04/javafx-jdbc-mysql-database-example.html> [Accessed 11 April 2022].
 

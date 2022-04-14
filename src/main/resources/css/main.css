@@ -1,30 +1,124 @@
+/* FONT-FACE ******************************************************************************************* */
 @font-face {
-    font-family: Lato-Thin;
-    src: url('../fonts/lato-thin.ttf');
+    -fx-font-family: "just another hand regular";
+    src: url('../fonts/just-another-hand-regular.ttf');
 }
 
 @font-face {
-    font-family: Lato-Light;
+    -fx-font-family: "lato light";
     src: url('../fonts/lato-light.ttf');
 }
 
 @font-face {
-    font-family: Lato-LightItalic;
-    src: url('../fonts/lato-light-italic.ttf');
-}
-
-@font-face {
-    font-family: Lato-Regular;
+    -fx-font-family: "lato regular";
     src: url('../fonts/lato-regular.ttf');
 }
 
 @font-face {
-    font-family: Lato-Bold;
+    -fx-font-family: "lato bold";
     src: url('../fonts/lato-bold.ttf');
 }
+/* ----------------------------------------------------------------------------------------------------- */
 
+/* ROOT ************************************************************************************************ */
 .root {
-    -fx-background-color: pink;
-    -fx-font-family: Lato-Light;
+    -fx-background-color: #FFFEFC;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* MENU BAR ******************************************************************************************** */
+.menu-bar {
+    -fx-background-color: #FFFEFC;
+    -fx-border-color: transparent transparent #EF8354 transparent;
 }
 
+.menu-bar .label {
+    -fx-text-fill: #000000;
+}
+
+.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
+    -fx-background-color: #EF8354;
+}
+
+.context-menu {
+    -fx-background-color: #FFFEFC;
+    -fx-border-color: #FFFEFC;
+}
+
+.menu-item .label {
+    -fx-text-fill: #000000;
+}
+
+.menu-item:focused {
+    -fx-background-color: #EF8354;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* LABEL *********************************************************************************************** */
+.label {
+    -fx-text-fill: #84837E;
+    -fx-font-size: 12px;
+    -fx-font-family: "lato light";
+}
+
+.label-scene-title {
+    -fx-font-family: "just another hand regular";
+    -fx-font-size: 60px;
+    -fx-text-fill: #4f5d75;
+}
+
+.label-username {
+    -fx-font-family: "just another hand regular";
+    -fx-font-size: 28px;
+    -fx-text-fill: #4f5d75;
+}
+
+.label-quote {
+    -fx-font-family: "lato bold";
+}
+
+.label-text-field {
+    -fx-font-family: "lato regular";
+    -fx-font-size: 12px;
+    -fx-text-fill: #84837E;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* HYPERLINK ******************************************************************************************* */
+.hyperlink {
+    -fx-text-fill: #4f5d75;
+    -fx-font-size: 14px;
+    -fx-font-family: "lato regular";
+    -fx-smooth: smooth;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* TEXT FIELD ****************************************************************************************** */
+.text-field {
+    -fx-font-family: "lato light";
+    -fx-background-color: #F7F7F4;
+    -fx-text-fill: black;
+    -fx-background-radius: 4px;
+    -fx-border-color: #E0E0DD;
+    -fx-border-radius: 4px;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* BUTTON ********************************************************************************************** */
+.button {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #4f5d75;
+    -fx-background-radius: 4px;
+    -fx-font-size: 15px;
+    -fx-cursor: pointer;
+    -fx-border-color: #4f5d75;
+    -fx-border-radius: 4px;
+    -fx-font-family: "lato light";
+}
+
+.cancel-button, .button-log-out {
+    -fx-background-color: #F7F7F4;
+    -fx-border-color: #4f5d75;
+    -fx-text-fill: #4f5d75;
+}
+/* ----------------------------------------------------------------------------------------------------- */

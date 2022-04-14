@@ -11,9 +11,9 @@ import java.util.Objects;
 public class SceneHelper {
 
     private static SceneHelper sceneHelperInstance;
-    private Stage stage;
 
-    private SceneHelper() { }
+    private SceneHelper() {
+    }
 
     public synchronized static SceneHelper getSceneHelperInstance() {
         if (sceneHelperInstance == null)
@@ -21,11 +21,7 @@ public class SceneHelper {
         return sceneHelperInstance;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void changeScene(String fxml) throws IOException {
+    public void changeScene(Stage stage, String fxml) throws IOException {
         Parent pane = FXMLLoader.load(Objects.requireNonNull(SmartBoardApplication.class.getResource(fxml)));
         stage.getScene().setRoot(pane);
     }
