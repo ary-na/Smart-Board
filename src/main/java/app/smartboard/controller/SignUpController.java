@@ -1,5 +1,6 @@
 package app.smartboard.controller;
 
+import app.smartboard.model.DatabaseHelper;
 import app.smartboard.model.SceneHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,22 +15,21 @@ public class SignUpController {
     @FXML
     private Button cancelButton;
     @FXML
-    private TextField userName;
+    private TextField username;
     @FXML
     private TextField firstName;
     @FXML
     private TextField lastName;
     @FXML
-    private TextField psw;
-    @FXML
-    private TextField profilePhoto;
+    private TextField password;
+
 
     private Stage stage;
 
 
     public void onSignUpButtonClick() {
-//        DatabaseHelper.createUser(userName.getText(), firstName.getText(), lastName.getText(), psw.getText(), profilePhoto.getText());
-//        System.out.println("User created");
+        DatabaseHelper.getDatabaseHelperInstance().createUser(username.getText(), firstName.getText(), lastName.getText(), password.getText());
+        System.out.println("User created");
     }
 
     public void onCancelButtonClick(ActionEvent event) throws IOException {

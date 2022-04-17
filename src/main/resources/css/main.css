@@ -5,8 +5,13 @@
 }
 
 @font-face {
-    -fx-font-family: "lato light";
-    src: url('../fonts/lato-light.ttf');
+    -fx-font-family: "lato bold";
+    src: url('../fonts/lato-bold.ttf');
+}
+
+@font-face {
+    -fx-font-family: "lato italic";
+    src: url('../fonts/lato-italic.ttf');
 }
 
 @font-face {
@@ -15,8 +20,8 @@
 }
 
 @font-face {
-    -fx-font-family: "lato bold";
-    src: url('../fonts/lato-bold.ttf');
+    -fx-font-family: "lato light";
+    src: url('../fonts/lato-light.ttf');
 }
 /* ----------------------------------------------------------------------------------------------------- */
 
@@ -74,7 +79,7 @@
 }
 
 .label-quote {
-    -fx-font-family: "lato bold";
+    -fx-font-family: "lato italic";
 }
 
 .label-text-field {

@@ -4,23 +4,18 @@ import java.io.Serializable;
 
 public class User implements Serializable, Login {
 
-    private String userName;
-    private String psw;
+    private String username;
+    private String password;
     private Profile profile;
 
-    public User(String userName, String psw, Profile profile){
-        this.userName = userName;
-        this.psw = psw;
+    public User(String username, String password, Profile profile){
+        this.username = username;
+        this.password = password;
         this.profile = profile;
     }
 
     @Override
     public void login() {
-
-    }
-
-    @Override
-    public void logout() {
 
     }
 }

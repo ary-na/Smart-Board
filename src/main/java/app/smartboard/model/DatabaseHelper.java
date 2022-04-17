@@ -4,15 +4,16 @@ import java.sql.*;
 
 public class DatabaseHelper {
     private static DatabaseHelper databaseHelperInstance;
-    private Connection connection = null;
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/smart_board?useSSL=false";
-    private static final String DATABASE_USERNAME = "root";
-    private static final String DATABASE_PASSWORD = "ArianS3910902";
-    private static final String INSERT_QUERY = "INSERT INTO user (user_name, psw, first_name, last_name, profile_photo) VALUES (?, ?, ?, ?, ?)";
-    private static final String SELECT_QUERY = "SELECT * FROM user WHERE user_name = ? AND psw = ?";
-    private static final String SELECT_QUOTE_QUERY = "SELECT * FROM quote WHERE quote_id = ?";
+    private PreparedStatement statement;
+    private ResultSet result;
+    private int success;
+    private static final String INSERT_USER = "INSERT INTO user (username, password) VALUES (?, ?)";
+    private static final String INSERT_PROFILE = "INSERT INTO profile (username, first_name, last_name) VALUES (?, ?, ?)";
 
-    private DatabaseHelper() { }
+    private static final String SELECT_USER_QUERY = "SELECT * FROM user WHERE username = ? AND password = ?";
+    private static final String SELECT_QUOTE_QUERY = "SELECT * FROM quote WHERE ROWID = ?";
+
+    private DatabaseHelper() {}
 
     public synchronized static DatabaseHelper getDatabaseHelperInstance() {
         if (databaseHelperInstance == null)
@@ -20,61 +21,63 @@ public class DatabaseHelper {
         return databaseHelperInstance;
     }
 
-    public void createUser(String userName, String psw, String firstName, String lastName, String profilePhoto) {
+    private Connection connection() {
+        Connection connection = null;
+        final String DATABASE_URL = "jdbc:sqlite:sb.db";
         try {
-            connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-            if(connection != null){
-                PreparedStatement values = connection.prepareStatement(INSERT_QUERY); {
-                    values.setString(1, userName);
-                    values.setString(2, psw);
-                    values.setString(3, firstName);
-                    values.setString(4, lastName);
-                    values.setString(5, profilePhoto);
-                    values.executeUpdate();
+            connection = DriverManager.getConnection(DATABASE_URL);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return connection;
+    }
+
+    public void createUser(String username, String firstName, String lastName, String password) {
+        try (Connection connection = this.connection();
+             PreparedStatement firstStatement = connection.prepareStatement(INSERT_USER)) {
+            firstStatement.setString(1, username);
+            firstStatement.setString(2, password);
+            success = firstStatement.executeUpdate();
+            if(success > 0){
+                PreparedStatement secondStatement = connection.prepareStatement(INSERT_PROFILE); {
+                    secondStatement.setString(1, username);
+                    secondStatement.setString(2, firstName);
+                    secondStatement.setString(3, lastName);
+                    secondStatement.executeUpdate();
                 }
             }
-
-        }catch (SQLException e){
-            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public boolean validate(String userName, String psw) {
-        try {
-            connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-            if(connection != null){
-                PreparedStatement values = connection.prepareStatement(SELECT_QUERY); {
-                    values.setString(1, userName);
-                    values.setString(2, psw);
-                    ResultSet result = values.executeQuery();
-                    if (result.next()){
-                        return true;
-                    }
-                }
+    public boolean validate(String username, String password) {
+        try (Connection connection = this.connection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_USER_QUERY)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                return true;
             }
-
-        }catch (SQLException e){
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return false;
     }
 
-    public String getQuote(int quoteID){
+    public String getQuote(int rowID) {
         String quote = null;
-        try {
-            connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-            if(connection != null){
-                PreparedStatement values = connection.prepareStatement(SELECT_QUOTE_QUERY); {
-                    values.setInt(1, quoteID);
-                    ResultSet result = values.executeQuery();
-                    if(result.next()){
-                        quote = result.getString(2);
-                    }
-                }
+        try (Connection connection = this.connection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_QUOTE_QUERY)) {
+            statement.setInt(1, rowID);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                quote = result.getString(1);
             }
-
-        }catch (SQLException e){
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return quote;
     }

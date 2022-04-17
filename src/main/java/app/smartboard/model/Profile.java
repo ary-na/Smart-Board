@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class Profile {
     private String firstName;
     private String lastName;
-    private String profilePhoto;
+    private Byte[] profilePhoto;
 
-    public Profile(String firstName, String lastName, String profilePhoto) {
+    public Profile(String firstName, String lastName, Byte[] profilePhoto) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.profilePhoto = profilePhoto;
@@ -22,7 +22,7 @@ public class Profile {
         return lastName;
     }
 
-    public String getProfilePhoto() {
+    public Byte[] getProfilePhoto() {
         return profilePhoto;
     }
 
@@ -35,7 +35,7 @@ public class Profile {
         this.lastName = lastName;
     }
 
-    public void setProfilePhoto(String profilePhoto) {
+    public void setProfilePhoto(Byte[] profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
 }
