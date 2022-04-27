@@ -1,21 +1,27 @@
 package app.smartboard.controller;
 
-import app.smartboard.SmartBoardApplication;
 import app.smartboard.model.*;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Random;
 
 public class WorkspaceController {
 
+    @FXML
+    public ImageView profilePhotoWorkspace;
+    @FXML
+    public Label firstNameLabelWorkspace;
     @FXML
     public TabPane tabPane;
     @FXML
@@ -24,13 +30,11 @@ public class WorkspaceController {
     @FXML
     private Label quoteLabel;
 
-    public void initialize(){
-        int min = 1;
-        int max = 10;
+    public void initialize() {
+        profilePhotoWorkspace.setImage(new Image(new ByteArrayInputStream(Model.getModelInstance().getCurrentUser().getProfile().getProfilePhoto())));
+        firstNameLabelWorkspace.setText(Model.getModelInstance().getCurrentUser().getProfile().getFirstName());
         Random random = new Random();
-        int no = random.nextInt(max) + min;
-        String quote = DatabaseHelper.getDatabaseHelperInstance().getQuote(no);
-        quoteLabel.setText(quote);
+        quoteLabel.setText(Model.getModelInstance().getDatabaseHelper().getQuote(random.nextInt(10) + 1));
     }
 
     public void onProfileButtonClick(ActionEvent event) throws IOException {
@@ -41,14 +45,15 @@ public class WorkspaceController {
         Stage stage = (Stage) logOutButton.getScene().getWindow();
         stage.close();
         StageHelper.getStageHelperInstance().changeStage("Smart Board", "view/log-in-view.fxml");
-
     }
 
-    public void onNewProjectMenuItemClicked(ActionEvent actionEvent) throws IOException {
-        StageHelper.getStageHelperInstance().createStage("Enter project name", "view/confirm-name-view.fxml");
-        Model project = new Project("project 1");
+    public void onNewProjectMenuItemClicked(ActionEvent event) throws IOException {
 
-        Tab tab = new Tab("project1");
+        StageHelper.getStageHelperInstance().createStage("Create Project", "view/confirm-name-view.fxml");
+        NameableFactory nameableFactory = new NameableFactory();
+        Nameable nameable = nameableFactory.createNameable("Project", ControllerHelper.getControllerHelperInstance().getName());
+        Tab tab = new Tab(nameable.getName());
         tabPane.getTabs().add(tab);
+        GridPane gridPane = new GridPane();
     }
 }

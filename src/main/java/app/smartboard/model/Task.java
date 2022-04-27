@@ -3,7 +3,7 @@ package app.smartboard.model;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class Task extends Model {
+public class Task extends Nameable {
 
     private String description;
     private Date dueDate;

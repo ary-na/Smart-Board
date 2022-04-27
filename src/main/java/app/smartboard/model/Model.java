@@ -1,17 +1,32 @@
 package app.smartboard.model;
 
-public abstract class Model {
-    private String name;
+import app.smartboard.model.database.DatabaseHelper;
 
-    public Model(String name) {
-        this.name = name;
+public class Model {
+
+    private static Model modelInstance;
+    private final DatabaseHelper databaseHelper;
+    private User currentUser;
+
+    public Model() {
+        this.databaseHelper = new DatabaseHelper();
     }
 
-    public String getName() {
-        return name;
+    public synchronized static Model getModelInstance() {
+        if (modelInstance == null)
+            modelInstance = new Model();
+        return modelInstance;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public DatabaseHelper getDatabaseHelper() {
+        return this.databaseHelper;
+    }
+
+    public User getCurrentUser() {
+        return this.currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }

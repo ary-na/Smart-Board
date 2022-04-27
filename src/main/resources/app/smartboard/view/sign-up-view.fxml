@@ -28,7 +28,7 @@
                 <VBox alignment="CENTER_LEFT" spacing="15.0">
                     <children>
                         <Label styleClass="label-text-field" text="Username"/>
-                        <TextField fx:id="username" promptText="Enter your username">
+                        <TextField fx:id="username" promptText="Enter a username">
                             <padding>
                                 <Insets bottom="12.0" left="8.0" right="8.0" top="12.0"/>
                             </padding>
@@ -46,7 +46,7 @@
                             </padding>
                         </TextField>
                         <Label styleClass="label-text-field" text="Password"/>
-                        <PasswordField fx:id="password" promptText="Enter your password">
+                        <PasswordField fx:id="password" promptText="Enter a password">
                             <padding>
                                 <Insets bottom="12.0" left="8.0" right="8.0" top="12.0"/>
                             </padding>

@@ -1,6 +1,8 @@
 package app.smartboard.controller;
 
-import app.smartboard.model.DatabaseHelper;
+import app.smartboard.model.Model;
+import app.smartboard.model.User;
+import app.smartboard.model.database.DatabaseHelper;
 import app.smartboard.model.SceneHelper;
 import app.smartboard.model.StageHelper;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LogInController {
 
@@ -30,11 +33,12 @@ public class LogInController {
 
 
     @FXML
-    public void onLogInButtonClick() throws IOException {
+    public void onLogInButtonClick() throws SQLException, IOException, ClassNotFoundException {
         stage = (Stage) logInButton.getScene().getWindow();
-        boolean loggedIn = DatabaseHelper.getDatabaseHelperInstance().validate(username.getText(), psw.getText());
-        System.out.println(loggedIn);
-        if (loggedIn) {
+        User user = Model.getModelInstance().getDatabaseHelper().getUser(username.getText(), psw.getText());
+        Model.getModelInstance().setCurrentUser(user);
+        System.out.println(user);
+        if (user != null) {
             stage.close();
             StageHelper.getStageHelperInstance().changeStage("Smart Board", "view/workspace-view.fxml");
         }

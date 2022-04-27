@@ -2,7 +2,7 @@ package app.smartboard.model;
 
 import java.util.LinkedList;
 
-public class Column extends Model {
+public class Column extends Nameable {
 
     private final LinkedList<Task> task;
 

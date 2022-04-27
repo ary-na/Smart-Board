@@ -1,10 +1,8 @@
 package app.smartboard.model;
 
-import javafx.scene.paint.Color;
-
 import java.util.LinkedList;
 
-public class Project extends Model implements DefaultProject {
+public class Project extends Nameable implements DefaultProject {
 
     private boolean isDefault;
     private final LinkedList<Column> column;

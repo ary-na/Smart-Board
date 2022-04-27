@@ -1,13 +1,16 @@
 package app.smartboard.model;
 
 import java.io.Serializable;
-
-public class Profile {
+public class Profile implements Serializable {
     private String firstName;
     private String lastName;
-    private Byte[] profilePhoto;
+    private byte[] profilePhoto;
 
-    public Profile(String firstName, String lastName, Byte[] profilePhoto) {
+    public Profile() {
+
+    }
+
+    public Profile(String firstName, String lastName, byte[] profilePhoto) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.profilePhoto = profilePhoto;
@@ -22,7 +25,7 @@ public class Profile {
         return lastName;
     }
 
-    public Byte[] getProfilePhoto() {
+    public byte[] getProfilePhoto() {
         return profilePhoto;
     }
 
@@ -35,7 +38,7 @@ public class Profile {
         this.lastName = lastName;
     }
 
-    public void setProfilePhoto(Byte[] profilePhoto) {
+    public void setProfilePhoto(byte[] profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
 }
