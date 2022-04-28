@@ -18,14 +18,14 @@
             <children>
             <Button fx:id="imageViewButton" onAction="#onImageViewButtonClicked" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" textAlignment="CENTER">
                <graphic>
-                  <ImageView fx:id="profilePhotoEditProfile" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profilePhotoImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../assets/default-profile-photo.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-                <Label fx:id="firstNameLabelEditProfile" alignment="CENTER" contentDisplay="CENTER" styleClass="label-username" text="Arian" textAlignment="CENTER" />
+                <Label fx:id="firstNameLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="label-username" text="Arian" textAlignment="CENTER" />
             </children>
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

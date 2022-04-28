@@ -6,9 +6,7 @@ public class Profile implements Serializable {
     private String lastName;
     private byte[] profilePhoto;
 
-    public Profile() {
-
-    }
+    public Profile() {}
 
     public Profile(String firstName, String lastName, byte[] profilePhoto) {
         this.firstName = firstName;

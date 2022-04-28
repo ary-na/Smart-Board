@@ -37,6 +37,8 @@ Halim, B., 2022. How to get Text from fxml TextField. [online] Stack Overflow. A
 
 Hotzst, Ryzhikov, E. and MrEbbinghaus, 2022. How to switch scenes in JavaFX. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/37200845/how-to-switch-scenes-in-javafx> [Accessed 11 April 2022].
 
+ItachiUchiha, 2022. How to close and iconify a JavaFx stage. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/22192484/how-to-close-and-iconify-a-javafx-stage> [Accessed 28 April 2022].
+
 Jenkov, J., 2022. JavaFX TabPane. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/tabpane.html> [Accessed 27 April 2022].
 
 Jetbrains.com. 2022. IntelliJ IDEA Ultimate – the IDE for Spring development. [online] Available at: <https://www.jetbrains.com/lp/intellij-frameworks/> [Accessed 3 April 2022].

@@ -35,12 +35,10 @@ public class StageHelper {
         stage.show();
     }
 
-    // Check this link and if worked add it to the readme file
-    // https://stackoverflow.com/questions/22192484/how-to-close-and-iconify-a-javafx-stage
-    public void createStage(Stage Owner, String title, String fxml) throws IOException {
+    public void createChildStage(Stage owner, String title, String fxml) throws IOException {
         stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(stage);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(owner);
         FXMLLoader fxmlLoader = new FXMLLoader(SmartBoardApplication.class.getResource(fxml));
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);

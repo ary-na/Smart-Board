@@ -3,14 +3,12 @@ package app.smartboard.controller;
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.model.ControllerHelper;
 import app.smartboard.model.Model;
-import app.smartboard.model.Profile;
-import app.smartboard.model.User;
-import app.smartboard.model.database.DatabaseHelper;
-import javafx.css.converter.PaintConverter;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,9 +17,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-import java.io.*;
-import java.nio.Buffer;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
@@ -29,9 +30,8 @@ import java.sql.SQLException;
 public class EditProfileController {
 
     private Stage stage;
-
     @FXML
-    public Label firstNameLabelEditProfile;
+    public Label firstNameLabel;
     @FXML
     public TextField firstNameTextField;
     @FXML
@@ -41,17 +41,17 @@ public class EditProfileController {
     @FXML
     private Button cancelButton;
     @FXML
-    public ImageView profilePhotoEditProfile;
+    public ImageView profilePhotoImageView;
     @FXML
     public Button imageViewButton;
 
     @FXML
     public void initialize() {
 
-        firstNameLabelEditProfile.setText(Model.getModelInstance().getCurrentUser().getProfile().getFirstName());
+        firstNameLabel.setText(Model.getModelInstance().getCurrentUser().getProfile().getFirstName());
         firstNameTextField.setText(Model.getModelInstance().getCurrentUser().getProfile().getFirstName());
         lastNameTextField.setText(Model.getModelInstance().getCurrentUser().getProfile().getLastName());
-        profilePhotoEditProfile.setImage(new Image(new ByteArrayInputStream(Model.getModelInstance().getCurrentUser().getProfile().getProfilePhoto())));
+        profilePhotoImageView.setImage(new Image(new ByteArrayInputStream(Model.getModelInstance().getCurrentUser().getProfile().getProfilePhoto())));
 
     }
 
@@ -82,7 +82,7 @@ public class EditProfileController {
         fileChooser.getExtensionFilters().add(extensionFilter);
         File selectedFile = fileChooser.showOpenDialog(stage);
         FileInputStream fileInputStream = new FileInputStream(selectedFile);
-        profilePhotoEditProfile.setImage(new Image(fileInputStream));
+        profilePhotoImageView.setImage(new Image(fileInputStream));
         Path path = selectedFile.toPath();
         Model.getModelInstance().getCurrentUser().getProfile().setProfilePhoto(Files.readAllBytes(path));
     }

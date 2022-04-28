@@ -1,7 +1,5 @@
 package app.smartboard.model;
 
-import java.io.Serializable;
-
 public class User {
 
     private String username;
