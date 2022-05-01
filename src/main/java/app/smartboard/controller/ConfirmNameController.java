@@ -1,6 +1,6 @@
 package app.smartboard.controller;
 
-import app.smartboard.model.ControllerHelper;
+import app.smartboard.model.BindDataHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,7 +27,7 @@ public class ConfirmNameController {
     }
 
     public void onConfirmButtonClick(ActionEvent actionEvent) throws IOException {
-        ControllerHelper.getControllerHelperInstance().setName(projectNameTextField.getText());
+        BindDataHolder.getBindDataHolderInstance().setName(projectNameTextField.getText());
         stage = (Stage) confirmButton.getScene().getWindow();
         stage.close();
     }

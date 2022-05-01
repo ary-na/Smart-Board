@@ -21,12 +21,12 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Project">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Add column"/>
-                                <MenuItem mnemonicParsing="false" text="Rename"/>
+                                <MenuItem onAction="#onAddColumnMenuItemClicked" mnemonicParsing="false" text="Add column"/>
+                                <MenuItem onAction="#onRenameMenuItemClicked" mnemonicParsing="false" text="Rename"/>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <CheckMenuItem mnemonicParsing="false" text="Set as default"/>
+                                <CheckMenuItem onAction="#onSetAsDefaultMenuItemClicked" mnemonicParsing="false" text="Set as default"/>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem mnemonicParsing="false" text="Delete"/>
+                                <MenuItem onAction="#onDeleteMenuItemClicked" mnemonicParsing="false" text="Delete"/>
                             </items>
                         </Menu>
                     </menus>

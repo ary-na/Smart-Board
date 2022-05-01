@@ -3,18 +3,18 @@ package app.smartboard.model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class ControllerHelper {
+public class BindDataHolder {
 
-    private static ControllerHelper controllerHelperInstance;
+    private static BindDataHolder bindDataHolderInstance;
     private final StringProperty name = new SimpleStringProperty();
 
-    private ControllerHelper() {
+    private BindDataHolder() {
     }
 
-    public synchronized static ControllerHelper getControllerHelperInstance() {
-        if (controllerHelperInstance == null)
-            controllerHelperInstance = new ControllerHelper();
-        return controllerHelperInstance;
+    public synchronized static BindDataHolder getBindDataHolderInstance() {
+        if (bindDataHolderInstance == null)
+            bindDataHolderInstance = new BindDataHolder();
+        return bindDataHolderInstance;
     }
 
     public String getName() {
