@@ -1,5 +1,7 @@
 package app.smartboard.model;
 
+import javafx.scene.control.Tab;
+
 import java.util.LinkedList;
 
 public class Project extends Nameable implements DefaultProject {
@@ -10,7 +12,7 @@ public class Project extends Nameable implements DefaultProject {
     public Project(String name) {
         super(name);
         this.isDefault = false;
-        this.column = new LinkedList<Column>();
+        this.column = new LinkedList<>();
     }
 
     public LinkedList<Column> getColumn() {

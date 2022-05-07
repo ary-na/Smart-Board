@@ -7,7 +7,17 @@ A.b, 2022. close fxml window by code, javafx. [online] Stack Overflow. Available
 
 Alves, N., 2022. How to get the current opened stage in JavaFX?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/32922424/how-to-get-the-current-opened-stage-in-javafx> [Accessed 27 April 2022].
 
+Andrew1234, 2022. JavaFX | Background Class - GeeksforGeeks. [online] GeeksforGeeks. Available at: <https://www.geeksforgeeks.org/javafx-background-class/> [Accessed 5 May 2022].
+
+Assylias, 2022. How to set padding between columns of a JavaFX GridPane?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/20454021/how-to-set-padding-between-columns-of-a-javafx-gridpane> [Accessed 5 May 2022].
+
 Baeldung, 2022. Object Type Casting in Java. [online] Baeldung. Available at: <https://www.baeldung.com/java-type-casting> [Accessed 27 April 2022].
+
+Biy, U., 2022. How to set tab name size in JavaFX. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16922138/how-to-set-tab-name-size-in-javafx> [Accessed 5 May 2022].
+
+Biy, U., 2022. JavaFX : Highlight VBox on mouse click and change color when unfocused. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/33840436/javafx-highlight-vbox-on-mouse-click-and-change-color-when-unfocused> [Accessed 5 May 2022].
+
+Brian, 2022. How to get the selected Tab from the TabPane with JavaFX?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/30276935/how-to-get-the-selected-tab-from-the-tabpane-with-javafx> [Accessed 5 May 2022].
 
 Bucky, 2022. JavaFX Java GUI Tutorial. [online] Youtube.com. Available at: <https://www.youtube.com/watch?v=FLkOX4Eez6o&t=14s> [Accessed 13 April 2022].
 
@@ -39,11 +49,21 @@ Hotzst, Ryzhikov, E. and MrEbbinghaus, 2022. How to switch scenes in JavaFX. [on
 
 ItachiUchiha, 2022. How to close and iconify a JavaFx stage. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/22192484/how-to-close-and-iconify-a-javafx-stage> [Accessed 28 April 2022].
 
+James_D, 2022. JavaFX How to get a children (WebView) from a Tab?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/28173252/javafx-how-to-get-a-children-webview-from-a-tab> [Accessed 5 May 2022].
+
+Java2s.com. 2022. JavaFX How to - Add two controls to HBox. [online] Available at: <http://www.java2s.com/Tutorials/Java/JavaFX_How_to/HBox/Add_two_controls_to_HBox.htm> [Accessed 5 May 2022].
+
 Jenkov, J., 2022. JavaFX TabPane. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/tabpane.html> [Accessed 27 April 2022].
 
 Jetbrains.com. 2022. IntelliJ IDEA Ultimate – the IDE for Spring development. [online] Available at: <https://www.jetbrains.com/lp/intellij-frameworks/> [Accessed 3 April 2022].
 
+Kaltstahl, Z., 2022. JavaFx USE_COMPUTED_SIZE for Stage without using FXML. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/28573700/javafx-use-computed-size-for-stage-without-using-fxml> [Accessed 5 May 2022].
+
+Knowprogram. 2022. isBlank() vs isEmpty() in Java String. [online] Available at: <https://www.knowprogram.com/java/isblank-vs-isempty-in-java/> [Accessed 5 May 2022].
+
 Kozlova, A., 2022. Support for JavaFX 2 CSS in IntelliJ IDEA 12.1 | The IntelliJ IDEA Blog. [online] The JetBrains Blog. Available at: <https://blog.jetbrains.com/idea/2013/03/support-for-javafx-2-css-in-intellij-idea-121/> [Accessed 3 April 2022].
+
+Krishna, M., 2022. How to add an image to a button (action) in JavaFX?. [online] Tutorialspoint.com. Available at: <https://www.tutorialspoint.com/how-to-add-an-image-to-a-button-action-in-javafx> [Accessed 5 May 2022].
 
 L. Saito, T., 2022. Inserting BLOBs. [online] Groups.google.com. Available at: <https://groups.google.com/g/xerial/c/FfNOo-dPlsE?hl=en#efd9bcd10d194672> [Accessed 27 April 2022].
 
@@ -79,6 +99,14 @@ Turri, A. and Ry-, 2022. Specifying external font in JavaFX CSS. [online] Stack 
 
 Tutorialspoint.com. 2022. SQLite - UPDATE Query. [online] Available at: <https://www.tutorialspoint.com/sqlite/sqlite_update_query.htm> [Accessed 27 April 2022].
 
+WEGSY85, 2022. JavaFX Image from resources folder. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/59029879/javafx-image-from-resources-folder> [Accessed 5 May 2022].
+
 W3schools.com. 2022. Java LinkedList. [online] Available at: <https://www.w3schools.com/java/java_linkedlist.asp> [Accessed 27 April 2022].
 
 www.javatpoint.com. 2022. Factory Method Design Pattern - Javatpoint. [online] Available at: <https://www.javatpoint.com/factory-method-design-pattern> [Accessed 27 April 2022].
+
+Zephyr, 2022. JavaFx property binding with multiple objects on on screen. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/53771119/javafx-property-binding-with-multiple-objects-on-on-screen> [Accessed 5 May 2022].
+
+Zephyr, 2022. Java FX Set Margin. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/51574433/java-fx-set-margin> [Accessed 5 May 2022].
+
+Zon, 2022. JavaFX TabPane: How to set the selected tab. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/6902377/javafx-tabpane-how-to-set-the-selected-tab> [Accessed 5 May 2022].

@@ -11,7 +11,7 @@ public class Task extends Nameable {
 
     public Task(String name) {
         super(name);
-        this.checkList = new LinkedList<String>();
+        this.checkList = new LinkedList<>();
     }
 
     public String getDescription() {

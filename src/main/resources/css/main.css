@@ -25,37 +25,47 @@
 }
 /* ----------------------------------------------------------------------------------------------------- */
 
-/* ROOT ************************************************************************************************ */
-.root {
+/* BUTTON ********************************************************************************************** */
+.button {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #4f5d75;
+    -fx-background-radius: 4px;
+    -fx-font-size: 15px;
+    -fx-cursor: pointer;
+    -fx-border-color: #4f5d75;
+    -fx-border-radius: 4px;
+    -fx-font-family: "lato light";
+}
+
+.button-image-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.button-cancel, .button-log-out {
+    -fx-background-color: #F7F7F4;
+    -fx-border-color: #4f5d75;
+    -fx-text-fill: #4f5d75;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* HBOX ************************************************************************************************ */
+.hbox-column-header {
+    -fx-background-color: #F7F7F4;
+    -fx-background-radius: 10;
+}
+
+.hbox-project {
     -fx-background-color: #FFFEFC;
 }
 /* ----------------------------------------------------------------------------------------------------- */
 
-/* MENU BAR ******************************************************************************************** */
-.menu-bar {
-    -fx-background-color: #FFFEFC;
-    -fx-border-color: transparent transparent #EF8354 transparent;
-}
-
-.menu-bar .label {
-    -fx-text-fill: #000000;
-}
-
-.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
-    -fx-background-color: #EF8354;
-}
-
-.context-menu {
-    -fx-background-color: #FFFEFC;
-    -fx-border-color: #FFFEFC;
-}
-
-.menu-item .label {
-    -fx-text-fill: #000000;
-}
-
-.menu-item:focused {
-    -fx-background-color: #EF8354;
+/* HYPERLINK ******************************************************************************************* */
+.hyperlink {
+    -fx-text-fill: #4f5d75;
+    -fx-font-size: 14px;
+    -fx-font-family: "lato regular";
+    -fx-smooth: smooth;
 }
 /* ----------------------------------------------------------------------------------------------------- */
 
@@ -89,12 +99,111 @@
 }
 /* ----------------------------------------------------------------------------------------------------- */
 
-/* HYPERLINK ******************************************************************************************* */
-.hyperlink {
-    -fx-text-fill: #4f5d75;
-    -fx-font-size: 14px;
-    -fx-font-family: "lato regular";
-    -fx-smooth: smooth;
+/* MENU BAR ******************************************************************************************** */
+.menu-bar {
+    -fx-background-color: #FFFEFC;
+    -fx-border-color: transparent transparent #EF8354 transparent;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #000000;
+}
+
+.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
+    -fx-background-color: #EF8354;
+}
+
+.context-menu {
+    -fx-background-color: #FFFEFC;
+    -fx-border-color: #FFFEFC;
+}
+
+.menu-item .label {
+    -fx-text-fill: #000000;
+}
+
+.menu-item:focused {
+    -fx-background-color: #EF8354;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* ROOT ************************************************************************************************ */
+.root {
+    -fx-background-color: #FFFEFC;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* SCROLL PANE ***************************************************************************************** */
+.scroll-pane .viewport{
+    -fx-background-color: #FFFEFC;
+}
+
+.scroll-pane .scroll-bar {
+    -fx-background-color: #FFFEFC;
+}
+
+.scroll-pane .corner {
+    -fx-background-color: #FFFEFC;
+}
+
+.scroll-bar:horizontal .thumb, .scroll-bar:vertical .thumb {
+    -fx-background-color: #F7F7F4;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .increment-arrow:focused, .scroll-pane .decrement-arrow:focused {
+    -fx-text-fill: #F7F7F4;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .increment-arrow, .scroll-pane .decrement-arrow {
+    -fx-background-color: #84837E;
+    -fx-border-color: transparent;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* TAB PANE ******************************************************************************************** */
+.tab-pane {
+    -fx-background-color: #FFFEFC;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: #FFFEFC;
+}
+
+.tab {
+    -fx-background-color: #FFFEFC;
+    -fx-font-family: "lato light";
+    -fx-font-size: 16;
+    -fx-padding: 4, 16, 4, 16;
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-border-width: 2;
+    -fx-border-insets: 8;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #84837E;
+}
+
+.tab:selected {
+    -fx-border-color: transparent transparent #EF8354 transparent;
+    -fx-border-width: 2;
+}
+
+.tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #000000;
+}
+
+.tab:hover {
+    -fx-text-fill: #000000;
+}
+
+.tab-content-area {
+    -fx-background-color: #FFFEFC;
 }
 /* ----------------------------------------------------------------------------------------------------- */
 
@@ -109,21 +218,9 @@
 }
 /* ----------------------------------------------------------------------------------------------------- */
 
-/* BUTTON ********************************************************************************************** */
-.button {
-    -fx-text-fill: #ffffff;
-    -fx-background-color: #4f5d75;
-    -fx-background-radius: 4px;
-    -fx-font-size: 15px;
-    -fx-cursor: pointer;
-    -fx-border-color: #4f5d75;
-    -fx-border-radius: 4px;
-    -fx-font-family: "lato light";
-}
-
-.cancel-button, .button-log-out {
-    -fx-background-color: #F7F7F4;
-    -fx-border-color: #4f5d75;
-    -fx-text-fill: #4f5d75;
+/* VBOX ************************************************************************************************ */
+.vbox-column {
+    -fx-background-color: #FFFEFC;
+    -fx-border-color: pink;
 }
 /* ----------------------------------------------------------------------------------------------------- */

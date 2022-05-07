@@ -8,7 +8,7 @@ public class Column extends Nameable {
 
     public Column(String name) {
         super(name);
-        this.task = new LinkedList<Task>();
+        this.task = new LinkedList<>();
     }
 
     public LinkedList<Task> getTask() {
