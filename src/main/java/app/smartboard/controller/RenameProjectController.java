@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
 public class RenameProjectController {
     Stage stage;
     @FXML
@@ -18,6 +19,7 @@ public class RenameProjectController {
 
     public void onConfirmButtonClick(ActionEvent event) {
         Model.getModelInstance().getProjects().get(BindDataHolder.getBindDataHolderInstance().getTabIndex()).setName(projectNameTextField.getText().trim());
+        projectNameTextField.textProperty().bind(Model.getModelInstance().getProjects().get(BindDataHolder.getBindDataHolderInstance().getTabIndex()).nameProperty());
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }

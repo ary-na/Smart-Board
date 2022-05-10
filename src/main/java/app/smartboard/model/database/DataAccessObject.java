@@ -14,7 +14,7 @@ public interface DataAccessObject {
 
     User getUser(String username, String password) throws SQLException, IOException, ClassNotFoundException;
 
-    User createUser(String username, String password, Profile profile) throws SQLException, IOException;
+    int createUser(String username, String password, Profile profile) throws SQLException, IOException;
 
     void updateProfile(String username, Profile profile) throws SQLException, IOException;
 }

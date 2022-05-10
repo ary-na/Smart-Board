@@ -1,6 +1,7 @@
 package app.smartboard.controller;
 
 import app.smartboard.model.Model;
+import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -20,9 +21,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
 
-public class EditProfileController {
+public class EditProfileController extends BaseController {
 
     private Stage stage;
+    private File selectedFile;
     @FXML
     public Label firstNameLabel;
     @FXML
@@ -38,6 +40,10 @@ public class EditProfileController {
     @FXML
     public Button imageViewButton;
 
+    public EditProfileController(Model model, ViewFactory viewFactory, String fxml) {
+        super(model, viewFactory, fxml);
+    }
+
     @FXML
     public void initialize() {
 
@@ -45,27 +51,38 @@ public class EditProfileController {
         firstNameTextField.setText(Model.getModelInstance().getCurrentUser().getProfile().getFirstName());
         lastNameTextField.setText(Model.getModelInstance().getCurrentUser().getProfile().getLastName());
         if (Model.getModelInstance().getCurrentUser().getProfile().getProfilePhoto() != null) {
-            profilePhotoImageView.setImage(new Image(new ByteArrayInputStream(Model.getModelInstance().getCurrentUser().getProfile().getProfilePhoto())));
+            profilePhotoImageView.setImage(new Image(new ByteArrayInputStream(this.model.getCurrentUser().getProfile().getProfilePhoto())));
         }
     }
 
-    @FXML
     public void onConfirmButtonClick(ActionEvent event) throws SQLException, IOException {
 
+        // Set new first name and last name
+        this.model.getCurrentUser().getProfile().setFirstName(firstNameTextField.getText().trim());
+        this.model.getCurrentUser().getProfile().setLastName(lastNameTextField.getText().trim());
+
+        // Set new user image
+        if(selectedFile != null) {
+            Path path = selectedFile.toPath();
+            this.model.getCurrentUser().getProfile().setProfilePhoto(Files.readAllBytes(path));
+        }
+
+        // Update database
+        this.model.getDatabaseHelper().updateProfile(Model.getModelInstance().getCurrentUser().getUsername(), Model.getModelInstance().getCurrentUser().getProfile());
+
+        // Close stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        viewFactory.closeStage(stage);
 
-        Model.getModelInstance().getCurrentUser().getProfile().setFirstName(firstNameTextField.getText());
-        Model.getModelInstance().getCurrentUser().getProfile().setLastName(lastNameTextField.getText());
-
-        Model.getModelInstance().getDatabaseHelper().updateProfile(Model.getModelInstance().getCurrentUser().getUsername(), Model.getModelInstance().getCurrentUser().getProfile());
-
-        stage.close();
+        // Set first name and profile image
+        this.model.getViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
+        this.model.getViewModel().setImageProperty(new Image(new ByteArrayInputStream(this.model.getCurrentUser().getProfile().getProfilePhoto())));
     }
 
     @FXML
     private void onCancelButtonClick(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        viewFactory.closeStage(stage);
     }
 
     @FXML
@@ -74,10 +91,8 @@ public class EditProfileController {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("PNG, JPG, JPEG", "*.png", "*.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extensionFilter);
-        File selectedFile = fileChooser.showOpenDialog(stage);
+        selectedFile = fileChooser.showOpenDialog(stage);
         FileInputStream fileInputStream = new FileInputStream(selectedFile);
         profilePhotoImageView.setImage(new Image(fileInputStream));
-        Path path = selectedFile.toPath();
-        Model.getModelInstance().getCurrentUser().getProfile().setProfilePhoto(Files.readAllBytes(path));
     }
 }

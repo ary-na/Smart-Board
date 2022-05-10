@@ -2,11 +2,10 @@ package app.smartboard.controller;
 
 import app.smartboard.model.Model;
 import app.smartboard.model.User;
-import app.smartboard.model.database.DatabaseHelper;
-import app.smartboard.model.SceneHelper;
-import app.smartboard.model.StageHelper;
+import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class LogInController {
+public class LogInController extends BaseController {
 
     @FXML
     public Hyperlink signUpHyperlink;
@@ -31,22 +30,40 @@ public class LogInController {
 
     private Stage stage;
 
+    public LogInController(Model model, ViewFactory viewFactory, String fxml) {
+        super(model, viewFactory, fxml);
+    }
+
 
     @FXML
-    public void onLogInButtonClick() throws SQLException, IOException, ClassNotFoundException {
-        stage = (Stage) logInButton.getScene().getWindow();
-        User user = Model.getModelInstance().getDatabaseHelper().getUser(username.getText(), psw.getText());
-        Model.getModelInstance().setCurrentUser(user);
-        System.out.println(user);
+    public void onLogInButtonClick(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+
+        User user = this.model.getDatabaseHelper().getUser(username.getText().trim(), psw.getText().trim());
+
         if (user != null) {
-            stage.close();
-            StageHelper.getStageHelperInstance().changeStage("Smart Board", "view/workspace-view.fxml");
+
+            System.out.println("User Logged In");
+
+            // Set the current user
+            Model.getModelInstance().setCurrentUser(user);
+
+            // Display Workspace view
+            viewFactory.displayWorkspaceView();
+
+            // Close Log In stage
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            viewFactory.closeStage(stage);
         }
     }
 
-    @FXML
     public void onSignUpHyperLinkClick(ActionEvent event) throws IOException {
-        stage = (Stage) signUpHyperlink.getScene().getWindow();
-        SceneHelper.getSceneHelperInstance().changeScene(stage, "view/sign-up-view.fxml");
+
+        System.out.println("onSignUpHyperLinkClick");
+        // Display Sign Up view
+        viewFactory.displaySignUpView();
+
+        // Close Log In stage
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        viewFactory.closeStage(stage);
     }
 }

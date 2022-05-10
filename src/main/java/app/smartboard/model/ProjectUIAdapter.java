@@ -1,21 +1,31 @@
 package app.smartboard.model;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
-import javafx.scene.control.Control;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
-
-import java.util.LinkedList;
 
 public class ProjectUIAdapter extends Tab {
 
-    private LinkedList<ColumnUIAdapter> columns;
+    private final Project project;
+    private final StringProperty projectName;
+
     public ProjectUIAdapter(Project project) {
+        this.project = project;
+        this.projectName = new SimpleStringProperty();
+        bindToModel();
+        layout();
+    }
 
-        columns = new LinkedList<>();
+    public void bindToModel(){
+        this.projectName.bindBidirectional(this.project.nameProperty());
+    }
 
-        setText(project.getName());
+    private void layout(){
+        this.setText(project.getName());
+
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -25,6 +35,7 @@ public class ProjectUIAdapter extends Tab {
         scrollPane.prefWidth(Control.USE_COMPUTED_SIZE);
         scrollPane.setMaxHeight(Control.USE_COMPUTED_SIZE);
         scrollPane.setMaxWidth(Control.USE_COMPUTED_SIZE);
+
         setContent(scrollPane);
 
         HBox hBox = new HBox(20);
@@ -36,14 +47,7 @@ public class ProjectUIAdapter extends Tab {
         hBox.setMaxHeight(Control.USE_COMPUTED_SIZE);
         hBox.setMaxWidth(Control.USE_COMPUTED_SIZE);
         hBox.getStyleClass().add("hbox-project");
+
         scrollPane.setContent(hBox);
-    }
-
-    public LinkedList<ColumnUIAdapter> getColumns() {
-        return columns;
-    }
-
-    public void setColumns(ColumnUIAdapter column) {
-        this.columns.addLast(column);
     }
 }

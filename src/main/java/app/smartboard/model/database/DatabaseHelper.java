@@ -9,17 +9,12 @@ import java.sql.*;
 public class DatabaseHelper implements DataAccessObject {
 
     private ResultSet result;
-
     private ByteArrayOutputStream byteArrayOutputStream;
     private ObjectOutputStream objectOutputStream;
-
     private static final String SELECT_QUOTE_QUERY = "SELECT * FROM quote WHERE ROWID = ?";
     private static final String CREATE_USER_QUERY = "INSERT INTO user (username, password, profile) VALUES (?, ?, ?)";
     private static final String SELECT_USER_QUERY = "SELECT * FROM user WHERE username = ? AND password = ?";
     private static final String UPDATE_PROFILE_QUERY = "UPDATE user SET profile = ? WHERE username = ?";
-
-    public DatabaseHelper() {
-    }
 
     @Override
     public String getQuote(int rowID) {
@@ -38,8 +33,9 @@ public class DatabaseHelper implements DataAccessObject {
     }
 
     @Override
-    public User createUser(String username, String password, Profile profile) throws SQLException, IOException {
+    public int createUser(String username, String password, Profile profile) throws SQLException, IOException {
 
+        int success = 0;
         byteArrayOutputStream = new ByteArrayOutputStream();
         objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
 
@@ -52,9 +48,9 @@ public class DatabaseHelper implements DataAccessObject {
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setBytes(3, byteArrayOutputStream.toByteArray());
-            statement.execute();
+            success = statement.executeUpdate();
         }
-        return null;
+        return success;
     }
 
     @Override

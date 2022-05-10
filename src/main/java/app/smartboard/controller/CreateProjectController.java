@@ -25,7 +25,11 @@ public class CreateProjectController {
             // Create a project
             NameableFactory nameableFactory = new NameableFactory();
             Nameable nameable = nameableFactory.createNameable("Project", projectNameTextField.getText().trim());
-            Model.getModelInstance().setProjects((Project) nameable);
+            Model.getModelInstance().getProjects().add((Project) nameable);
+            projectNameTextField.textProperty().bindBidirectional(nameable.nameProperty());
+            ProjectUIAdapter projectUIAdapter = new ProjectUIAdapter((Project) nameable);
+
+            Model.getModelInstance().getProjectUI().add(projectUIAdapter);
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();

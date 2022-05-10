@@ -2,8 +2,8 @@ package app.smartboard.controller;
 
 import app.smartboard.model.Model;
 import app.smartboard.model.Profile;
-import app.smartboard.model.database.DatabaseHelper;
-import app.smartboard.model.SceneHelper;
+import app.smartboard.model.User;
+import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SignUpController {
+public class SignUpController extends BaseController {
 
     @FXML
     private Button cancelButton;
@@ -30,17 +30,52 @@ public class SignUpController {
 
     private Stage stage;
 
+    public SignUpController(Model model, ViewFactory viewFactory, String fxml) {
+        super(model, viewFactory, fxml);
+    }
 
-    public void onSignUpButtonClick() throws SQLException, IOException {
+
+    public void onSignUpButtonClick(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+
+        // Create user profile
+        int accountCreated;
+        System.out.println("onSignUpButtonClick");
+
         Profile profile = new Profile();
-        profile.setFirstName(firstName.getText());
-        profile.setLastName(lastName.getText());
-        Model.getModelInstance().getDatabaseHelper().createUser(username.getText(), password.getText(), profile);
-        System.out.println("User created");
+        profile.setFirstName(firstName.getText().trim());
+        profile.setLastName(lastName.getText().trim());
+
+        accountCreated = this.model.getDatabaseHelper().createUser(username.getText().trim(), password.getText().trim(), profile);
+
+        System.out.println(accountCreated);
+
+        if(accountCreated == 1)
+        {
+            System.out.println("User created");
+
+            User user = this.model.getDatabaseHelper().getUser(username.getText(), password.getText());
+
+            // Set the current user
+            Model.getModelInstance().setCurrentUser(user);
+
+            // Display Workspace view
+            viewFactory.displayWorkspaceView();
+
+            // Close Log In stage
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            viewFactory.closeStage(stage);
+        }
     }
 
     public void onCancelButtonClick(ActionEvent event) throws IOException {
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        SceneHelper.getSceneHelperInstance().changeScene(stage, "view/log-in-view.fxml");
+
+        System.out.println("onCancelButtonClick");
+        // Display Sign Up view
+        viewFactory.displayLoginView();
+
+        // Close Log In stage
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        viewFactory.closeStage(stage);
+
     }
 }

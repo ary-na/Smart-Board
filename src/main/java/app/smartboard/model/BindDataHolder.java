@@ -2,6 +2,7 @@ package app.smartboard.model;
 
 import javafx.beans.property.*;
 import javafx.collections.ObservableMap;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 import java.util.HashMap;

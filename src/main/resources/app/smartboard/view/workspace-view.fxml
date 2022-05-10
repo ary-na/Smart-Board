@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
-            prefWidth="1100.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/16"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.smartboard.controller.WorkspaceController">
+            prefWidth="1100.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -21,19 +22,22 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Project">
                             <items>
-                                <MenuItem onAction="#onAddColumnMenuItemClicked" mnemonicParsing="false" text="Add column"/>
-                                <MenuItem onAction="#onRenameMenuItemClicked" mnemonicParsing="false" text="Rename"/>
+                                <MenuItem mnemonicParsing="false" onAction="#onAddColumnMenuItemClicked"
+                                          text="Add column"/>
+                                <MenuItem mnemonicParsing="false" onAction="#onRenameMenuItemClicked" text="Rename"/>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <CheckMenuItem onAction="#onSetAsDefaultMenuItemClicked" mnemonicParsing="false" text="Set as default"/>
+                                <CheckMenuItem mnemonicParsing="false" onAction="#onSetAsDefaultMenuItemClicked"
+                                               text="Set as default"/>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem onAction="#onDeleteMenuItemClicked" mnemonicParsing="false" text="Delete"/>
+                                <MenuItem mnemonicParsing="false" onAction="#onDeleteMenuItemClicked" text="Delete"/>
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
                 <HBox alignment="CENTER" spacing="20.0">
                     <children>
-                        <ImageView fx:id="profilePhotoImageView" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="profilePhotoImageView" fitWidth="30.0" pickOnBounds="true"
+                                   preserveRatio="true">
                             <image>
                                 <Image url="@../../../assets/default-profile-photo.png"/>
                             </image>
@@ -73,7 +77,6 @@
         </HBox>
     </bottom>
     <center>
-        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        </TabPane>
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER"/>
     </center>
 </BorderPane>
