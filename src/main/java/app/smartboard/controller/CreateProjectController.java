@@ -1,6 +1,8 @@
 package app.smartboard.controller;
 
 import app.smartboard.model.*;
+import app.smartboard.view.ViewProjectFactory;
+import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -8,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class CreateProjectController {
+public class CreateProjectController extends BaseController {
 
     private Stage stage;
     @FXML
@@ -16,28 +18,37 @@ public class CreateProjectController {
     @FXML
     public Label errorLabel;
 
+    public CreateProjectController(Model model, ViewFactory viewFactory, String fxml) {
+        super(model, viewFactory, fxml);
+    }
+
     public void onConfirmButtonClick(ActionEvent event) {
 
-        if (projectNameTextField.getText().isBlank() || projectNameTextField.getText().length() > 45) {
+        if (!validInput()) {
             errorLabel.setText("Enter a valid name");
         } else {
 
-            // Create a project
+            // Create project
             NameableFactory nameableFactory = new NameableFactory();
             Nameable nameable = nameableFactory.createNameable("Project", projectNameTextField.getText().trim());
-            Model.getModelInstance().getProjects().add((Project) nameable);
-            projectNameTextField.textProperty().bindBidirectional(nameable.nameProperty());
-            ProjectUIAdapter projectUIAdapter = new ProjectUIAdapter((Project) nameable);
+            this.model.getProjects().add(nameable);
 
-            Model.getModelInstance().getProjectUI().add(projectUIAdapter);
+            // Add tab to the arraylist
+            this.model.getProjectUI().add(new ViewProjectFactory(nameable));
+            this.model.getViewModel().setProjectCreated(false);
 
+            // Close stage
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
+            this.viewFactory.closeStage(stage);
         }
     }
 
     public void onCancelButtonClick(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    private boolean validInput() {
+        return !projectNameTextField.getText().isEmpty() && projectNameTextField.getText().length() <= 45;
     }
 }

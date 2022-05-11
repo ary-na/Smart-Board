@@ -14,19 +14,27 @@ import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Random;
 
 public class WorkspaceController extends BaseController {
 
     public TabPane projectTabPane;
-    @FXML
+
     private HBox projectHBox;
     private Stage stage;
-    private final LinkedList<Tab> projectTabs = new LinkedList<>();
 
     @FXML
     private MenuBar workspaceMenuBar;
+    @FXML
+    private Menu projectMenu;
+    @FXML
+    private MenuItem addColumnMenuItem;
+    @FXML
+    private MenuItem renameProjectMenuItem;
+    @FXML
+    private MenuItem setDefaultProjectMenuItem;
+    @FXML
+    private MenuItem deleteProjectMenuItem;
     @FXML
     private ImageView profilePhotoImageView;
     @FXML
@@ -42,10 +50,18 @@ public class WorkspaceController extends BaseController {
 
     public void initialize() {
 
+        if (this.model.getProjects().isEmpty())
+            this.model.getViewModel().setProjectCreated(true);
+
+        Bindings.bindBidirectional(addColumnMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
+        Bindings.bindBidirectional(renameProjectMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
+        Bindings.bindBidirectional(deleteProjectMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
+        Bindings.bindBidirectional(setDefaultProjectMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
+
         // Bind user profile picture and first name to view model
         Bindings.bindBidirectional(profilePhotoImageView.imageProperty(), this.model.getViewModel().imageProperty());
         Bindings.bindBidirectional(firstNameLabel.textProperty(), this.model.getViewModel().userFirstNameProperty());
-
+        Bindings.bindContent(tabPane.getTabs(), this.model.getProjectUI());
 
         // Load user data
         if (this.model.getCurrentUser().getProfile().getProfilePhoto() != null) {
@@ -61,7 +77,7 @@ public class WorkspaceController extends BaseController {
     public void onProfileButtonClick(ActionEvent event) throws IOException {
 
         System.out.println("onProfileButtonClick");
-        // Display Sign Up view
+        // Display Edit Profile view
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         viewFactory.displayEditProfileView(stage);
 
@@ -73,41 +89,22 @@ public class WorkspaceController extends BaseController {
         // Display Sign Up view
         viewFactory.displayLoginView();
 
-        // Close Log In stage
+        // Close Workspace stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         viewFactory.closeStage(stage);
     }
 
     public void onNewProjectMenuItemClicked(ActionEvent event) throws IOException {
 
-        // Create stage -> create new project
+        System.out.println("onNewProjectMenuItemClicked");
+
+        // Display Create Project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();
-        StageHelper.getStageHelperInstance().createChildStage(stage, "Create Project", "view/create-project-view.fxml");
+        viewFactory.displayCreateProjectView(stage);
 
-        // Create project UI
+        // Display added tabs
+        this.model.getViewModel().setTabPane(this.tabPane);
         tabPane.getSelectionModel().selectLast();
-
-        /*
-        scrollpane
-        https://stackoverflow.com/questions/50184756/remove-border-around-javafx-scrollpane-scroll-bar-when-not-focused
-        https://stackoverflow.com/questions/42808539/in-javafx-how-to-change-scrollbar-arrow-color
-        https://stackoverflow.com/questions/41804373/javafx-scrollpane-styling
-        https://stackoverflow.com/questions/16977100/how-do-i-add-margin-to-a-javafx-element-using-css
-        https://stackoverflow.com/questions/20118574/set-background-color-in-scrollpane
-        https://stackoverflow.com/questions/39962796/creating-map-composed-of-2-lists-using-stream-collect-in-java
-
-
-        https://github.com/dipto-pratyaksa-rmit/javafx-mvc/blob/main/src/main/java/com/javafx/mvc/model/Person.java
-        https://stackoverflow.com/questions/21865044/javafx-sethgrow-doesnt-work
-        https://stackoverflow.com/questions/34211310/remove-the-glowing-border-from-focused-tab-with-css
-        https://stackoverflow.com/questions/17091605/how-to-change-the-tab-pane-style
-        https://stackoverflow.com/questions/41642403/how-to-add-css-to-a-javafx-element
-
-        https://github.com/adwansyed/Kanban-Board/tree/master/src/main/java/project
-
-        https://github.com/barosanuemailtest/JavaFxEmailClientCourse/commit/968af113fc73cc16454d26ab95db0fa5962b7a34
-        https://www.udemy.com/course/advanced-programming-with-javafx-build-an-email-client/learn/lecture/16121875#questions
-         */
     }
 
     public void onAddColumnMenuItemClicked(ActionEvent event) throws IOException {
@@ -144,17 +141,27 @@ public class WorkspaceController extends BaseController {
     }
 
     public void onRenameMenuItemClicked(ActionEvent event) throws IOException {
-        BindDataHolder.getBindDataHolderInstance().setTabIndex(tabPane.getSelectionModel().getSelectedIndex());
-        System.out.println(tabPane.getSelectionModel().getSelectedIndex());
+
+        System.out.println("onRenameMenuItemClicked");
+
+        // Display Rename Project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();
-        StageHelper.getStageHelperInstance().createChildStage(stage, "Rename Project", "view/rename-project-view.fxml");
+        viewFactory.displayRenameProjectView(stage);
     }
 
     public void onSetAsDefaultMenuItemClicked(ActionEvent event) {
         System.out.println("Set project as default");
     }
 
-    public void onDeleteMenuItemClicked(ActionEvent event) {
+    public void onDeleteProjectMenuItemClicked() throws IOException {
 
+        System.out.println("onDeleteMenuItemClicked");
+
+        // Set tab pane
+        this.model.getViewModel().setTabPane(this.tabPane);
+
+        // Display Create Project view
+        stage = (Stage) workspaceMenuBar.getScene().getWindow();
+        viewFactory.displayDeleteProjectView(stage);
     }
 }

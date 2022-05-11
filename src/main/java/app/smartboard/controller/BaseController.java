@@ -4,6 +4,12 @@ import app.smartboard.model.Model;
 import app.smartboard.view.ViewFactory;
 import javafx.stage.Stage;
 
+/*
+ * Code sourced and adapted from:
+ * https://www.udemy.com/course/advanced-programming-with-javafx-build-an-email-client/
+ * https://github.com/barosanuemailtest/JavaFxEmailClientCourse/commit/968af113fc73cc16454d26ab95db0fa5962b7a34
+ */
+
 public abstract class BaseController {
 
     protected Model model;

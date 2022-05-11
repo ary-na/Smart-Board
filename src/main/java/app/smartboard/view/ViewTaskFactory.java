@@ -1,15 +1,14 @@
-package app.smartboard.model;
+package app.smartboard.view;
 
+import app.smartboard.model.Column;
 import javafx.geometry.Insets;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import java.util.LinkedList;
+public class ViewTaskFactory extends VBox {
 
-public class TaskUIAdapter extends VBox {
-
-    public TaskUIAdapter(Column column, VBox projectColumn) {
+    public ViewTaskFactory(Column column, VBox projectColumn) {
 
         VBox task = new VBox(20);
         task.setPadding(new Insets(20));

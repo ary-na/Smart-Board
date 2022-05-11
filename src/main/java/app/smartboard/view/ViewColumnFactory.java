@@ -1,6 +1,7 @@
-package app.smartboard.model;
+package app.smartboard.view;
 
 import app.smartboard.SmartBoardApplication;
+import app.smartboard.model.Project;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -10,14 +11,14 @@ import javafx.scene.layout.*;
 
 import java.util.LinkedList;
 
-public class ColumnUIAdapter extends VBox {
+public class ViewColumnFactory extends VBox {
 
     private VBox columnUI;
     private Button createTaskButton;
 
-    private LinkedList<TaskUIAdapter> tasks;
+    private LinkedList<ViewTaskFactory> tasks;
 
-    public ColumnUIAdapter(Project project, Tab projectTab) {
+    public ViewColumnFactory(Project project, Tab projectTab) {
 
         tasks = new LinkedList<>();
 
@@ -76,11 +77,11 @@ public class ColumnUIAdapter extends VBox {
         this.createTaskButton = button;
     }
 
-    public LinkedList<TaskUIAdapter> getTasks() {
+    public LinkedList<ViewTaskFactory> getTasks() {
         return tasks;
     }
 
-    public void setTasks(TaskUIAdapter task) {
+    public void setTasks(ViewTaskFactory task) {
         this.tasks.addLast(task);
     }
 }

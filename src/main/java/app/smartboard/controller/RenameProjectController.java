@@ -1,7 +1,7 @@
 package app.smartboard.controller;
 
-import app.smartboard.model.BindDataHolder;
 import app.smartboard.model.Model;
+import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,22 +10,36 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-public class RenameProjectController {
+public class RenameProjectController extends BaseController {
     Stage stage;
     @FXML
     public TextField projectNameTextField;
     @FXML
     public Label errorLabel;
 
+    public RenameProjectController(Model model, ViewFactory viewFactory, String fxml) {
+        super(model, viewFactory, fxml);
+    }
+
     public void onConfirmButtonClick(ActionEvent event) {
-        Model.getModelInstance().getProjects().get(BindDataHolder.getBindDataHolderInstance().getTabIndex()).setName(projectNameTextField.getText().trim());
-        projectNameTextField.textProperty().bind(Model.getModelInstance().getProjects().get(BindDataHolder.getBindDataHolderInstance().getTabIndex()).nameProperty());
+
+        // Rename project
+        int index = this.model.getProjectUI().indexOf(this.model.getViewModel().getTabPane().getSelectionModel().getSelectedItem());
+
+        this.model.getProjects().forEach(project -> System.out.println("Project names before renaming: " + project.getName()));
+
+        this.model.getProjects().get(index).setName(projectNameTextField.getText().trim());
+        this.model.getProjectUI().get(index).textProperty().set(projectNameTextField.getText().trim());
+
+        this.model.getProjects().forEach(project -> System.out.println("Project names after deletion: " + project.getName()));
+
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        viewFactory.closeStage(stage);
     }
 
     public void onCancelButtonClick(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        viewFactory.closeStage(stage);
     }
 }

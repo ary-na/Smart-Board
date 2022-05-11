@@ -1,6 +1,8 @@
 # Smart-Board
 Smart Board is a desktop-based Kanban-style application for managing personal work.
 
+
+
 ## References
 
 A.b, 2022. close fxml window by code, javafx. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/13567019/close-fxml-window-by-code-javafx> [Accessed 13 April 2022].
@@ -13,6 +15,10 @@ Assylias, 2022. How to set padding between columns of a JavaFX GridPane?. [onlin
 
 Baeldung, 2022. Object Type Casting in Java. [online] Baeldung. Available at: <https://www.baeldung.com/java-type-casting> [Accessed 27 April 2022].
 
+Barosanuemailtest, 2022. Abstract controller and dependencies · barosanuemailtest/JavaFxEmailClientCourse@968af11. [online] GitHub. Available at: <https://github.com/barosanuemailtest/JavaFxEmailClientCourse/commit/968af113fc73cc16454d26ab95db0fa5962b7a34> [Accessed 11 May 2022].
+
+Biy, U., 2022. How do I add margin to a JavaFX element using CSS?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16977100/how-do-i-add-margin-to-a-javafx-element-using-css> [Accessed 11 May 2022].
+
 Biy, U., 2022. How to set tab name size in JavaFX. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16922138/how-to-set-tab-name-size-in-javafx> [Accessed 5 May 2022].
 
 Biy, U., 2022. JavaFX : Highlight VBox on mouse click and change color when unfocused. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/33840436/javafx-highlight-vbox-on-mouse-click-and-change-color-when-unfocused> [Accessed 5 May 2022].
@@ -24,6 +30,8 @@ Bucky, 2022. JavaFX Java GUI Tutorial. [online] Youtube.com. Available at: <http
 Chappell, G. and Hildebrandt, N., 2022. Getting Started with JavaFX: Using FXML to Create a User Interface | JavaFX 2 Tutorials and Documentation. [online] Docs.oracle.com. Available at: <https://docs.oracle.com/javafx/2/get_started/fxml_tutorial.htm> [Accessed 3 April 2022].
 
 Diwan, A., 2022. Connecting to a MySQL database with Java. [online] Tutorialspoint.com. Available at: <https://www.tutorialspoint.com/connecting-to-a-mysql-database-with-java> [Accessed 11 April 2022].
+
+DVarga and Brucker, P., 2022. JavaFX ScrollPane styling. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41804373/javafx-scrollpane-styling> [Accessed 11 May 2022].
 
 Eder, L., 2022. Easiest way to convert a Blob into a byte array. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/6662432/easiest-way-to-convert-a-blob-into-a-byte-array> [Accessed 27 April 2022].
 
@@ -43,7 +51,11 @@ Gordon, J. and Kouznetsov, A., 2022. Skinning JavaFX Applications with CSS | Jav
 
 GOXR3PLUS, 2022. JavaFx: how make a clickable image using scenebuilder. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/40495658/javafx-how-make-a-clickable-image-using-scenebuilder> [Accessed 27 April 2022].
 
+Graham and Fabian, 2022. How to add css to a JavaFx element. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41642403/how-to-add-css-to-a-javafx-element> [Accessed 11 May 2022].
+
 Halim, B., 2022. How to get Text from fxml TextField. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41683209/how-to-get-text-from-fxml-textfield> [Accessed 11 April 2022].
+
+Horea, A., 2022. Advanced Java programming with JavaFx: Write an email client. [online] udemy.com. Available at: <https://www.udemy.com/course/advanced-programming-with-javafx-build-an-email-client/> [Accessed 11 May 2022].
 
 Hotzst, Ryzhikov, E. and MrEbbinghaus, 2022. How to switch scenes in JavaFX. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/37200845/how-to-switch-scenes-in-javafx> [Accessed 11 April 2022].
 
@@ -57,7 +69,11 @@ Jenkov, J., 2022. JavaFX TabPane. [online] Jenkov.com. Available at: <https://je
 
 Jetbrains.com. 2022. IntelliJ IDEA Ultimate – the IDE for Spring development. [online] Available at: <https://www.jetbrains.com/lp/intellij-frameworks/> [Accessed 3 April 2022].
 
+Jewelsea and Tonkel, 2022. JavaFX: setHgrow(...) doesn't work. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/21865044/javafx-sethgrow-doesnt-work> [Accessed 11 May 2022].
+
 Kaltstahl, Z., 2022. JavaFx USE_COMPUTED_SIZE for Stage without using FXML. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/28573700/javafx-use-computed-size-for-stage-without-using-fxml> [Accessed 5 May 2022].
+
+Kiers, B., 2022. How to find the index of an element in an array in Java?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/1522108/how-to-find-the-index-of-an-element-in-an-array-in-java> [Accessed 11 May 2022].
 
 Knowprogram. 2022. isBlank() vs isEmpty() in Java String. [online] Available at: <https://www.knowprogram.com/java/isblank-vs-isempty-in-java/> [Accessed 5 May 2022].
 
@@ -79,7 +95,17 @@ Mevada, R., 2022. How can I style a JavaFX menu and its items in CSS?. [online] 
 
 Pankaj, 2022. Java SQL Blob - JournalDev. [online] JournalDev. Available at: <https://www.journaldev.com/44618/java-sql-blob> [Accessed 27 April 2022].
 
+Parashar, A., 2022. How to change the tab pane style. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/17091605/how-to-change-the-tab-pane-style> [Accessed 11 May 2022].
+
+Parashar, A., 2022. set background color in scrollpane. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/20118574/set-background-color-in-scrollpane> [Accessed 11 May 2022].
+
+Pereda, J., 2022. In javafx, how to change scrollbar arrow color?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/42808539/in-javafx-how-to-change-scrollbar-arrow-color> [Accessed 11 May 2022].
+
 Pethani, A., 2022. Switching between Scenes (Screens) in JavaFx using the FXML. [online] Gist. Available at: <https://gist.github.com/pethaniakshay/302072fda98098a24ce382a361bdf477> [Accessed 11 April 2022].
+
+Pratyaksa, D., 2022. javafx-mvc/Person.java at main · dipto-pratyaksa-rmit/javafx-mvc. [online] GitHub. Available at: <https://github.com/dipto-pratyaksa-rmit/javafx-mvc/blob/main/src/main/java/com/javafx/mvc/model/Person.java> [Accessed 11 May 2022].
+
+Prometheus, 2022. Remove the glowing border from focused tab with CSS. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/34211310/remove-the-glowing-border-from-focused-tab-with-css> [Accessed 11 May 2022].
 
 Reddy, A., 2022. Create a new database with MySQL Workbench?. [online] Tutorialspoint.com. Available at: <https://www.tutorialspoint.com/create-a-new-database-with-mysql-workbench> [Accessed 11 April 2022].
 
@@ -91,9 +117,15 @@ Slaw, 2022. Can I only target bottom border at JavaFX Styling?. [online] Stack O
 
 Snortum, K., 2022. javafx-pass-data-demo/src/main/java/net/snortum/passdatademo at master · ksnortum/javafx-pass-data-demo. [online] GitHub. Available at: <https://github.com/ksnortum/javafx-pass-data-demo/tree/master/src/main/java/net/snortum/passdatademo> [Accessed 27 April 2022].
 
+Sonawalla, A. and Nat, 2022. Remove border around JavaFX ScrollPane scroll bar when *not* focused. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/50184756/remove-border-around-javafx-scrollpane-scroll-bar-when-not-focused> [Accessed 11 May 2022].
+
 Sourcecodeexamples.net. 2022. JavaFX JDBC MySQL Database Example. [online] Available at: <https://www.sourcecodeexamples.net/2020/04/javafx-jdbc-mysql-database-example.html> [Accessed 11 April 2022].
 
 SQLite Tutorial. 2022. SQLite Java: Inserting Data. [online] Available at: <https://www.sqlitetutorial.net/sqlite-java/insert/> [Accessed 15 April 2022].
+
+Svarog, 2022. Creating Map composed of 2 Lists using stream().collect in Java. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/39962796/creating-map-composed-of-2-lists-using-stream-collect-in-java> [Accessed 11 May 2022].
+
+Syed, A., selvarajah, a., Naeem, A. and Guo, Y., 2022. Kanban-Board/src/main/java/project at master · adwansyed/Kanban-Board. [online] GitHub. Available at: <https://github.com/adwansyed/Kanban-Board/tree/master/src/main/java/project> [Accessed 11 May 2022].
 
 Turri, A. and Ry-, 2022. Specifying external font in JavaFX CSS. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/12173288/specifying-external-font-in-javafx-css> [Accessed 3 April 2022].
 

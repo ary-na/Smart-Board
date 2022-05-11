@@ -47,10 +47,10 @@ public class EditProfileController extends BaseController {
     @FXML
     public void initialize() {
 
-        firstNameLabel.setText(Model.getModelInstance().getCurrentUser().getProfile().getFirstName());
-        firstNameTextField.setText(Model.getModelInstance().getCurrentUser().getProfile().getFirstName());
-        lastNameTextField.setText(Model.getModelInstance().getCurrentUser().getProfile().getLastName());
-        if (Model.getModelInstance().getCurrentUser().getProfile().getProfilePhoto() != null) {
+        firstNameLabel.setText(this.model.getCurrentUser().getProfile().getFirstName());
+        firstNameTextField.setText(this.model.getCurrentUser().getProfile().getFirstName());
+        lastNameTextField.setText(this.model.getCurrentUser().getProfile().getLastName());
+        if (this.model.getCurrentUser().getProfile().getProfilePhoto() != null) {
             profilePhotoImageView.setImage(new Image(new ByteArrayInputStream(this.model.getCurrentUser().getProfile().getProfilePhoto())));
         }
     }
@@ -68,7 +68,7 @@ public class EditProfileController extends BaseController {
         }
 
         // Update database
-        this.model.getDatabaseHelper().updateProfile(Model.getModelInstance().getCurrentUser().getUsername(), Model.getModelInstance().getCurrentUser().getProfile());
+        this.model.getDatabaseHelper().updateProfile(this.model.getCurrentUser().getUsername(), this.model.getCurrentUser().getProfile());
 
         // Close stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

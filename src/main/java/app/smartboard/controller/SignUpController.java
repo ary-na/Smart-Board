@@ -56,7 +56,7 @@ public class SignUpController extends BaseController {
             User user = this.model.getDatabaseHelper().getUser(username.getText(), password.getText());
 
             // Set the current user
-            Model.getModelInstance().setCurrentUser(user);
+            this.model.setCurrentUser(user);
 
             // Display Workspace view
             viewFactory.displayWorkspaceView();

@@ -45,7 +45,7 @@ public class LogInController extends BaseController {
             System.out.println("User Logged In");
 
             // Set the current user
-            Model.getModelInstance().setCurrentUser(user);
+            this.model.setCurrentUser(user);
 
             // Display Workspace view
             viewFactory.displayWorkspaceView();

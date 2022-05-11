@@ -22,14 +22,14 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Project">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#onAddColumnMenuItemClicked"
+                                <MenuItem fx:id="addColumnMenuItem" mnemonicParsing="false" onAction="#onAddColumnMenuItemClicked"
                                           text="Add column"/>
-                                <MenuItem mnemonicParsing="false" onAction="#onRenameMenuItemClicked" text="Rename"/>
+                                <MenuItem fx:id="renameProjectMenuItem" mnemonicParsing="false" onAction="#onRenameMenuItemClicked" text="Rename"/>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <CheckMenuItem mnemonicParsing="false" onAction="#onSetAsDefaultMenuItemClicked"
+                                <CheckMenuItem fx:id="setDefaultProjectMenuItem" mnemonicParsing="false" onAction="#onSetAsDefaultMenuItemClicked"
                                                text="Set as default"/>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem mnemonicParsing="false" onAction="#onDeleteMenuItemClicked" text="Delete"/>
+                                <MenuItem fx:id="deleteProjectMenuItem" mnemonicParsing="false" onAction="#onDeleteProjectMenuItemClicked" text="Delete"/>
                             </items>
                         </Menu>
                     </menus>

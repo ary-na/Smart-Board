@@ -1,30 +1,22 @@
-package app.smartboard.model;
+package app.smartboard.view;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import app.smartboard.model.Nameable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-public class ProjectUIAdapter extends Tab {
+public class ViewProjectFactory extends Tab {
 
-    private final Project project;
-    private final StringProperty projectName;
+    private final Nameable nameable;
 
-    public ProjectUIAdapter(Project project) {
-        this.project = project;
-        this.projectName = new SimpleStringProperty();
-        bindToModel();
+    public ViewProjectFactory(Nameable nameable) {
+        this.nameable = nameable;
         layout();
     }
 
-    public void bindToModel(){
-        this.projectName.bindBidirectional(this.project.nameProperty());
-    }
+    private void layout() {
 
-    private void layout(){
-        this.setText(project.getName());
+        setText(nameable.getName());
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);

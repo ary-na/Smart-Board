@@ -16,4 +16,7 @@ module app.smartboard {
     opens app.smartboard.controller to javafx.fxml;
     exports app.smartboard.model.database;
     opens app.smartboard.model.database to javafx.fxml;
+    exports app.smartboard.view;
+    exports app.smartboard.model.viewmodel;
+    opens app.smartboard.view to javafx.fxml;
 }

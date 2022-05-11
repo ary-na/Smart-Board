@@ -4,13 +4,17 @@ import app.smartboard.SmartBoardApplication;
 import app.smartboard.controller.*;
 import app.smartboard.model.Model;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
+
+/*
+ * Code sourced and adapted from:
+ * https://www.udemy.com/course/advanced-programming-with-javafx-build-an-email-client/
+ * https://github.com/barosanuemailtest/JavaFxEmailClientCourse/commit/968af113fc73cc16454d26ab95db0fa5962b7a34
+ */
 
 public class ViewFactory {
 
@@ -57,6 +61,30 @@ public class ViewFactory {
 
     }
 
+    public void displayCreateProjectView(Stage owner) throws IOException {
+
+        System.out.println("Create Project View");
+        BaseController controller = new CreateProjectController(model, this, "view/create-project-view.fxml");
+        initializeChildStage(controller, owner, "Create Project", false);
+
+    }
+
+    public void displayRenameProjectView(Stage owner) throws IOException {
+
+        System.out.println("Create Rename View");
+        BaseController controller = new RenameProjectController(model, this, "view/rename-project-view.fxml");
+        initializeChildStage(controller, owner, "Rename Project", false);
+
+    }
+
+    public void displayDeleteProjectView(Stage owner) throws IOException {
+
+        System.out.println("Create Delete View");
+        BaseController controller = new DeleteProjectController(model, this, "view/delete-project-view.fxml");
+        initializeChildStage(controller, owner, "Delete Project", false);
+
+    }
+
     // Initialize stage and inject controller to FXML
     private void initializeStage(BaseController controller, String title, Boolean resizable) throws IOException {
         this.fxmlLoader = new FXMLLoader(SmartBoardApplication.class.getResource(controller.getFxml()));
@@ -85,12 +113,9 @@ public class ViewFactory {
 
     }
 
-
     // Close stage
     public void closeStage(Stage stage) {
-
         stage.close();
-
     }
 
 

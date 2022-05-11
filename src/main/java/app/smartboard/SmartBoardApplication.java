@@ -15,7 +15,7 @@ public class SmartBoardApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        ViewFactory viewFactory = new ViewFactory(Model.getModelInstance());
+        ViewFactory viewFactory = new ViewFactory(new Model());
         viewFactory.displayLoginView();
     }
 }

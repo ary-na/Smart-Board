@@ -1,20 +1,20 @@
 package app.smartboard.model;
 
 public class NameableFactory {
-    public Nameable createNameable(String modelType, String modelName) {
+    public Nameable createNameable(String nameableType, String nameableName) {
 
-        if (modelType == null || modelType.isEmpty())
+        if (nameableType == null || nameableName.isEmpty())
             return null;
 
-        switch (modelType) {
+        switch (nameableType) {
             case "Project" -> {
-                return new Project(modelName);
+                return new Project(nameableName);
             }
             case "Column" -> {
-                return new Column(modelName);
+                return new Column(nameableName);
             }
             case "Task" -> {
-                return new Task(modelName);
+                return new Task(nameableName);
             }
         }
         return null;
