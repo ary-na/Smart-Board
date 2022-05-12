@@ -12,7 +12,7 @@ Smart Board is a desktop-based Kanban-style application for managing personal wo
 **Edit profile** view screenshot
 ![Edit profile view](src/main/resources/screenshots/edit-profile.png)
 
-### References
+## References
 
 A.b, 2022. close fxml window by code, javafx. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/13567019/close-fxml-window-by-code-javafx> [Accessed 13 April 2022].
 
@@ -82,6 +82,8 @@ Jewelsea and Tonkel, 2022. JavaFX: setHgrow(...) doesn't work. [online] Stack Ov
 
 Kaltstahl, Z., 2022. JavaFx USE_COMPUTED_SIZE for Stage without using FXML. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/28573700/javafx-use-computed-size-for-stage-without-using-fxml> [Accessed 5 May 2022].
 
+Kapoor, V., 2022. [online] Foxinfotech.in. Available at: <https://www.foxinfotech.in/2019/12/github-markdown-add-an-image-to-readme-md-file.html> [Accessed 12 May 2022].
+
 Kiers, B., 2022. How to find the index of an element in an array in Java?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/1522108/how-to-find-the-index-of-an-element-in-an-array-in-java> [Accessed 11 May 2022].
 
 Knowprogram. 2022. isBlank() vs isEmpty() in Java String. [online] Available at: <https://www.knowprogram.com/java/isblank-vs-isempty-in-java/> [Accessed 5 May 2022].
@@ -122,6 +124,8 @@ Rmit.instructure.com. 2022. Further Programming. [online] Available at: <https:/
 
 Ruzicka, V., 2022. JavaFX Tutorial: CSS Styling. [online] Vojtech Ruzicka's Programming Blog. Available at: <https://www.vojtechruzicka.com/javafx-css/> [Accessed 3 April 2022].
 
+Saif, S., 2022. [online] Saif71.com. Available at: <https://saif71.com> [Accessed 12 May 2022].
+
 Slaw, 2022. Can I only target bottom border at JavaFX Styling?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/60682935/can-i-only-target-bottom-border-at-javafx-styling> [Accessed 14 April 2022].
 
 Snortum, K., 2022. javafx-pass-data-demo/src/main/java/net/snortum/passdatademo at master · ksnortum/javafx-pass-data-demo. [online] GitHub. Available at: <https://github.com/ksnortum/javafx-pass-data-demo/tree/master/src/main/java/net/snortum/passdatademo> [Accessed 27 April 2022].
@@ -131,6 +135,8 @@ Sonawalla, A. and Nat, 2022. Remove border around JavaFX ScrollPane scroll bar w
 Sourcecodeexamples.net. 2022. JavaFX JDBC MySQL Database Example. [online] Available at: <https://www.sourcecodeexamples.net/2020/04/javafx-jdbc-mysql-database-example.html> [Accessed 11 April 2022].
 
 SQLite Tutorial. 2022. SQLite Java: Inserting Data. [online] Available at: <https://www.sqlitetutorial.net/sqlite-java/insert/> [Accessed 15 April 2022].
+
+Squarespace Help Center. 2022. Markdown cheat sheet. [online] Available at: <https://support.squarespace.com/hc/en-us/articles/206543587-Markdown-cheat-sheet> [Accessed 12 May 2022].
 
 Svarog, 2022. Creating Map composed of 2 Lists using stream().collect in Java. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/39962796/creating-map-composed-of-2-lists-using-stream-collect-in-java> [Accessed 11 May 2022].
 
