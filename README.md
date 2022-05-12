@@ -1,9 +1,19 @@
 # Smart-Board
 Smart Board is a desktop-based Kanban-style application for managing personal work.
 
+## Screen Shots
 
 
-## References
+![Log in view](src/main/resources/screenshots/log-in.png)
+<p align="center">Log in view screenshot</p>
+
+![Sign up view](src/main/resources/screenshots/sign-up.png)
+<p align="center">Sign up view screenshot</p>
+
+![Edit profile view](src/main/resources/screenshots/edit-profile.png)
+<p align="center" font-weight="bold">Edit profile view screenshot</p>
+
+### References
 
 A.b, 2022. close fxml window by code, javafx. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/13567019/close-fxml-window-by-code-javafx> [Accessed 13 April 2022].
 

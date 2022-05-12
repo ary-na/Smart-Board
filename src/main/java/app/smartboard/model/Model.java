@@ -12,8 +12,8 @@ public class Model {
     private WorkspaceViewModel workspaceViewModel;
     private final DatabaseHelper databaseHelper;
     private User currentUser;
-    private final ObservableList<Nameable> projects;
-    private final ObservableList<Tab> projectUI;
+    private ObservableList<Nameable> projects;
+    private ObservableList<Tab> projectUI;
 
     public Model() {
         this.workspaceViewModel = new WorkspaceViewModel();
@@ -46,7 +46,15 @@ public class Model {
         return projects;
     }
 
+    public void setProjects(ObservableList<Nameable> projects) {
+        this.projects = projects;
+    }
+
     public ObservableList<Tab> getProjectUI() {
         return projectUI;
+    }
+
+    public void setProjectUI(ObservableList<Tab> projectUI) {
+        this.projectUI = projectUI;
     }
 }

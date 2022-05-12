@@ -2,6 +2,7 @@ package app.smartboard.controller;
 
 import app.smartboard.model.*;
 import app.smartboard.view.ViewFactory;
+import app.smartboard.view.ViewProjectFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,7 +51,9 @@ public class WorkspaceController extends BaseController {
 
     public void initialize() {
 
-        if (this.model.getProjects().isEmpty())
+        //this.model.getProjects().forEach(project -> this.model.getProjectUI().add(new ViewProjectFactory(project)));
+
+        if (this.model.getProjects().isEmpty() && this.model.getProjects() != null)
             this.model.getViewModel().setProjectCreated(true);
 
         Bindings.bindBidirectional(addColumnMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
@@ -60,6 +63,7 @@ public class WorkspaceController extends BaseController {
 
         // Bind user profile picture and first name to view model
         Bindings.bindBidirectional(profilePhotoImageView.imageProperty(), this.model.getViewModel().imageProperty());
+
         Bindings.bindBidirectional(firstNameLabel.textProperty(), this.model.getViewModel().userFirstNameProperty());
         Bindings.bindContent(tabPane.getTabs(), this.model.getProjectUI());
 
@@ -88,6 +92,12 @@ public class WorkspaceController extends BaseController {
         System.out.println("onLogOutButtonClick");
         // Display Sign Up view
         viewFactory.displayLoginView();
+        this.model.getViewModel().setImageProperty(null);
+        this.model.getViewModel().setUserFirstName(null);
+
+
+        this.model = new Model();
+
 
         // Close Workspace stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

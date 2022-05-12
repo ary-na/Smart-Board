@@ -1,16 +1,20 @@
 package app.smartboard.controller;
 
-import app.smartboard.model.Model;
-import app.smartboard.model.Profile;
-import app.smartboard.model.User;
+import app.smartboard.SmartBoardApplication;
+import app.smartboard.model.*;
 import app.smartboard.view.ViewFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -49,14 +53,17 @@ public class SignUpController extends BaseController {
 
         System.out.println(accountCreated);
 
-        if(accountCreated == 1)
-        {
+        if (accountCreated == 1) {
             System.out.println("User created");
 
             User user = this.model.getDatabaseHelper().getUser(username.getText(), password.getText());
+            ObservableList<Nameable> projects = FXCollections.observableArrayList();
+            ObservableList<Tab> projectUI = FXCollections.observableArrayList();
 
             // Set the current user
             this.model.setCurrentUser(user);
+            this.model.setProjects(projects);
+            this.model.setProjectUI(projectUI);
 
             // Display Workspace view
             viewFactory.displayWorkspaceView();
@@ -64,6 +71,10 @@ public class SignUpController extends BaseController {
             // Close Log In stage
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             viewFactory.closeStage(stage);
+
+            // Set first name and profile image
+            this.model.getViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
+            this.model.getViewModel().setImageProperty(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/default-profile-photo.png"))));
         }
     }
 

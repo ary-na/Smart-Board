@@ -1,14 +1,21 @@
 package app.smartboard.controller;
 
+import app.smartboard.SmartBoardApplication;
 import app.smartboard.model.Model;
+import app.smartboard.model.Nameable;
+import app.smartboard.model.Project;
 import app.smartboard.model.User;
 import app.smartboard.view.ViewFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -39,6 +46,8 @@ public class LogInController extends BaseController {
     public void onLogInButtonClick(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
 
         User user = this.model.getDatabaseHelper().getUser(username.getText().trim(), psw.getText().trim());
+        ObservableList<Nameable> projects = FXCollections.observableArrayList();
+        ObservableList<Tab> projectUI = FXCollections.observableArrayList();
 
         if (user != null) {
 
@@ -46,6 +55,14 @@ public class LogInController extends BaseController {
 
             // Set the current user
             this.model.setCurrentUser(user);
+            this.model.setProjects(projects);
+            this.model.setProjectUI(projectUI);
+
+            // Load user data
+            if (this.model.getCurrentUser().getProfile().getProfilePhoto() == null) {
+                this.model.getViewModel().setImageProperty(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/default-profile-photo.png"))));
+            }
+            this.model.getViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
 
             // Display Workspace view
             viewFactory.displayWorkspaceView();
