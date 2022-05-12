@@ -3,15 +3,14 @@ Smart Board is a desktop-based Kanban-style application for managing personal wo
 
 ## Screen Shots
 
-
-![Log in view](src/main/resources/screenshots/log-in.png)
 **Log in** view screenshot
+![Log in view](src/main/resources/screenshots/log-in.png)
 
-![Sign up view](src/main/resources/screenshots/sign-up.png)
 **Sign up** view screenshot
+![Sign up view](src/main/resources/screenshots/sign-up.png)
 
-![Edit profile view](src/main/resources/screenshots/edit-profile.png)
 **Edit profile** view screenshot
+![Edit profile view](src/main/resources/screenshots/edit-profile.png)
 
 ### References
 
