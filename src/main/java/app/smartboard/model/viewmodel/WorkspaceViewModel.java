@@ -1,14 +1,14 @@
 package app.smartboard.model.viewmodel;
 
 import javafx.beans.property.*;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 
 public class WorkspaceViewModel {
+
     private final StringProperty userFirstName = new SimpleStringProperty();
-    private final ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
-    private final BooleanProperty projectCreated = new SimpleBooleanProperty();
+    private final BooleanProperty emptyWorkspace = new SimpleBooleanProperty();
+    private final ObjectProperty<Image> userImage = new SimpleObjectProperty<>();
     private TabPane tabPane = new TabPane();
 
     public String getUserFirstName() {
@@ -23,29 +23,32 @@ public class WorkspaceViewModel {
         return userFirstName;
     }
 
-    public Image getImageProperty() {
-        return imageProperty.get();
+
+    public boolean getEmptyWorkspace() {
+        return emptyWorkspace.get();
     }
 
-    public void setImageProperty(Image imageProperty) {
-        this.imageProperty.set(imageProperty);
+    public void setEmptyWorkspace(boolean emptyWorkspace) {
+        this.emptyWorkspace.set(emptyWorkspace);
     }
 
-    public ObjectProperty<Image> imageProperty() {
-        return imageProperty;
+    public BooleanProperty emptyWorkspaceProperty() {
+        return emptyWorkspace;
     }
 
-    public boolean isProjectCreated() {
-        return projectCreated.get();
+
+    public Image getUserImage() {
+        return userImage.get();
     }
 
-    public void setProjectCreated(boolean projectCreated) {
-        this.projectCreated.set(projectCreated);
+    public void setUserImage(Image imageProperty) {
+        this.userImage.set(imageProperty);
     }
 
-    public BooleanProperty projectCreatedProperty() {
-        return projectCreated;
+    public ObjectProperty<Image> userImageProperty() {
+        return userImage;
     }
+
 
     public TabPane getTabPane() {
         return tabPane;

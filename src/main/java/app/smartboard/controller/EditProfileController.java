@@ -75,8 +75,8 @@ public class EditProfileController extends BaseController {
         viewFactory.closeStage(stage);
 
         // Set first name and profile image
-        this.model.getViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
-        this.model.getViewModel().setImageProperty(new Image(new ByteArrayInputStream(this.model.getCurrentUser().getProfile().getProfilePhoto())));
+        this.model.getWorkspaceViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
+        this.model.getWorkspaceViewModel().setUserImage(new Image(new ByteArrayInputStream(this.model.getCurrentUser().getProfile().getProfilePhoto())));
     }
 
     @FXML

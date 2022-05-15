@@ -57,7 +57,7 @@ public class SignUpController extends BaseController {
             System.out.println("User created");
 
             User user = this.model.getDatabaseHelper().getUser(username.getText(), password.getText());
-            ObservableList<Nameable> projects = FXCollections.observableArrayList();
+            ObservableList<Project> projects = FXCollections.observableArrayList();
             ObservableList<Tab> projectUI = FXCollections.observableArrayList();
 
             // Set the current user
@@ -73,8 +73,8 @@ public class SignUpController extends BaseController {
             viewFactory.closeStage(stage);
 
             // Set first name and profile image
-            this.model.getViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
-            this.model.getViewModel().setImageProperty(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/default-profile-photo.png"))));
+            this.model.getWorkspaceViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
+            this.model.getWorkspaceViewModel().setUserImage(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/default-profile-photo.png"))));
         }
     }
 

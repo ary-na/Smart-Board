@@ -2,7 +2,6 @@ package app.smartboard.model;
 
 import app.smartboard.model.database.DatabaseHelper;
 import app.smartboard.model.viewmodel.WorkspaceViewModel;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
@@ -12,8 +11,10 @@ public class Model {
     private WorkspaceViewModel workspaceViewModel;
     private final DatabaseHelper databaseHelper;
     private User currentUser;
-    private ObservableList<Nameable> projects;
+    private ObservableList<Project> projects;
     private ObservableList<Tab> projectUI;
+    private final NameableFactory nameableFactory = new NameableFactory();
+    private Nameable nameable;
 
     public Model() {
         this.workspaceViewModel = new WorkspaceViewModel();
@@ -34,19 +35,19 @@ public class Model {
         this.currentUser = currentUser;
     }
 
-    public WorkspaceViewModel getViewModel() {
+    public WorkspaceViewModel getWorkspaceViewModel() {
         return workspaceViewModel;
     }
 
-    public void setViewModel(WorkspaceViewModel viewModel) {
-        this.workspaceViewModel = viewModel;
+    public void setWorkspaceViewModel(WorkspaceViewModel workspaceViewModel) {
+        this.workspaceViewModel = workspaceViewModel;
     }
 
-    public ObservableList<Nameable> getProjects() {
+    public ObservableList<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(ObservableList<Nameable> projects) {
+    public void setProjects(ObservableList<Project> projects) {
         this.projects = projects;
     }
 
@@ -56,5 +57,12 @@ public class Model {
 
     public void setProjectUI(ObservableList<Tab> projectUI) {
         this.projectUI = projectUI;
+    }
+
+    public Nameable createNameable(String nameableType, String nameableName) {
+        this.nameable = nameableFactory.createNameable(nameableType, nameableName);
+        if (this.nameable instanceof Project)
+            this.projects.add((Project) nameable);
+        return this.nameable;
     }
 }

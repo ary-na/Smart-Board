@@ -37,6 +37,11 @@
     -fx-font-family: "lato light";
 }
 
+.button-create-task {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
 .button-image-view {
     -fx-background-color: transparent;
     -fx-border-color: transparent;

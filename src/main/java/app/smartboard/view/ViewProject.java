@@ -1,23 +1,25 @@
 package app.smartboard.view;
 
-import app.smartboard.model.Nameable;
+import app.smartboard.model.Project;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-public class ViewProjectFactory extends Tab {
+public class ViewProject extends Tab {
 
-    private final Nameable nameable;
+    private final Project project;
 
-    public ViewProjectFactory(Nameable nameable) {
-        this.nameable = nameable;
+    public ViewProject(Project project) {
+        this.project = project;
         layout();
     }
 
     private void layout() {
 
-        setText(nameable.getName());
+        // Set tab name
+        setText(this.project.getName());
 
+        // Create scroll pane
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -28,8 +30,10 @@ public class ViewProjectFactory extends Tab {
         scrollPane.setMaxHeight(Control.USE_COMPUTED_SIZE);
         scrollPane.setMaxWidth(Control.USE_COMPUTED_SIZE);
 
+        // Set tab content
         setContent(scrollPane);
 
+        // Create HBox
         HBox hBox = new HBox(20);
         hBox.setPadding(new Insets(20));
         hBox.setMinHeight(Control.USE_COMPUTED_SIZE);
@@ -40,6 +44,7 @@ public class ViewProjectFactory extends Tab {
         hBox.setMaxWidth(Control.USE_COMPUTED_SIZE);
         hBox.getStyleClass().add("hbox-project");
 
+        // Set scroll pane content
         scrollPane.setContent(hBox);
     }
 }

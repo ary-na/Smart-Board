@@ -46,7 +46,7 @@ public class LogInController extends BaseController {
     public void onLogInButtonClick(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
 
         User user = this.model.getDatabaseHelper().getUser(username.getText().trim(), psw.getText().trim());
-        ObservableList<Nameable> projects = FXCollections.observableArrayList();
+        ObservableList<Project> projects = FXCollections.observableArrayList();
         ObservableList<Tab> projectUI = FXCollections.observableArrayList();
 
         if (user != null) {
@@ -60,9 +60,9 @@ public class LogInController extends BaseController {
 
             // Load user data
             if (this.model.getCurrentUser().getProfile().getProfilePhoto() == null) {
-                this.model.getViewModel().setImageProperty(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/default-profile-photo.png"))));
+                this.model.getWorkspaceViewModel().setUserImage(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/default-profile-photo.png"))));
             }
-            this.model.getViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
+            this.model.getWorkspaceViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
 
             // Display Workspace view
             viewFactory.displayWorkspaceView();

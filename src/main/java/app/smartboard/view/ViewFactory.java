@@ -2,13 +2,18 @@ package app.smartboard.view;
 
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.controller.*;
+import app.smartboard.model.Column;
 import app.smartboard.model.Model;
+import app.smartboard.model.Nameable;
+import app.smartboard.model.Project;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.jar.Attributes;
 
 /*
  * Code sourced and adapted from:
@@ -18,70 +23,87 @@ import java.io.IOException;
 
 public class ViewFactory {
 
-    private Model model;
+    private final Model model;
     private Stage stage;
     private Scene scene;
-
     private FXMLLoader fxmlLoader;
+
+    private ViewProject viewProject;
+    private ViewColumn viewColumn;
+    private int columnIDCounter = 0;
 
     public ViewFactory(Model model) {
         this.model = model;
     }
 
-    // Create Log In stage
+    // Display Log In stage
     public void displayLoginView() throws IOException {
 
-        System.out.println("Log In View");
-        BaseController controller = new LogInController(model, this, "view/log-in-view.fxml");
+        System.out.println("Log In View stage");
+        BaseController controller = new LogInController(this.model, this, "view/log-in-view.fxml");
         initializeStage(controller, "Smart Board - Log In", false);
+
     }
 
-    // Create Sign Up stage
+    // Display Sign Up stage
     public void displaySignUpView() throws IOException {
 
-        System.out.println("Sign Up View");
-        BaseController controller = new SignUpController(model, this, "view/sign-up-view.fxml");
+        System.out.println("Sign Up View stage");
+        BaseController controller = new SignUpController(this.model, this, "view/sign-up-view.fxml");
         initializeStage(controller, "Smart Board - Sign Up", false);
     }
 
-    // Create Workspace stage
+    // Display Workspace stage
     public void displayWorkspaceView() throws IOException {
 
-        System.out.println("Workspace View");
-        BaseController controller = new WorkspaceController(model, this, "view/workspace-view.fxml");
+        System.out.println("Workspace View stage");
+        BaseController controller = new WorkspaceController(this.model, this, "view/workspace-view.fxml");
         initializeStage(controller, "Smart Board - Workspace", true);
 
     }
 
-    public void displayEditProfileView(Stage owner) throws IOException {
-
-        System.out.println("Edit Profile View");
-        BaseController controller = new EditProfileController(model, this, "view/edit-profile-view.fxml");
-        initializeChildStage(controller, owner, "Edit Profile", false);
-
-    }
-
+    // Display Create Project stage
     public void displayCreateProjectView(Stage owner) throws IOException {
 
-        System.out.println("Create Project View");
-        BaseController controller = new CreateProjectController(model, this, "view/create-project-view.fxml");
-        initializeChildStage(controller, owner, "Create Project", false);
+        System.out.println("Create Project View stage");
+        BaseController controller = new CreateProjectController(this.model, this, "view/create-project-view.fxml");
+        initializeChildStage(controller, owner, "Create Project");
 
     }
 
+    // Display Rename Project stage
     public void displayRenameProjectView(Stage owner) throws IOException {
 
-        System.out.println("Create Rename View");
-        BaseController controller = new RenameProjectController(model, this, "view/rename-project-view.fxml");
-        initializeChildStage(controller, owner, "Rename Project", false);
+        System.out.println("Create Rename View stage");
+        BaseController controller = new RenameProjectController(this.model, this, "view/rename-project-view.fxml");
+        initializeChildStage(controller, owner, "Rename Project");
 
     }
 
+    // Display Delete Project stage
     public void displayDeleteProjectView(Stage owner) throws IOException {
 
-        System.out.println("Create Delete View");
-        BaseController controller = new DeleteProjectController(model, this, "view/delete-project-view.fxml");
-        initializeChildStage(controller, owner, "Delete Project", false);
+        System.out.println("Create Delete View stage");
+        BaseController controller = new DeleteProjectController(this.model, this, "view/delete-project-view.fxml");
+        initializeChildStage(controller, owner, "Delete Project");
+
+    }
+
+    // Display Create Column stage
+    public void displayCreateColumnView(Stage owner) throws IOException {
+
+        System.out.println("Create Column View stage");
+        BaseController controller = new CreateColumnController(this.model, this, "view/create-column-view.fxml");
+        initializeChildStage(controller, owner, "Create Column");
+
+    }
+
+    // Display Edit Project stage
+    public void displayEditProfileView(Stage owner) throws IOException {
+
+        System.out.println("Edit Profile View stage");
+        BaseController controller = new EditProfileController(this.model, this, "view/edit-profile-view.fxml");
+        initializeChildStage(controller, owner, "Edit Profile");
 
     }
 
@@ -98,7 +120,7 @@ public class ViewFactory {
     }
 
     // Initialize child stage and inject controller to FXML
-    private void initializeChildStage(BaseController controller, Stage owner, String title, Boolean resizable) throws IOException {
+    private void initializeChildStage(BaseController controller, Stage owner, String title) throws IOException {
 
         this.fxmlLoader = new FXMLLoader(SmartBoardApplication.class.getResource(controller.getFxml()));
         this.fxmlLoader.setController(controller);
@@ -108,8 +130,28 @@ public class ViewFactory {
         stage.initOwner(owner);
         stage.setScene(scene);
         stage.setTitle(title);
-        stage.setResizable(resizable);
+        stage.setResizable(false);
         stage.showAndWait();
+
+    }
+
+    public void initializeProject(Nameable nameable) {
+
+        this.viewProject = new ViewProject((Project) nameable);
+        this.model.getWorkspaceViewModel().getTabPane().getTabs().add(this.viewProject);
+        this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().select(this.viewProject);
+        this.model.getWorkspaceViewModel().setEmptyWorkspace(false);
+
+    }
+
+
+    public void initializeColumn(Nameable nameable) {
+
+        Tab tab = this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().getSelectedItem();
+        int tabIndex = this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().getSelectedIndex();
+        this.viewColumn = new ViewColumn((Column) nameable, tab);
+        this.viewColumn.setId(String.valueOf(columnIDCounter));
+        this.columnIDCounter++;
 
     }
 
@@ -117,6 +159,5 @@ public class ViewFactory {
     public void closeStage(Stage stage) {
         stage.close();
     }
-
 
 }

@@ -24,7 +24,7 @@ public class RenameProjectController extends BaseController {
     public void onConfirmButtonClick(ActionEvent event) {
 
         // Rename project
-        int index = this.model.getProjectUI().indexOf(this.model.getViewModel().getTabPane().getSelectionModel().getSelectedItem());
+        int index = this.model.getProjectUI().indexOf(this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().getSelectedItem());
 
         this.model.getProjects().forEach(project -> System.out.println("Project names before renaming: " + project.getName()));
 

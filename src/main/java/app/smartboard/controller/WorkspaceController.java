@@ -2,7 +2,6 @@ package app.smartboard.controller;
 
 import app.smartboard.model.*;
 import app.smartboard.view.ViewFactory;
-import app.smartboard.view.ViewProjectFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,20 +50,23 @@ public class WorkspaceController extends BaseController {
 
     public void initialize() {
 
+        // Set tab pane to Workspace view model
+        this.model.getWorkspaceViewModel().setTabPane(this.tabPane);
+
         //this.model.getProjects().forEach(project -> this.model.getProjectUI().add(new ViewProjectFactory(project)));
 
         if (this.model.getProjects().isEmpty() && this.model.getProjects() != null)
-            this.model.getViewModel().setProjectCreated(true);
+            this.model.getWorkspaceViewModel().setEmptyWorkspace(true);
 
-        Bindings.bindBidirectional(addColumnMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
-        Bindings.bindBidirectional(renameProjectMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
-        Bindings.bindBidirectional(deleteProjectMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
-        Bindings.bindBidirectional(setDefaultProjectMenuItem.disableProperty(), this.model.getViewModel().projectCreatedProperty());
+        Bindings.bindBidirectional(addColumnMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
+        Bindings.bindBidirectional(renameProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
+        Bindings.bindBidirectional(deleteProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
+        Bindings.bindBidirectional(setDefaultProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
 
         // Bind user profile picture and first name to view model
-        Bindings.bindBidirectional(profilePhotoImageView.imageProperty(), this.model.getViewModel().imageProperty());
+        Bindings.bindBidirectional(profilePhotoImageView.imageProperty(), this.model.getWorkspaceViewModel().userImageProperty());
 
-        Bindings.bindBidirectional(firstNameLabel.textProperty(), this.model.getViewModel().userFirstNameProperty());
+        Bindings.bindBidirectional(firstNameLabel.textProperty(), this.model.getWorkspaceViewModel().userFirstNameProperty());
         Bindings.bindContent(tabPane.getTabs(), this.model.getProjectUI());
 
         // Load user data
@@ -92,8 +94,8 @@ public class WorkspaceController extends BaseController {
         System.out.println("onLogOutButtonClick");
         // Display Sign Up view
         viewFactory.displayLoginView();
-        this.model.getViewModel().setImageProperty(null);
-        this.model.getViewModel().setUserFirstName(null);
+        this.model.getWorkspaceViewModel().setUserImage(null);
+        this.model.getWorkspaceViewModel().setUserFirstName(null);
 
 
         this.model = new Model();
@@ -111,19 +113,20 @@ public class WorkspaceController extends BaseController {
         // Display Create Project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();
         viewFactory.displayCreateProjectView(stage);
-
-        // Display added tabs
-        this.model.getViewModel().setTabPane(this.tabPane);
-        tabPane.getSelectionModel().selectLast();
     }
 
-    public void onAddColumnMenuItemClicked(ActionEvent event) throws IOException {
+    public void onAddColumnMenuItemClicked() throws IOException {
+
+        // Display Create Project view
+        this.stage = (Stage) workspaceMenuBar.getScene().getWindow();
+        viewFactory.displayCreateColumnView(stage);
+
         // Get tab index
 //        BindDataHolder.getBindDataHolderInstance().setTabIndex(tabPane.getSelectionModel().getSelectedIndex());
 //
 //        // Open create new column stage
 //        stage = (Stage) workspaceMenuBar.getScene().getWindow();
-//        StageHelper.getStageHelperInstance().createChildStage(stage, "Create Column", "view/create-column-view.fxml");
+//        StageHelper.getStageHelperInstance().createChildStage(stage, "Create Column", "view/create-colum-view.fxml");
 //
 //        // Create column UI
 //        ProjectUIAdapter projectUIAdapter = (ProjectUIAdapter) projectTabs.get(BindDataHolder.getBindDataHolderInstance().getTabIndex());
@@ -140,7 +143,7 @@ public class WorkspaceController extends BaseController {
 //
 //            // Open create new task stage
 //            try {
-//                StageHelper.getStageHelperInstance().createChildStage(stage, "Create Task", "view/create-task-view.fxml");
+//                StageHelper.getStageHelperInstance().createChildStage(stage, "Create Task", "view/create-tak-view.fxml");
 //                ColumnUIAdapter columnUIAdapter = projectUIAdapter.getColumns().getLast();
 //                columnUIAdapter.setTasks(new TaskUIAdapter(Model.getModelInstance().getProjects().get(BindDataHolder.getBindDataHolderInstance().getTabIndex()).getColumn().getLast(), projectUIAdapter.getColumns().get(BindDataHolder.getBindDataHolderInstance().getTabIndex())));
 //            } catch (IOException ex) {
@@ -168,7 +171,7 @@ public class WorkspaceController extends BaseController {
         System.out.println("onDeleteMenuItemClicked");
 
         // Set tab pane
-        this.model.getViewModel().setTabPane(this.tabPane);
+        this.model.getWorkspaceViewModel().setTabPane(this.tabPane);
 
         // Display Create Project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();

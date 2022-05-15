@@ -17,7 +17,7 @@ public class DeleteProjectController extends BaseController {
     public void onDeleteButtonClick(ActionEvent event) {
 
         // Delete project
-        int index = this.model.getProjectUI().indexOf(this.model.getViewModel().getTabPane().getSelectionModel().getSelectedItem());
+        int index = this.model.getProjectUI().indexOf(this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().getSelectedItem());
 
         this.model.getProjectUI().remove(index);
 
@@ -28,7 +28,7 @@ public class DeleteProjectController extends BaseController {
         this.model.getProjects().forEach(project -> System.out.println("Projects after deletion: " + project.getName()));
 
         if (this.model.getProjects().isEmpty())
-            this.model.getViewModel().setProjectCreated(true);
+            this.model.getWorkspaceViewModel().setEmptyWorkspace(true);
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
