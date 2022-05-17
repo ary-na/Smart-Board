@@ -1,6 +1,9 @@
 package app.smartboard.controller;
 
+import app.smartboard.model.Column;
 import app.smartboard.model.Model;
+import app.smartboard.model.Nameable;
+import app.smartboard.model.Task;
 import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,13 +24,23 @@ public class CreateTaskController extends BaseController {
     }
 
     public void onConfirmButtonClick(ActionEvent event) {
-        //Model.getModelInstance().getProjects().get(BindDataHolder.getBindDataHolderInstance().getTabIndex()).getColumn().get(BindDataHolder.getBindDataHolderInstance().getColumnIndex()).addTask(new Task(taskNameTextField.getText().trim()));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+
+        // Create column
+        Nameable nameable = this.model.createNameable("Task", this.taskNameTextField.getText().trim());
+        int index = this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedIndex();
+        this.model.getProjects().get(index).getColumn().getLast().addTask((Task) nameable);
+
+
+        // Create column VBox
+        this.viewFactory.initializeTask(nameable);
+
+        // Close stage
+        this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        this.viewFactory.closeStage(stage);
     }
 
     public void onCancelButtonClick(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        this.viewFactory.closeStage(stage);
     }
 }

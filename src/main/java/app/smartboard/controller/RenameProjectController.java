@@ -24,12 +24,13 @@ public class RenameProjectController extends BaseController {
     public void onConfirmButtonClick(ActionEvent event) {
 
         // Rename project
-        int index = this.model.getProjectUI().indexOf(this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().getSelectedItem());
+        int index = this.model.getProjectViewModel().getProjectTabs().indexOf(this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedItem());
+
 
         this.model.getProjects().forEach(project -> System.out.println("Project names before renaming: " + project.getName()));
 
         this.model.getProjects().get(index).setName(projectNameTextField.getText().trim());
-        this.model.getProjectUI().get(index).textProperty().set(projectNameTextField.getText().trim());
+        this.model.getProjectViewModel().getProjectTabs().get(index).textProperty().set(projectNameTextField.getText().trim());
 
         this.model.getProjects().forEach(project -> System.out.println("Project names after deletion: " + project.getName()));
 

@@ -38,6 +38,7 @@
 }
 
 .button-create-task {
+    -fx-font-size: 8px;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
@@ -56,8 +57,27 @@
 
 /* HBOX ************************************************************************************************ */
 .hbox-column-header {
-    -fx-background-color: #F7F7F4;
-    -fx-background-radius: 10;
+    -fx-padding: 0;
+}
+
+.hbox-column-header > .label {
+    -fx-font-size: 18;
+    -fx-text-fill: #2D3142;
+    -fx-font-family: "lato-light";
+}
+
+.hbox-column-header > .menu-button {
+    -fx-font-size: 8px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.hbox-column-header > .menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+
+.hbox-column-header > .menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
 }
 
 .hbox-project {
@@ -111,7 +131,7 @@
 }
 
 .menu-bar .label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #2D3142;
 }
 
 .menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
@@ -124,7 +144,7 @@
 }
 
 .menu-item .label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #2D3142;
 }
 
 .menu-item:focused {
@@ -183,7 +203,7 @@
     -fx-padding: 4, 16, 4, 16;
     -fx-border-color: transparent transparent transparent transparent;
     -fx-border-width: 2;
-    -fx-border-insets: 8;
+    -fx-border-insets: 0 8 0 8;
 }
 
 .tab .tab-label {
@@ -200,23 +220,44 @@
 }
 
 .tab:selected .tab-label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #2D3142;
 }
 
 .tab:hover {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #2D3142;
 }
 
 .tab-content-area {
     -fx-background-color: #FFFEFC;
+    -fx-border-color: #E0E0DD transparent transparent transparent;
 }
 /* ----------------------------------------------------------------------------------------------------- */
+
+/* TEXT AREA ******************************************************************************************* */
+.text-area {
+    -fx-font-family: "lato light";
+    -fx-background-color: #F7F7F4;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 4px;
+    -fx-border-color: #E0E0DD;
+    -fx-border-radius: 4px;
+}
+
+.text-area .content {
+    -fx-background-color:  #F7F7F4;
+}
+
+.text-area:focused .content {
+    -fx-background-color:  #F7F7F4;
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
 
 /* TEXT FIELD ****************************************************************************************** */
 .text-field {
     -fx-font-family: "lato light";
     -fx-background-color: #F7F7F4;
-    -fx-text-fill: black;
+    -fx-text-fill: #000000;
     -fx-background-radius: 4px;
     -fx-border-color: #E0E0DD;
     -fx-border-radius: 4px;
@@ -226,6 +267,9 @@
 /* VBOX ************************************************************************************************ */
 .vbox-column {
     -fx-background-color: #FFFEFC;
-    -fx-border-color: pink;
+}
+
+.vbox-task {
+    -fx-background-color: red;
 }
 /* ----------------------------------------------------------------------------------------------------- */

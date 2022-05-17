@@ -1,6 +1,8 @@
 package app.smartboard.model;
 
 import app.smartboard.model.database.DatabaseHelper;
+import app.smartboard.model.viewmodel.ColumnViewModel;
+import app.smartboard.model.viewmodel.ProjectViewModel;
 import app.smartboard.model.viewmodel.WorkspaceViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,18 +11,20 @@ import javafx.scene.control.Tab;
 public class Model {
 
     private WorkspaceViewModel workspaceViewModel;
+    private ProjectViewModel projectViewModel;
+    private ColumnViewModel columnViewModel;
     private final DatabaseHelper databaseHelper;
     private User currentUser;
     private ObservableList<Project> projects;
-    private ObservableList<Tab> projectUI;
-    private final NameableFactory nameableFactory = new NameableFactory();
-    private Nameable nameable;
+    private final NameableFactory nameableFactory;
 
     public Model() {
         this.workspaceViewModel = new WorkspaceViewModel();
+        this.projectViewModel = new ProjectViewModel();
+        this.columnViewModel = new ColumnViewModel();
         this.databaseHelper = new DatabaseHelper();
         this.projects = FXCollections.observableArrayList();
-        this.projectUI = FXCollections.observableArrayList();
+        this.nameableFactory = new NameableFactory();
     }
 
     public DatabaseHelper getDatabaseHelper() {
@@ -43,6 +47,22 @@ public class Model {
         this.workspaceViewModel = workspaceViewModel;
     }
 
+    public ProjectViewModel getProjectViewModel() {
+        return projectViewModel;
+    }
+
+    public void setProjectViewModel(ProjectViewModel projectViewModel) {
+        this.projectViewModel = projectViewModel;
+    }
+
+    public ColumnViewModel getColumnViewModel() {
+        return columnViewModel;
+    }
+
+    public void setColumnViewModel(ColumnViewModel columnViewModel) {
+        this.columnViewModel = columnViewModel;
+    }
+
     public ObservableList<Project> getProjects() {
         return projects;
     }
@@ -51,18 +71,10 @@ public class Model {
         this.projects = projects;
     }
 
-    public ObservableList<Tab> getProjectUI() {
-        return projectUI;
-    }
-
-    public void setProjectUI(ObservableList<Tab> projectUI) {
-        this.projectUI = projectUI;
-    }
-
     public Nameable createNameable(String nameableType, String nameableName) {
-        this.nameable = nameableFactory.createNameable(nameableType, nameableName);
-        if (this.nameable instanceof Project)
+        Nameable nameable = nameableFactory.createNameable(nameableType, nameableName);
+        if (nameable instanceof Project)
             this.projects.add((Project) nameable);
-        return this.nameable;
+        return nameable;
     }
 }

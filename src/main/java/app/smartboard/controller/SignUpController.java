@@ -58,12 +58,12 @@ public class SignUpController extends BaseController {
 
             User user = this.model.getDatabaseHelper().getUser(username.getText(), password.getText());
             ObservableList<Project> projects = FXCollections.observableArrayList();
-            ObservableList<Tab> projectUI = FXCollections.observableArrayList();
+            ObservableList<Tab> projectTabs = FXCollections.observableArrayList();
 
             // Set the current user
             this.model.setCurrentUser(user);
             this.model.setProjects(projects);
-            this.model.setProjectUI(projectUI);
+            this.model.getProjectViewModel().setProjectTabs(projectTabs);
 
             // Display Workspace view
             viewFactory.displayWorkspaceView();

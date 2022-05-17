@@ -4,13 +4,18 @@ import app.smartboard.model.*;
 import app.smartboard.view.ViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -51,7 +56,7 @@ public class WorkspaceController extends BaseController {
     public void initialize() {
 
         // Set tab pane to Workspace view model
-        this.model.getWorkspaceViewModel().setTabPane(this.tabPane);
+        this.model.getProjectViewModel().setTabPane(this.tabPane);
 
         //this.model.getProjects().forEach(project -> this.model.getProjectUI().add(new ViewProjectFactory(project)));
 
@@ -67,7 +72,7 @@ public class WorkspaceController extends BaseController {
         Bindings.bindBidirectional(profilePhotoImageView.imageProperty(), this.model.getWorkspaceViewModel().userImageProperty());
 
         Bindings.bindBidirectional(firstNameLabel.textProperty(), this.model.getWorkspaceViewModel().userFirstNameProperty());
-        Bindings.bindContent(tabPane.getTabs(), this.model.getProjectUI());
+        Bindings.bindContent(tabPane.getTabs(), this.model.getProjectViewModel().getProjectTabs());
 
         // Load user data
         if (this.model.getCurrentUser().getProfile().getProfilePhoto() != null) {
@@ -78,6 +83,55 @@ public class WorkspaceController extends BaseController {
         // Select a random quote
         Random random = new Random();
         quoteLabel.setText(this.model.getDatabaseHelper().getQuote(random.nextInt(10) + 1));
+
+
+        this.model.getColumnViewModel().getColumnVBoxes().forEach(column -> column.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
+            VBox vBox = (VBox) e.getSource();
+            vBox.getId();
+            HBox hBox = (HBox) vBox.getChildren().get(0);
+
+
+            this.model.getColumnViewModel().setColumn(column);
+            int projectIndex = this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedIndex();
+            int columnIndex = this.model.getProjects().get(projectIndex).getColumn().indexOf(this.model.getColumnViewModel().getColumnMap().get(column));
+
+            System.out.println("This column is selected" + this.model.getProjects().get(projectIndex).getColumn().get(columnIndex).getName());
+
+            ScrollPane scrollPane = (ScrollPane) this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedItem().getContent();
+            HBox hBox3 = (HBox) scrollPane.getContent();
+
+
+            for(Node node5: hBox3.getChildren()){
+                System.out.println(node5.getId());
+
+            }
+
+                for(Node node: hBox.getChildren()){
+                    if(node instanceof Button button){
+                        button.setOnAction(event2 -> {
+                            System.out.println("onAddColumnButtonClicked");
+                            // Display Edit Profile view
+                            this.stage = (Stage) ((Node) event2.getSource()).getScene().getWindow();
+                            try {
+                                viewFactory.displayCreateTaskView(stage);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        });
+                    }
+                }
+        }));
+//        if(tabPane != null) {
+//            Tab tab = tabPane.getSelectionModel().getSelectedItem();
+//            ScrollPane scrollPane = (ScrollPane) tab.getContent();
+//            HBox hBox = (HBox) scrollPane.getContent();
+//            hBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+//                Node node = (Node) e.getSource();
+//
+//                System.out.println("Arian" + node.getId());
+//            });
+//        }
+
     }
 
     public void onProfileButtonClick(ActionEvent event) throws IOException {
@@ -120,6 +174,17 @@ public class WorkspaceController extends BaseController {
         // Display Create Project view
         this.stage = (Stage) workspaceMenuBar.getScene().getWindow();
         viewFactory.displayCreateColumnView(stage);
+
+        initialize();
+
+        // new links
+        //https://jenkov.com/tutorials/javafx/menubutton.html
+        //https://localcoder.org/how-to-determine-if-the-user-clicked-outside-a-particular-javafx-node
+        //https://stackoverflow.com/questions/25930944/javafx-dynamically-add-buttons
+        //https://stackoverflow.com/questions/9816568/how-can-i-get-a-buttons-text-in-javafx-if-the-button-is-being-read-as-a-node-l#9835566
+        //https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx
+        //https://stackoverflow.com/questions/51594560/javafx-textarea-style-with-css
+        //https://stackoverflow.com/questions/30210117/remove-arrow-on-javafx-menubutton
 
         // Get tab index
 //        BindDataHolder.getBindDataHolderInstance().setTabIndex(tabPane.getSelectionModel().getSelectedIndex());
@@ -171,10 +236,13 @@ public class WorkspaceController extends BaseController {
         System.out.println("onDeleteMenuItemClicked");
 
         // Set tab pane
-        this.model.getWorkspaceViewModel().setTabPane(this.tabPane);
+        this.model.getProjectViewModel().setTabPane(this.tabPane);
 
         // Display Create Project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();
         viewFactory.displayDeleteProjectView(stage);
     }
+
+
+
 }

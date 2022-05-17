@@ -47,7 +47,7 @@ public class LogInController extends BaseController {
 
         User user = this.model.getDatabaseHelper().getUser(username.getText().trim(), psw.getText().trim());
         ObservableList<Project> projects = FXCollections.observableArrayList();
-        ObservableList<Tab> projectUI = FXCollections.observableArrayList();
+        ObservableList<Tab> projectTabs = FXCollections.observableArrayList();
 
         if (user != null) {
 
@@ -56,7 +56,7 @@ public class LogInController extends BaseController {
             // Set the current user
             this.model.setCurrentUser(user);
             this.model.setProjects(projects);
-            this.model.setProjectUI(projectUI);
+            this.model.getProjectViewModel().setProjectTabs(projectTabs);
 
             // Load user data
             if (this.model.getCurrentUser().getProfile().getProfilePhoto() == null) {

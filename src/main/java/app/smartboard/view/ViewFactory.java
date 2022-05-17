@@ -2,17 +2,16 @@ package app.smartboard.view;
 
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.controller.*;
-import app.smartboard.model.Column;
-import app.smartboard.model.Model;
-import app.smartboard.model.Nameable;
-import app.smartboard.model.Project;
+import app.smartboard.model.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.jar.Attributes;
 
 /*
@@ -28,8 +27,6 @@ public class ViewFactory {
     private Scene scene;
     private FXMLLoader fxmlLoader;
 
-    private ViewProject viewProject;
-    private ViewColumn viewColumn;
     private int columnIDCounter = 0;
 
     public ViewFactory(Model model) {
@@ -98,6 +95,15 @@ public class ViewFactory {
 
     }
 
+    // Display Create Task stage
+    public void displayCreateTaskView(Stage owner) throws IOException {
+
+        System.out.println("Create Task View stage");
+        BaseController controller = new CreateTaskController(this.model, this, "view/create-task-view.fxml");
+        initializeChildStage(controller, owner, "Create Task");
+
+    }
+
     // Display Edit Project stage
     public void displayEditProfileView(Stage owner) throws IOException {
 
@@ -135,23 +141,42 @@ public class ViewFactory {
 
     }
 
+    // Initialize Project
     public void initializeProject(Nameable nameable) {
 
-        this.viewProject = new ViewProject((Project) nameable);
-        this.model.getWorkspaceViewModel().getTabPane().getTabs().add(this.viewProject);
-        this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().select(this.viewProject);
+        ViewProject viewProject = new ViewProject((Project) nameable);
+
+        // Add tab to list
+        this.model.getProjectViewModel().getProjectTabs().add(viewProject);
+
+        // Add tab to tab pane
+        this.model.getProjectViewModel().getTabPane().getTabs().add(viewProject);
+
+        this.model.getProjectViewModel().getTabPane().getSelectionModel().select(viewProject);
         this.model.getWorkspaceViewModel().setEmptyWorkspace(false);
 
     }
 
-
+    // Initialize Column
     public void initializeColumn(Nameable nameable) {
 
-        Tab tab = this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().getSelectedItem();
-        int tabIndex = this.model.getWorkspaceViewModel().getTabPane().getSelectionModel().getSelectedIndex();
-        this.viewColumn = new ViewColumn((Column) nameable, tab);
-        this.viewColumn.setId(String.valueOf(columnIDCounter));
+        Tab tab = this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedItem();
+        ViewColumn viewColumn = new ViewColumn((Column) nameable, tab);
+        viewColumn.setId(String.valueOf(columnIDCounter));
+        this.model.getColumnViewModel().getColumnVBoxes().add(viewColumn);
+        this.model.getColumnViewModel().getColumnMap().put(viewColumn, (Column) nameable);
+
         this.columnIDCounter++;
+        System.out.println("This is the column ID:" + viewColumn.getId());
+
+
+    }
+
+    // Initialize Task
+    public void initializeTask(Nameable nameable) {
+
+        VBox columnVBox = this.model.getColumnViewModel().getColumn();
+        ViewTask viewTask = new ViewTask((Task) nameable, columnVBox);
 
     }
 

@@ -5,16 +5,18 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+import java.util.LinkedList;
+
 public class ViewProject extends Tab {
 
     private final Project project;
 
     public ViewProject(Project project) {
         this.project = project;
-        layout();
+        projectLayout();
     }
 
-    private void layout() {
+    private void projectLayout() {
 
         // Set tab name
         setText(this.project.getName());

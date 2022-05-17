@@ -11,8 +11,25 @@ import javafx.scene.layout.*;
 
 public class ViewColumn extends VBox {
 
-    public ViewColumn(Column column, Tab tab) {
+    private final Column column;
+    private final Tab projectTab;
+    private Button createTaskMenuButton;
 
+    public ViewColumn(Column column, Tab projectTab) {
+        this.column = column;
+        this.projectTab = projectTab;
+        columnLayout();
+    }
+
+    public Button getCreateTaskMenuButton() {
+        return createTaskMenuButton;
+    }
+
+    public void setCreateTaskMenuButton(Button createTaskMenuButton) {
+        this.createTaskMenuButton = createTaskMenuButton;
+    }
+
+    private void columnLayout() {
         // Set column properties
         setSpacing(20);
         setPadding(new Insets(20));
@@ -25,7 +42,7 @@ public class ViewColumn extends VBox {
         getStyleClass().add("vbox-column");
 
         // Get tab content
-        ScrollPane scrollPane = (ScrollPane) tab.getContent();
+        ScrollPane scrollPane = (ScrollPane) this.projectTab.getContent();
         HBox hBox = (HBox) scrollPane.getContent();
 
         // Add column to tab
@@ -33,8 +50,8 @@ public class ViewColumn extends VBox {
 
         // Create column header
         HBox columnHeader = new HBox();
-        columnHeader.setPrefWidth(300.00);
-        columnHeader.setPrefHeight(25.00);
+        columnHeader.setPrefWidth(300);
+        columnHeader.setPrefHeight(15);
         columnHeader.setAlignment(Pos.CENTER);
         columnHeader.getStyleClass().add("hbox-column-header");
 
@@ -45,17 +62,30 @@ public class ViewColumn extends VBox {
         Region region = new Region();
         HBox.setHgrow(region, Priority.ALWAYS);
 
-        // Column header button
-        Button createTaskButton = new Button();
+        // Column header Add Task button
         ImageView plusIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/plus-icon.png"))));
-        createTaskButton.setGraphic(plusIconImageView);
-        createTaskButton.getStyleClass().add("button-create-task");
+        plusIconImageView.setFitHeight(12);
+        plusIconImageView.setFitWidth(12);
+        Button columnHeaderAddTaskButton = new Button();
+        columnHeaderAddTaskButton.setGraphic(plusIconImageView);
+        columnHeaderAddTaskButton.getStyleClass().add("button-create-task");
+
+        // Column header Menu button
+        ImageView menuIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/menu-icon.png"))));
+        menuIconImageView.setFitWidth(12);
+        menuIconImageView.setFitHeight(12);
+        MenuItem rename = new MenuItem("Rename");
+        MenuItem delete = new MenuItem("Delete");
+        MenuButton columnHeaderMenuButton = new MenuButton("", null, rename, delete);
+        columnHeaderMenuButton.setGraphic(menuIconImageView);
+
 
         // Add column header children
         columnHeader.getChildren().addAll(
                 columnName,
                 region,
-                createTaskButton
+                columnHeaderAddTaskButton,
+                columnHeaderMenuButton
         );
 
         // Add column header to column
