@@ -5,13 +5,11 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-import java.util.LinkedList;
-
-public class ViewProject extends Tab {
+public class ProjectView extends Tab {
 
     private final Project project;
 
-    public ViewProject(Project project) {
+    public ProjectView(Project project) {
         this.project = project;
         projectLayout();
     }

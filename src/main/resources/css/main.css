@@ -57,11 +57,13 @@
 
 /* HBOX ************************************************************************************************ */
 .hbox-column-header {
-    -fx-padding: 0;
+    -fx-padding: 10;
+    -fx-border-color: #E0E0DD;
+    -fx-border-radius: 4px;
 }
 
 .hbox-column-header > .label {
-    -fx-font-size: 18;
+    -fx-font-size: 14;
     -fx-text-fill: #2D3142;
     -fx-font-family: "lato-light";
 }
@@ -270,6 +272,9 @@
 }
 
 .vbox-task {
-    -fx-background-color: red;
+    -fx-background-color: #F7F7F4;
+    -fx-border-color: #E0E0DD;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
 }
 /* ----------------------------------------------------------------------------------------------------- */

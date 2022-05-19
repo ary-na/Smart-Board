@@ -9,13 +9,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-public class ViewColumn extends VBox {
+public class ColumnView extends VBox {
 
     private final Column column;
     private final Tab projectTab;
     private Button createTaskMenuButton;
 
-    public ViewColumn(Column column, Tab projectTab) {
+    public ColumnView(Column column, Tab projectTab) {
         this.column = column;
         this.projectTab = projectTab;
         columnLayout();

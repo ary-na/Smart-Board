@@ -11,8 +11,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.jar.Attributes;
 
 /*
  * Code sourced and adapted from:
@@ -144,7 +142,7 @@ public class ViewFactory {
     // Initialize Project
     public void initializeProject(Nameable nameable) {
 
-        ViewProject viewProject = new ViewProject((Project) nameable);
+        ProjectView viewProject = new ProjectView((Project) nameable);
 
         // Add tab to list
         this.model.getProjectViewModel().getProjectTabs().add(viewProject);
@@ -161,7 +159,7 @@ public class ViewFactory {
     public void initializeColumn(Nameable nameable) {
 
         Tab tab = this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedItem();
-        ViewColumn viewColumn = new ViewColumn((Column) nameable, tab);
+        ColumnView viewColumn = new ColumnView((Column) nameable, tab);
         viewColumn.setId(String.valueOf(columnIDCounter));
         this.model.getColumnViewModel().getColumnVBoxes().add(viewColumn);
         this.model.getColumnViewModel().getColumnMap().put(viewColumn, (Column) nameable);
@@ -176,7 +174,7 @@ public class ViewFactory {
     public void initializeTask(Nameable nameable) {
 
         VBox columnVBox = this.model.getColumnViewModel().getColumn();
-        ViewTask viewTask = new ViewTask((Task) nameable, columnVBox);
+        TaskView viewTask = new TaskView((Task) nameable, columnVBox);
 
     }
 
