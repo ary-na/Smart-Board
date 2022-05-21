@@ -4,9 +4,7 @@ import app.smartboard.SmartBoardApplication;
 import app.smartboard.model.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -53,24 +51,17 @@ public class TaskView extends VBox {
         right.setAlignment(Pos.CENTER);
         right.getStyleClass().add("vbox-task-right-container");
 
-        // Task Buttons
-        ImageView editIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/edit-icon.png"))));
-        editIconImageView.setFitHeight(15);
-        editIconImageView.setFitWidth(15);
-        Button editButton = new Button();
-        editButton.setGraphic(editIconImageView);
-        editButton.getStyleClass().add("button-create-task");
-
-        ImageView deleteIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/delete-icon.png"))));
-        deleteIconImageView.setFitHeight(15);
-        deleteIconImageView.setFitWidth(15);
-        Button deleteButton = new Button();
-        deleteButton.setGraphic(deleteIconImageView);
-        deleteButton.getStyleClass().add("button-create-task");
+        // Task Button
+        ImageView menuIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/menu-icon.png"))));
+        menuIconImageView.setFitWidth(12);
+        menuIconImageView.setFitHeight(12);
+        MenuItem edit = new MenuItem("Edit");
+        MenuItem delete = new MenuItem("Delete");
+        MenuButton taskMenuButton = new MenuButton("", null, edit, delete);
+        taskMenuButton.setGraphic(menuIconImageView);
 
         right.getChildren().addAll(
-                editButton,
-                deleteButton
+                taskMenuButton
         );
 
         // Task HBox container

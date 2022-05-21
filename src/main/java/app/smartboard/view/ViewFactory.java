@@ -25,8 +25,6 @@ public class ViewFactory {
     private Scene scene;
     private FXMLLoader fxmlLoader;
 
-    private int columnIDCounter = 0;
-
     public ViewFactory(Model model) {
         this.model = model;
     }
@@ -69,7 +67,7 @@ public class ViewFactory {
     // Display Rename Project stage
     public void displayRenameProjectView(Stage owner) throws IOException {
 
-        System.out.println("Create Rename View stage");
+        System.out.println("Create Rename Project View stage");
         BaseController controller = new RenameProjectController(this.model, this, "view/rename-project-view.fxml");
         initializeChildStage(controller, owner, "Rename Project");
 
@@ -90,6 +88,24 @@ public class ViewFactory {
         System.out.println("Create Column View stage");
         BaseController controller = new CreateColumnController(this.model, this, "view/create-column-view.fxml");
         initializeChildStage(controller, owner, "Create Column");
+
+    }
+
+    // Display Rename Column stage
+    public void displayRenameColumnView(Stage owner) throws IOException {
+
+        System.out.println("Create Rename Column View stage");
+        BaseController controller = new RenameColumnController(this.model, this, "view/rename-column-view.fxml");
+        initializeChildStage(controller, owner, "Rename Column");
+
+    }
+
+    // Display Delete Column stage
+    public void displayDeleteColumnView(Stage owner) throws IOException {
+
+        System.out.println("Create Delete Column View stage");
+        BaseController controller = new DeleteColumnController(this.model, this, "view/delete-column-view.fxml");
+        initializeChildStage(controller, owner, "Delete Column");
 
     }
 
@@ -153,6 +169,8 @@ public class ViewFactory {
         this.model.getProjectViewModel().getTabPane().getSelectionModel().select(viewProject);
         this.model.getWorkspaceViewModel().setEmptyWorkspace(false);
 
+
+
     }
 
     // Initialize Column
@@ -160,13 +178,8 @@ public class ViewFactory {
 
         Tab tab = this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedItem();
         ColumnView viewColumn = new ColumnView((Column) nameable, tab);
-        viewColumn.setId(String.valueOf(columnIDCounter));
         this.model.getColumnViewModel().getColumnVBoxes().add(viewColumn);
         this.model.getColumnViewModel().getColumnMap().put(viewColumn, (Column) nameable);
-
-        this.columnIDCounter++;
-        System.out.println("This is the column ID:" + viewColumn.getId());
-
 
     }
 
@@ -174,7 +187,9 @@ public class ViewFactory {
     public void initializeTask(Nameable nameable) {
 
         VBox columnVBox = this.model.getColumnViewModel().getColumn();
-        TaskView viewTask = new TaskView((Task) nameable, columnVBox);
+        TaskView taskView = new TaskView((Task) nameable, columnVBox);
+        this.model.getTaskViewModel().getTaskVBoxes().add(taskView);
+        this.model.getTaskViewModel().getTaskMap().put(taskView, (Task) nameable);
 
     }
 

@@ -13,20 +13,11 @@ public class ColumnView extends VBox {
 
     private final Column column;
     private final Tab projectTab;
-    private Button createTaskMenuButton;
 
     public ColumnView(Column column, Tab projectTab) {
         this.column = column;
         this.projectTab = projectTab;
         columnLayout();
-    }
-
-    public Button getCreateTaskMenuButton() {
-        return createTaskMenuButton;
-    }
-
-    public void setCreateTaskMenuButton(Button createTaskMenuButton) {
-        this.createTaskMenuButton = createTaskMenuButton;
     }
 
     private void columnLayout() {

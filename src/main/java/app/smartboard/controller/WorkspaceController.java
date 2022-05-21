@@ -4,22 +4,21 @@ import app.smartboard.model.*;
 import app.smartboard.view.ViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.controlsfx.control.action.Action;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class WorkspaceController extends BaseController {
 
@@ -74,6 +73,14 @@ public class WorkspaceController extends BaseController {
         Bindings.bindBidirectional(firstNameLabel.textProperty(), this.model.getWorkspaceViewModel().userFirstNameProperty());
         Bindings.bindContent(tabPane.getTabs(), this.model.getProjectViewModel().getProjectTabs());
 
+
+        // fix this bug, Duplicate Hbox detected
+        if (this.model.getProjectViewModel().getProjectTabs().size() > 0) {
+            ScrollPane scrollPane = (ScrollPane) this.model.getProjectViewModel().getTabPane().getTabs().get(this.model.getProjectIndex()).getContent();
+            HBox columnContainer = (HBox) scrollPane.getContent();
+            Bindings.bindContent(columnContainer.getChildren(), this.model.getColumnViewModel().getColumnVBoxes());
+        }
+
         // Load user data
         if (this.model.getCurrentUser().getProfile().getProfilePhoto() != null) {
             firstNameLabel.setText(this.model.getCurrentUser().getProfile().getFirstName());
@@ -84,53 +91,9 @@ public class WorkspaceController extends BaseController {
         Random random = new Random();
         quoteLabel.setText(this.model.getDatabaseHelper().getQuote(random.nextInt(10) + 1));
 
-
-        this.model.getColumnViewModel().getColumnVBoxes().forEach(column -> column.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
-            VBox vBox = (VBox) e.getSource();
-            vBox.getId();
-            HBox hBox = (HBox) vBox.getChildren().get(0);
-
-
-            this.model.getColumnViewModel().setColumn(column);
-            int projectIndex = this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedIndex();
-            int columnIndex = this.model.getProjects().get(projectIndex).getColumn().indexOf(this.model.getColumnViewModel().getColumnMap().get(column));
-
-            System.out.println("This column is selected" + this.model.getProjects().get(projectIndex).getColumn().get(columnIndex).getName());
-
-            ScrollPane scrollPane = (ScrollPane) this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedItem().getContent();
-            HBox hBox3 = (HBox) scrollPane.getContent();
-
-
-            for(Node node5: hBox3.getChildren()){
-                System.out.println(node5.getId());
-
-            }
-
-                for(Node node: hBox.getChildren()){
-                    if(node instanceof Button button){
-                        button.setOnAction(event2 -> {
-                            System.out.println("onAddColumnButtonClicked");
-                            // Display Edit Profile view
-                            this.stage = (Stage) ((Node) event2.getSource()).getScene().getWindow();
-                            try {
-                                viewFactory.displayCreateTaskView(stage);
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        });
-                    }
-                }
+        this.model.getColumnViewModel().getColumnVBoxes().forEach(column -> column.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+            this.columnEventFilter(column, mouseEvent);
         }));
-//        if(tabPane != null) {
-//            Tab tab = tabPane.getSelectionModel().getSelectedItem();
-//            ScrollPane scrollPane = (ScrollPane) tab.getContent();
-//            HBox hBox = (HBox) scrollPane.getContent();
-//            hBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-//                Node node = (Node) e.getSource();
-//
-//                System.out.println("Arian" + node.getId());
-//            });
-//        }
 
     }
 
@@ -174,7 +137,6 @@ public class WorkspaceController extends BaseController {
         // Display Create Project view
         this.stage = (Stage) workspaceMenuBar.getScene().getWindow();
         viewFactory.displayCreateColumnView(stage);
-
         initialize();
 
         // new links
@@ -243,6 +205,58 @@ public class WorkspaceController extends BaseController {
         viewFactory.displayDeleteProjectView(stage);
     }
 
+    private void columnEventFilter(VBox column, MouseEvent mouseEvent) {
 
+        // Set selected column
+        this.model.getColumnViewModel().setColumn(column);
 
+        // Get column header
+        VBox vBox = (VBox) mouseEvent.getSource();
+        HBox hBox = (HBox) vBox.getChildren().get(0);
+
+        // Get column header children
+        for (Node node : hBox.getChildren()) {
+
+            // Add action to add task button
+            if (node instanceof Button button) {
+                button.setOnAction(actionEvent -> {
+                    System.out.println("onAddTaskButtonClicked");
+                    try {
+                        // Display Edit Profile view
+                        this.stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                        viewFactory.displayCreateTaskView(stage);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+            // Add actions to menu button menu items
+            if (node instanceof MenuButton menuButton) {
+
+                menuButton.getItems().get(0).setOnAction(actionEvent -> {
+                    System.out.println("OnRenameMenuItemClicked");
+                    try {
+                        // Display Edit Profile view
+                        this.stage = (Stage) menuButton.getScene().getWindow();
+                        viewFactory.displayRenameColumnView(stage);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+                menuButton.getItems().get(1).setOnAction(actionEvent -> {
+                    System.out.println("OnDeleteMenuItemClicked");
+                    try {
+                        // Display Edit Profile view
+                        this.stage = (Stage) menuButton.getScene().getWindow();
+                        viewFactory.displayDeleteColumnView(stage);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+            }
+        }
+    }
 }
