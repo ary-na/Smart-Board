@@ -32,6 +32,10 @@ Biy, U., 2022. How to set tab name size in JavaFX. [online] Stack Overflow. Avai
 
 Biy, U., 2022. JavaFX : Highlight VBox on mouse click and change color when unfocused. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/33840436/javafx-highlight-vbox-on-mouse-click-and-change-color-when-unfocused> [Accessed 5 May 2022].
 
+Biy, U., 2022. JavaFX dynamically add buttons. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/25930944/javafx-dynamically-add-buttons> [Accessed 22 May 2022].
+
+Biy, U., 2022. Remove arrow on JavaFX menuButton. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/30210117/remove-arrow-on-javafx-menubutton> [Accessed 22 May 2022].
+
 Brian, 2022. How to get the selected Tab from the TabPane with JavaFX?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/30276935/how-to-get-the-selected-tab-from-the-tabpane-with-javafx> [Accessed 5 May 2022].
 
 Bucky, 2022. JavaFX Java GUI Tutorial. [online] Youtube.com. Available at: <https://www.youtube.com/watch?v=FLkOX4Eez6o&t=14s> [Accessed 13 April 2022].
@@ -43,6 +47,8 @@ Diwan, A., 2022. Connecting to a MySQL database with Java. [online] Tutorialspoi
 DVarga and Brucker, P., 2022. JavaFX ScrollPane styling. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41804373/javafx-scrollpane-styling> [Accessed 11 May 2022].
 
 Eder, L., 2022. Easiest way to convert a Blob into a byte array. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/6662432/easiest-way-to-convert-a-blob-into-a-byte-array> [Accessed 27 April 2022].
+
+Fabian and Sethi, H., 2022. [Solved] How to determine if the user clicked outside a particular JavaFX node? - Local Coder. [online] Localcoder.org. Available at: <https://localcoder.org/how-to-determine-if-the-user-clicked-outside-a-particular-javafx-node> [Accessed 22 May 2022].
 
 Fadatare, R., 2022. Login Form Using JavaFX with MySQL Database. [online] Javaguides.net. Available at: <https://www.javaguides.net/2019/07/login-form-using-javafx-with-mysql-database.html> [Accessed 11 April 2022].
 
@@ -62,6 +68,8 @@ GOXR3PLUS, 2022. JavaFx: how make a clickable image using scenebuilder. [online]
 
 Graham and Fabian, 2022. How to add css to a JavaFx element. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41642403/how-to-add-css-to-a-javafx-element> [Accessed 11 May 2022].
 
+Grinev, S., 2022. How can I get a Button's text in JavaFX if the Button is being read as a Node? Looping through Group/VBox of Buttons. Returns it as Nodes. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/9816568/how-can-i-get-a-buttons-text-in-javafx-if-the-button-is-being-read-as-a-node-l#9835566> [Accessed 22 May 2022].
+
 Halim, B., 2022. How to get Text from fxml TextField. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41683209/how-to-get-text-from-fxml-textfield> [Accessed 11 April 2022].
 
 Horea, A., 2022. Advanced Java programming with JavaFx: Write an email client. [online] udemy.com. Available at: <https://www.udemy.com/course/advanced-programming-with-javafx-build-an-email-client/> [Accessed 11 May 2022].
@@ -70,9 +78,13 @@ Hotzst, Ryzhikov, E. and MrEbbinghaus, 2022. How to switch scenes in JavaFX. [on
 
 ItachiUchiha, 2022. How to close and iconify a JavaFx stage. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/22192484/how-to-close-and-iconify-a-javafx-stage> [Accessed 28 April 2022].
 
+James_D and Sevle, 2022. How do I resize an imageview image in javafx?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx> [Accessed 22 May 2022].
+
 James_D, 2022. JavaFX How to get a children (WebView) from a Tab?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/28173252/javafx-how-to-get-a-children-webview-from-a-tab> [Accessed 5 May 2022].
 
 Java2s.com. 2022. JavaFX How to - Add two controls to HBox. [online] Available at: <http://www.java2s.com/Tutorials/Java/JavaFX_How_to/HBox/Add_two_controls_to_HBox.htm> [Accessed 5 May 2022].
+
+Jenkov, J., 2022. JavaFX MenuButton. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/menubutton.html> [Accessed 22 May 2022].
 
 Jenkov, J., 2022. JavaFX TabPane. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/tabpane.html> [Accessed 27 April 2022].
 
@@ -85,6 +97,8 @@ Kaltstahl, Z., 2022. JavaFx USE_COMPUTED_SIZE for Stage without using FXML. [onl
 Kapoor, V., 2022. [online] Foxinfotech.in. Available at: <https://www.foxinfotech.in/2019/12/github-markdown-add-an-image-to-readme-md-file.html> [Accessed 12 May 2022].
 
 Kiers, B., 2022. How to find the index of an element in an array in Java?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/1522108/how-to-find-the-index-of-an-element-in-an-array-in-java> [Accessed 11 May 2022].
+
+Kleopatra, 2022. JavaFX TextArea style with css. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/51594560/javafx-textarea-style-with-css> [Accessed 22 May 2022].
 
 Knowprogram. 2022. isBlank() vs isEmpty() in Java String. [online] Available at: <https://www.knowprogram.com/java/isblank-vs-isempty-in-java/> [Accessed 5 May 2022].
 

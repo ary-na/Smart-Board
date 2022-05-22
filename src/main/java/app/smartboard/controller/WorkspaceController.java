@@ -118,14 +118,14 @@ public class WorkspaceController extends BaseController {
         initialize();
 
         // new links
-        //https://jenkov.com/tutorials/javafx/menubutton.html
-        //https://localcoder.org/how-to-determine-if-the-user-clicked-outside-a-particular-javafx-node
-        //https://stackoverflow.com/questions/25930944/javafx-dynamically-add-buttons
-        //https://stackoverflow.com/questions/9816568/how-can-i-get-a-buttons-text-in-javafx-if-the-button-is-being-read-as-a-node-l#9835566
-        //https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx
-        //https://stackoverflow.com/questions/51594560/javafx-textarea-style-with-css
-        //https://stackoverflow.com/questions/30210117/remove-arrow-on-javafx-menubutton
-        //https://jenkov.com/tutorials/javafx/menubutton.html
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
 
     }
 
