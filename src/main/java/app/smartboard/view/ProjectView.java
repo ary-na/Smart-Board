@@ -1,6 +1,9 @@
 package app.smartboard.view;
 
 import app.smartboard.model.Project;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -8,10 +11,27 @@ import javafx.scene.layout.*;
 public class ProjectView extends Tab {
 
     private final Project project;
+    private final HBox columnContainer;
+    private ObservableList<ColumnView> columnViews;
 
     public ProjectView(Project project) {
         this.project = project;
+        this.columnContainer = new HBox(20);
+        this.columnViews = FXCollections.observableArrayList();
+        Bindings.bindContent(this.columnContainer.getChildren(), this.columnViews);
         projectLayout();
+    }
+
+    public ObservableList<ColumnView> getColumnViews() {
+        return columnViews;
+    }
+
+    public void setColumnViews(ObservableList<ColumnView> columnViews) {
+        this.columnViews = columnViews;
+    }
+
+    public void addColumnView(ColumnView columnView){
+        this.columnViews.add(columnView);
     }
 
     private void projectLayout() {
@@ -33,18 +53,21 @@ public class ProjectView extends Tab {
         // Set tab content
         setContent(scrollPane);
 
-        // Create HBox
-        HBox hBox = new HBox(20);
-        hBox.setPadding(new Insets(20));
-        hBox.setMinHeight(Control.USE_COMPUTED_SIZE);
-        hBox.setMinWidth(Control.USE_COMPUTED_SIZE);
-        hBox.prefHeight(Control.USE_COMPUTED_SIZE);
-        hBox.prefWidth(Control.USE_COMPUTED_SIZE);
-        hBox.setMaxHeight(Control.USE_COMPUTED_SIZE);
-        hBox.setMaxWidth(Control.USE_COMPUTED_SIZE);
-        hBox.getStyleClass().add("hbox-project");
+        // Create column container
+        this.columnContainer.setPadding(new Insets(20));
+        this.columnContainer.setMinHeight(Control.USE_COMPUTED_SIZE);
+        this.columnContainer.setMinWidth(Control.USE_COMPUTED_SIZE);
+        this.columnContainer.prefHeight(Control.USE_COMPUTED_SIZE);
+        this.columnContainer.prefWidth(Control.USE_COMPUTED_SIZE);
+        this.columnContainer.setMaxHeight(Control.USE_COMPUTED_SIZE);
+        this.columnContainer.setMaxWidth(Control.USE_COMPUTED_SIZE);
+        this.columnContainer.getStyleClass().add("hbox-project");
 
         // Set scroll pane content
-        scrollPane.setContent(hBox);
+        scrollPane.setContent(this.columnContainer);
+
+        this.columnContainer.getChildren().addAll(this.columnViews);
     }
+
+
 }

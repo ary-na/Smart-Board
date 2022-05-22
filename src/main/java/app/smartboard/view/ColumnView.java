@@ -2,8 +2,12 @@ package app.smartboard.view;
 
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.model.Column;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,32 +16,41 @@ import javafx.scene.layout.*;
 public class ColumnView extends VBox {
 
     private final Column column;
-    private final Tab projectTab;
+    private ObservableList<TaskView> taskViews;
+    private final VBox taskContainer;
 
-    public ColumnView(Column column, Tab projectTab) {
+    public ColumnView(Column column) {
         this.column = column;
-        this.projectTab = projectTab;
+        this.taskContainer = new VBox();
+        this.taskViews = FXCollections.observableArrayList();
+        Bindings.bindContent(this.taskContainer.getChildren(), this.taskViews);
         columnLayout();
     }
 
+    public ObservableList<TaskView> getTaskViews() {
+        return taskViews;
+    }
+
+    public void setTaskViews(ObservableList<TaskView> taskViews) {
+        this.taskViews = taskViews;
+    }
+
+    public void addTaskView(TaskView taskView){
+        this.taskViews.add(taskView);
+    }
+
     private void columnLayout() {
+
         // Set column properties
-        setSpacing(20);
-        setPadding(new Insets(20));
-        setMinHeight(Control.USE_COMPUTED_SIZE);
-        setMinWidth(Control.USE_COMPUTED_SIZE);
-        prefHeight(Control.USE_COMPUTED_SIZE);
-        prefWidth(Control.USE_COMPUTED_SIZE);
-        setMaxHeight(Control.USE_COMPUTED_SIZE);
-        setMaxWidth(Control.USE_COMPUTED_SIZE);
-        getStyleClass().add("vbox-column");
-
-        // Get tab content
-        ScrollPane scrollPane = (ScrollPane) this.projectTab.getContent();
-        HBox hBox = (HBox) scrollPane.getContent();
-
-        // Add column to tab
-        hBox.getChildren().add(this);
+        this.setSpacing(20);
+        this.setPadding(new Insets(20));
+        this.setMinHeight(Control.USE_COMPUTED_SIZE);
+        this.setMinWidth(Control.USE_COMPUTED_SIZE);
+        this.prefHeight(Control.USE_COMPUTED_SIZE);
+        this.prefWidth(Control.USE_COMPUTED_SIZE);
+        this.setMaxHeight(Control.USE_COMPUTED_SIZE);
+        this.setMaxWidth(Control.USE_COMPUTED_SIZE);
+        this.getStyleClass().add("vbox-column");
 
         // Create column header
         HBox columnHeader = new HBox();
@@ -79,7 +92,20 @@ public class ColumnView extends VBox {
                 columnHeaderMenuButton
         );
 
+        this.taskContainer.setSpacing(20);
+        this.taskContainer.setMinHeight(Control.USE_COMPUTED_SIZE);
+        this.taskContainer.setMinWidth(Control.USE_COMPUTED_SIZE);
+        this.taskContainer.prefHeight(Control.USE_COMPUTED_SIZE);
+        this.taskContainer.prefWidth(Control.USE_COMPUTED_SIZE);
+        this.taskContainer.setMaxHeight(Control.USE_COMPUTED_SIZE);
+        this.taskContainer.setMaxWidth(Control.USE_COMPUTED_SIZE);
+        // Add tasks to column
+        this.taskContainer.getChildren().addAll(this.taskViews);
+
         // Add column header to column
-        getChildren().add(columnHeader);
+        this.getChildren().addAll(
+                columnHeader,
+                taskContainer
+        );
     }
 }

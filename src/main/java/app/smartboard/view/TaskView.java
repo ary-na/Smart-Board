@@ -15,18 +15,13 @@ import javafx.scene.layout.VBox;
 public class TaskView extends VBox {
 
     private final Task task;
-    private final VBox projectColumn;
 
-    public TaskView(Task task, VBox projectColumn) {
+    public TaskView(Task task) {
         this.task = task;
-        this.projectColumn = projectColumn;
         taskLayout();
     }
 
     private void taskLayout() {
-
-        // Add task layout to column
-        this.projectColumn.getChildren().add(this);
 
         // Task left container
         VBox left = new VBox(5);

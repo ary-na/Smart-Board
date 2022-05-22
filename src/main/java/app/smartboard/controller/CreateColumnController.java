@@ -31,8 +31,7 @@ public class CreateColumnController extends BaseController {
 
             // Create column
             Nameable nameable = this.model.createNameable("Column", this.columnNameTextField.getText().trim());
-            int index = this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedIndex();
-            this.model.getProjects().get(index).addColumn((Column) nameable);
+            this.model.getProjects().get(this.model.getProjectIndex()).addColumn((Column) nameable);
 
 
             // Create column VBox

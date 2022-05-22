@@ -5,6 +5,7 @@ import app.smartboard.model.Model;
 import app.smartboard.model.Nameable;
 import app.smartboard.model.Project;
 import app.smartboard.model.User;
+import app.smartboard.view.ProjectView;
 import app.smartboard.view.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

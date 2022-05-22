@@ -1,11 +1,11 @@
 package app.smartboard.controller;
 
 import app.smartboard.model.*;
+import app.smartboard.view.ProjectView;
 import app.smartboard.view.ViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -18,12 +18,10 @@ import javafx.stage.Stage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class WorkspaceController extends BaseController {
 
     public TabPane projectTabPane;
-
     private HBox projectHBox;
     private Stage stage;
 
@@ -57,44 +55,24 @@ public class WorkspaceController extends BaseController {
         // Set tab pane to Workspace view model
         this.model.getProjectViewModel().setTabPane(this.tabPane);
 
-        //this.model.getProjects().forEach(project -> this.model.getProjectUI().add(new ViewProjectFactory(project)));
-
         if (this.model.getProjects().isEmpty() && this.model.getProjects() != null)
             this.model.getWorkspaceViewModel().setEmptyWorkspace(true);
 
-        Bindings.bindBidirectional(addColumnMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
-        Bindings.bindBidirectional(renameProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
-        Bindings.bindBidirectional(deleteProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
-        Bindings.bindBidirectional(setDefaultProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
-
-        // Bind user profile picture and first name to view model
-        Bindings.bindBidirectional(profilePhotoImageView.imageProperty(), this.model.getWorkspaceViewModel().userImageProperty());
-
-        Bindings.bindBidirectional(firstNameLabel.textProperty(), this.model.getWorkspaceViewModel().userFirstNameProperty());
-        Bindings.bindContent(tabPane.getTabs(), this.model.getProjectViewModel().getProjectTabs());
-
-
-        // fix this bug, Duplicate Hbox detected
-        if (this.model.getProjectViewModel().getProjectTabs().size() > 0) {
-            ScrollPane scrollPane = (ScrollPane) this.model.getProjectViewModel().getTabPane().getTabs().get(this.model.getProjectIndex()).getContent();
-            HBox columnContainer = (HBox) scrollPane.getContent();
-            Bindings.bindContent(columnContainer.getChildren(), this.model.getColumnViewModel().getColumnVBoxes());
-        }
+        this.bindWorkspaceContent();
 
         // Load user data
-        if (this.model.getCurrentUser().getProfile().getProfilePhoto() != null) {
-            firstNameLabel.setText(this.model.getCurrentUser().getProfile().getFirstName());
+        firstNameLabel.setText(this.model.getCurrentUser().getProfile().getFirstName());
+        if (this.model.getCurrentUser().getProfile().getProfilePhoto() != null)
             profilePhotoImageView.setImage(new Image(new ByteArrayInputStream(this.model.getCurrentUser().getProfile().getProfilePhoto())));
+
+        this.displayRandomQuote();
+
+        if (this.model.getProjectViewModel().getProjectTabs().size() > 0) {
+            ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+            projectView.getColumnViews().forEach(column -> column.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+                this.columnEventFilter(column, mouseEvent);
+            }));
         }
-
-        // Select a random quote
-        Random random = new Random();
-        quoteLabel.setText(this.model.getDatabaseHelper().getQuote(random.nextInt(10) + 1));
-
-        this.model.getColumnViewModel().getColumnVBoxes().forEach(column -> column.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
-            this.columnEventFilter(column, mouseEvent);
-        }));
-
     }
 
     public void onProfileButtonClick(ActionEvent event) throws IOException {
@@ -147,36 +125,7 @@ public class WorkspaceController extends BaseController {
         //https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx
         //https://stackoverflow.com/questions/51594560/javafx-textarea-style-with-css
         //https://stackoverflow.com/questions/30210117/remove-arrow-on-javafx-menubutton
-
-        // Get tab index
-//        BindDataHolder.getBindDataHolderInstance().setTabIndex(tabPane.getSelectionModel().getSelectedIndex());
-//
-//        // Open create new column stage
-//        stage = (Stage) workspaceMenuBar.getScene().getWindow();
-//        StageHelper.getStageHelperInstance().createChildStage(stage, "Create Column", "view/create-colum-view.fxml");
-//
-//        // Create column UI
-//        ProjectUIAdapter projectUIAdapter = (ProjectUIAdapter) projectTabs.get(BindDataHolder.getBindDataHolderInstance().getTabIndex());
-//        projectUIAdapter.setColumns(new ColumnUIAdapter(Model.getModelInstance().getProjects().get(BindDataHolder.getBindDataHolderInstance().getTabIndex()), projectTabs.get(BindDataHolder.getBindDataHolderInstance().getTabIndex())));
-//
-//        projectUIAdapter.getColumns().getLast().getCreateTaskButton().setOnAction(e -> {
-//
-//            Button button = (Button) e.getSource();
-////            button.getScaleX();
-////
-////            int btnID = Integer.parseInt(button.getId());
-////            BindDataHolder.getBindDataHolderInstance().setColumnIndex(btnID);
-////            System.out.println(button.getId());
-//
-//            // Open create new task stage
-//            try {
-//                StageHelper.getStageHelperInstance().createChildStage(stage, "Create Task", "view/create-tak-view.fxml");
-//                ColumnUIAdapter columnUIAdapter = projectUIAdapter.getColumns().getLast();
-//                columnUIAdapter.setTasks(new TaskUIAdapter(Model.getModelInstance().getProjects().get(BindDataHolder.getBindDataHolderInstance().getTabIndex()).getColumn().getLast(), projectUIAdapter.getColumns().get(BindDataHolder.getBindDataHolderInstance().getTabIndex())));
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        });
+        //https://jenkov.com/tutorials/javafx/menubutton.html
 
     }
 
@@ -203,6 +152,29 @@ public class WorkspaceController extends BaseController {
         // Display Create Project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();
         viewFactory.displayDeleteProjectView(stage);
+    }
+
+    private void bindWorkspaceContent() {
+
+        Bindings.bindBidirectional(addColumnMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
+        Bindings.bindBidirectional(renameProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
+        Bindings.bindBidirectional(deleteProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
+        Bindings.bindBidirectional(setDefaultProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
+
+        // Bind user profile picture and first name to view model
+        Bindings.bindBidirectional(profilePhotoImageView.imageProperty(), this.model.getWorkspaceViewModel().userImageProperty());
+
+        Bindings.bindBidirectional(firstNameLabel.textProperty(), this.model.getWorkspaceViewModel().userFirstNameProperty());
+        Bindings.bindContent(tabPane.getTabs(), this.model.getProjectViewModel().getProjectTabs());
+
+    }
+
+    private void displayRandomQuote() {
+
+        // Select a random quote
+        Random random = new Random();
+        quoteLabel.setText(this.model.getDatabaseHelper().getQuote(random.nextInt(10) + 1));
+
     }
 
     private void columnEventFilter(VBox column, MouseEvent mouseEvent) {

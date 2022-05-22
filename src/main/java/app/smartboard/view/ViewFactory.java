@@ -3,9 +3,14 @@ package app.smartboard.view;
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.controller.*;
 import app.smartboard.model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -169,17 +174,17 @@ public class ViewFactory {
         this.model.getProjectViewModel().getTabPane().getSelectionModel().select(viewProject);
         this.model.getWorkspaceViewModel().setEmptyWorkspace(false);
 
-
-
     }
 
     // Initialize Column
     public void initializeColumn(Nameable nameable) {
 
-        Tab tab = this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedItem();
-        ColumnView viewColumn = new ColumnView((Column) nameable, tab);
-        this.model.getColumnViewModel().getColumnVBoxes().add(viewColumn);
+        ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+
+        ColumnView viewColumn = new ColumnView((Column) nameable);
+        projectView.addColumnView(viewColumn);
         this.model.getColumnViewModel().getColumnMap().put(viewColumn, (Column) nameable);
+
 
     }
 
@@ -187,8 +192,11 @@ public class ViewFactory {
     public void initializeTask(Nameable nameable) {
 
         VBox columnVBox = this.model.getColumnViewModel().getColumn();
-        TaskView taskView = new TaskView((Task) nameable, columnVBox);
-        this.model.getTaskViewModel().getTaskVBoxes().add(taskView);
+        TaskView taskView = new TaskView((Task) nameable);
+
+        ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+        projectView.getColumnViews().get(model.getColumnIndex(columnVBox)).addTaskView(taskView);
+
         this.model.getTaskViewModel().getTaskMap().put(taskView, (Task) nameable);
 
     }
