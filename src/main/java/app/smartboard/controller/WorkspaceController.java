@@ -117,16 +117,6 @@ public class WorkspaceController extends BaseController {
         viewFactory.displayCreateColumnView(stage);
         initialize();
 
-        // new links
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-
     }
 
     public void onRenameMenuItemClicked(ActionEvent event) throws IOException {
