@@ -70,6 +70,8 @@ Graham and Fabian, 2022. How to add css to a JavaFx element. [online] Stack Over
 
 Grinev, S., 2022. How can I get a Button's text in JavaFX if the Button is being read as a Node? Looping through Group/VBox of Buttons. Returns it as Nodes. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/9816568/how-can-i-get-a-buttons-text-in-javafx-if-the-button-is-being-read-as-a-node-l#9835566> [Accessed 22 May 2022].
 
+Gupta, L., 2022. How to serialize and deserialize ArrayList in Java - HowToDoInJava. [online] HowToDoInJava. Available at: <https://howtodoinjava.com/java/collections/arraylist/serialize-deserialize-arraylist/> [Accessed 24 May 2022].
+
 Halim, B., 2022. How to get Text from fxml TextField. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41683209/how-to-get-text-from-fxml-textfield> [Accessed 11 April 2022].
 
 Horea, A., 2022. Advanced Java programming with JavaFx: Write an email client. [online] udemy.com. Available at: <https://www.udemy.com/course/advanced-programming-with-javafx-build-an-email-client/> [Accessed 11 May 2022].
@@ -80,9 +82,15 @@ ItachiUchiha, 2022. How to close and iconify a JavaFx stage. [online] Stack Over
 
 James_D and Sevle, 2022. How do I resize an imageview image in javafx?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx> [Accessed 22 May 2022].
 
+James_D, 2022. JavaFX DatePicker getValue in a specific format. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/26831978/javafx-datepicker-getvalue-in-a-specific-format> [Accessed 24 May 2022].
+
 James_D, 2022. JavaFX How to get a children (WebView) from a Tab?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/28173252/javafx-how-to-get-a-children-webview-from-a-tab> [Accessed 5 May 2022].
 
 Java2s.com. 2022. JavaFX How to - Add two controls to HBox. [online] Available at: <http://www.java2s.com/Tutorials/Java/JavaFX_How_to/HBox/Add_two_controls_to_HBox.htm> [Accessed 5 May 2022].
+
+Jenkov, J., 2022. JavaFX CheckBox. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/checkbox.html> [Accessed 24 May 2022].
+
+Jenkov, J., 2022. JavaFX DatePicker. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/datepicker.html> [Accessed 24 May 2022].
 
 Jenkov, J., 2022. JavaFX MenuButton. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/menubutton.html> [Accessed 22 May 2022].
 
@@ -118,15 +126,21 @@ MavenLibs.com. 2022. org.xerial : sqlite-jdbc - Maven Repository [Java]. [online
 
 Mevada, R., 2022. How can I style a JavaFX menu and its items in CSS?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/21912946/how-can-i-style-a-javafx-menu-and-its-items-in-css?noredirect=1&lq=1> [Accessed 14 April 2022].
 
+Mrak, 2022. How to extend custom JavaFX components that use FXML. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/31569299/how-to-extend-custom-javafx-components-that-use-fxml> [Accessed 24 May 2022].
+
 Pankaj, 2022. Java SQL Blob - JournalDev. [online] JournalDev. Available at: <https://www.journaldev.com/44618/java-sql-blob> [Accessed 27 April 2022].
 
 Parashar, A., 2022. How to change the tab pane style. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/17091605/how-to-change-the-tab-pane-style> [Accessed 11 May 2022].
 
 Parashar, A., 2022. set background color in scrollpane. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/20118574/set-background-color-in-scrollpane> [Accessed 11 May 2022].
 
+Pedamkar, P., 2022. SQL DELETE Row | How to Implement SQL DELETE ROW | Examples. [online] EDUCBA. Available at: <https://www.educba.com/sql-delete-row/> [Accessed 24 May 2022].
+
 Pereda, J., 2022. In javafx, how to change scrollbar arrow color?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/42808539/in-javafx-how-to-change-scrollbar-arrow-color> [Accessed 11 May 2022].
 
 Pethani, A., 2022. Switching between Scenes (Screens) in JavaFx using the FXML. [online] Gist. Available at: <https://gist.github.com/pethaniakshay/302072fda98098a24ce382a361bdf477> [Accessed 11 April 2022].
+
+Pratt, E. and mh-dev, 2022. How do I add margin to a JavaFX element using CSS?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16977100/how-do-i-add-margin-to-a-javafx-element-using-css> [Accessed 24 May 2022].
 
 Pratyaksa, D., 2022. javafx-mvc/Person.java at main · dipto-pratyaksa-rmit/javafx-mvc. [online] GitHub. Available at: <https://github.com/dipto-pratyaksa-rmit/javafx-mvc/blob/main/src/main/java/com/javafx/mvc/model/Person.java> [Accessed 11 May 2022].
 
@@ -140,6 +154,8 @@ Ruzicka, V., 2022. JavaFX Tutorial: CSS Styling. [online] Vojtech Ruzicka's Prog
 
 Saif, S., 2022. [online] Saif71.com. Available at: <https://saif71.com> [Accessed 12 May 2022].
 
+Schoen, J., 2022. How do you set the style for a JavaFX ContextMenu using css?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/11127999/how-do-you-set-the-style-for-a-javafx-contextmenu-using-css> [Accessed 24 May 2022].
+
 Slaw, 2022. Can I only target bottom border at JavaFX Styling?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/60682935/can-i-only-target-bottom-border-at-javafx-styling> [Accessed 14 April 2022].
 
 Snortum, K., 2022. javafx-pass-data-demo/src/main/java/net/snortum/passdatademo at master · ksnortum/javafx-pass-data-demo. [online] GitHub. Available at: <https://github.com/ksnortum/javafx-pass-data-demo/tree/master/src/main/java/net/snortum/passdatademo> [Accessed 27 April 2022].
@@ -147,6 +163,8 @@ Snortum, K., 2022. javafx-pass-data-demo/src/main/java/net/snortum/passdatademo 
 Sonawalla, A. and Nat, 2022. Remove border around JavaFX ScrollPane scroll bar when *not* focused. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/50184756/remove-border-around-javafx-scrollpane-scroll-bar-when-not-focused> [Accessed 11 May 2022].
 
 Sourcecodeexamples.net. 2022. JavaFX JDBC MySQL Database Example. [online] Available at: <https://www.sourcecodeexamples.net/2020/04/javafx-jdbc-mysql-database-example.html> [Accessed 11 April 2022].
+
+SQLite Tutorial. 2022. SQLite DELETE Statement Step By Step with Examples. [online] Available at: <https://www.sqlitetutorial.net/sqlite-delete/> [Accessed 24 May 2022].
 
 SQLite Tutorial. 2022. SQLite Java: Inserting Data. [online] Available at: <https://www.sqlitetutorial.net/sqlite-java/insert/> [Accessed 15 April 2022].
 
@@ -169,5 +187,7 @@ www.javatpoint.com. 2022. Factory Method Design Pattern - Javatpoint. [online] A
 Zephyr, 2022. JavaFx property binding with multiple objects on on screen. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/53771119/javafx-property-binding-with-multiple-objects-on-on-screen> [Accessed 5 May 2022].
 
 Zephyr, 2022. Java FX Set Margin. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/51574433/java-fx-set-margin> [Accessed 5 May 2022].
+
+Zon and kbyrd, 2022. Get key from a HashMap using the value. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/8112975/get-key-from-a-hashmap-using-the-value> [Accessed 24 May 2022].
 
 Zon, 2022. JavaFX TabPane: How to set the selected tab. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/6902377/javafx-tabpane-how-to-set-the-selected-tab> [Accessed 5 May 2022].

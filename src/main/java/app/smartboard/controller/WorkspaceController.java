@@ -7,7 +7,6 @@ import app.smartboard.view.TaskView;
 import app.smartboard.view.ViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -23,25 +22,11 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Random;
 
-/*
-links to add
-https://stackoverflow.com/questions/16977100/how-do-i-add-margin-to-a-javafx-element-using-css
-https://stackoverflow.com/questions/11127999/how-do-you-set-the-style-for-a-javafx-contextmenu-using-css
-https://stackoverflow.com/questions/26831978/javafx-datepicker-getvalue-in-a-specific-format
-https://jenkov.com/tutorials/javafx/datepicker.html
-https://stackoverflow.com/questions/31569299/how-to-extend-custom-javafx-components-that-use-fxml
-https://jenkov.com/tutorials/javafx/checkbox.html
-https://www.educba.com/sql-delete-row/
-https://www.sqlitetutorial.net/sqlite-delete/
-https://howtodoinjava.com/java/collections/arraylist/serialize-deserialize-arraylist/
- */
-
 public class WorkspaceController extends BaseController {
 
     public TabPane projectTabPane;
     private HBox projectHBox;
     private Stage stage;
-
     public MenuBar workspaceMenuBar;
     public Menu projectMenu;
     public MenuItem addColumnMenuItem;
@@ -192,7 +177,6 @@ public class WorkspaceController extends BaseController {
 
         }
     }
-
 
     public void onDeleteProjectMenuItemClick() throws IOException {
 
