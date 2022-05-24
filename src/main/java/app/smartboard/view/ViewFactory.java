@@ -29,6 +29,7 @@ public class ViewFactory {
     private Stage stage;
     private Scene scene;
     private FXMLLoader fxmlLoader;
+    private ProjectView projectView;
 
     public ViewFactory(Model model) {
         this.model = model;
@@ -181,15 +182,15 @@ public class ViewFactory {
     // Initialize Project
     public void initializeProject(Nameable nameable) {
 
-        ProjectView viewProject = new ProjectView((Project) nameable);
+        this.projectView = new ProjectView((Project) nameable);
 
         // Add tab to list
-        this.model.getProjectViewModel().getProjectTabs().add(viewProject);
+        this.model.getProjectViewModel().getProjectTabs().add(this.projectView);
 
         // Add tab to tab pane
-        this.model.getProjectViewModel().getTabPane().getTabs().add(viewProject);
+        this.model.getProjectViewModel().getTabPane().getTabs().add(this.projectView);
 
-        this.model.getProjectViewModel().getTabPane().getSelectionModel().select(viewProject);
+        this.model.getProjectViewModel().getTabPane().getSelectionModel().select(this.projectView);
         this.model.getWorkspaceViewModel().setEmptyWorkspace(false);
 
     }
@@ -197,23 +198,21 @@ public class ViewFactory {
     // Initialize Column
     public void initializeColumn(Nameable nameable) {
 
-        ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+        this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
 
         ColumnView viewColumn = new ColumnView((Column) nameable);
-        projectView.addColumnView(viewColumn);
         this.model.getColumnViewModel().getColumnMap().put(viewColumn, (Column) nameable);
-
+        this.projectView.addColumnView(viewColumn);
 
     }
 
     // Initialize Task
     public void initializeTask(Nameable nameable) {
 
-        VBox columnVBox = this.model.getColumnViewModel().getColumn();
         TaskView taskView = new TaskView((Task) nameable);
 
-        ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
-        projectView.getColumnViews().get(model.getColumnIndex(columnVBox)).addTaskView(taskView);
+        this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+        this.projectView.getColumnViews().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTaskView(taskView);
 
         this.model.getTaskViewModel().getTaskMap().put(taskView, (Task) nameable);
 

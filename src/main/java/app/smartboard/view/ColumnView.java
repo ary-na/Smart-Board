@@ -27,6 +27,10 @@ public class ColumnView extends VBox {
         columnLayout();
     }
 
+    public Column getColumn() {
+        return column;
+    }
+
     public ObservableList<TaskView> getTaskViews() {
         return taskViews;
     }

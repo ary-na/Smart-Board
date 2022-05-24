@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.Random;
 
 /*
@@ -31,6 +32,8 @@ https://jenkov.com/tutorials/javafx/datepicker.html
 https://stackoverflow.com/questions/31569299/how-to-extend-custom-javafx-components-that-use-fxml
 https://jenkov.com/tutorials/javafx/checkbox.html
 https://www.educba.com/sql-delete-row/
+https://www.sqlitetutorial.net/sqlite-delete/
+https://howtodoinjava.com/java/collections/arraylist/serialize-deserialize-arraylist/
  */
 
 public class WorkspaceController extends BaseController {
@@ -59,6 +62,31 @@ public class WorkspaceController extends BaseController {
         // Set tab pane to Workspace view model
         this.model.getProjectViewModel().setTabPane(this.tabPane);
 
+        // Load projects from database
+        if (this.model.getProjects().size() > 0 && this.model.getProjectViewModel().getProjectTabs().size() == 0) {
+
+            this.model.getProjects().forEach(project -> {
+                this.viewFactory.initializeProject(project);
+                project.getColumn().forEach(column -> {
+                    this.viewFactory.initializeColumn(column);
+
+                    ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+                    projectView.getColumnViews().forEach(columnUI -> columnUI.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+                        this.columnEventFilter(columnUI, mouseEvent);
+                    }));
+
+                    for (Map.Entry<ColumnView, Column> e : this.model.getColumnViewModel().getColumnMap().entrySet()) {
+                        if (e.getValue() == column) {
+                            this.model.getColumnViewModel().setColumn(e.getKey());
+                            column.getTask().forEach(task -> {
+                                this.viewFactory.initializeTask(task);
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
         if (this.model.getProjects().isEmpty() && this.model.getProjects() != null)
             this.model.getWorkspaceViewModel().setEmptyWorkspace(true);
 
@@ -71,7 +99,7 @@ public class WorkspaceController extends BaseController {
 
         this.displayRandomQuote();
 
-        if (this.model.getProjectViewModel().getProjectTabs().size() > 0) {
+        if (this.model.getProjects().size() > 0) {
             ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
             projectView.getColumnViews().forEach(column -> column.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
                 this.columnEventFilter(column, mouseEvent);
