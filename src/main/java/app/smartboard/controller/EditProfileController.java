@@ -25,28 +25,19 @@ public class EditProfileController extends BaseController {
 
     private Stage stage;
     private File selectedFile;
-    @FXML
     public Label firstNameLabel;
-    @FXML
     public TextField firstNameTextField;
-    @FXML
     public TextField lastNameTextField;
-    @FXML
-    public Button confirmButton;
-    @FXML
-    private Button cancelButton;
-    @FXML
     public ImageView profilePhotoImageView;
-    @FXML
     public Button imageViewButton;
 
     public EditProfileController(Model model, ViewFactory viewFactory, String fxml) {
         super(model, viewFactory, fxml);
     }
 
-    @FXML
     public void initialize() {
 
+        // Set user profile
         firstNameLabel.setText(this.model.getCurrentUser().getProfile().getFirstName());
         firstNameTextField.setText(this.model.getCurrentUser().getProfile().getFirstName());
         lastNameTextField.setText(this.model.getCurrentUser().getProfile().getLastName());
@@ -79,20 +70,29 @@ public class EditProfileController extends BaseController {
         this.model.getWorkspaceViewModel().setUserImage(new Image(new ByteArrayInputStream(this.model.getCurrentUser().getProfile().getProfilePhoto())));
     }
 
-    @FXML
-    private void onCancelButtonClick(ActionEvent event) {
+    // On cancel button click
+    public void onCancelButtonClick(ActionEvent event) {
+
+        // Close stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         viewFactory.closeStage(stage);
+
     }
 
-    @FXML
+    // On image view button click
     public void onImageViewButtonClicked(ActionEvent event) throws IOException {
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Display file chooser and get the file
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("PNG, JPG, JPEG", "*.png", "*.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extensionFilter);
         selectedFile = fileChooser.showOpenDialog(stage);
+
+        // Set selected file to user profile
         FileInputStream fileInputStream = new FileInputStream(selectedFile);
         profilePhotoImageView.setImage(new Image(fileInputStream));
+
     }
 }

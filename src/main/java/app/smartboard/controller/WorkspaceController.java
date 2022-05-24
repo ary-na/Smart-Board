@@ -1,7 +1,9 @@
 package app.smartboard.controller;
 
 import app.smartboard.model.*;
+import app.smartboard.view.ColumnView;
 import app.smartboard.view.ProjectView;
+import app.smartboard.view.TaskView;
 import app.smartboard.view.ViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -17,7 +19,19 @@ import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Random;
+
+/*
+links to add
+https://stackoverflow.com/questions/16977100/how-do-i-add-margin-to-a-javafx-element-using-css
+https://stackoverflow.com/questions/11127999/how-do-you-set-the-style-for-a-javafx-contextmenu-using-css
+https://stackoverflow.com/questions/26831978/javafx-datepicker-getvalue-in-a-specific-format
+https://jenkov.com/tutorials/javafx/datepicker.html
+https://stackoverflow.com/questions/31569299/how-to-extend-custom-javafx-components-that-use-fxml
+https://jenkov.com/tutorials/javafx/checkbox.html
+https://www.educba.com/sql-delete-row/
+ */
 
 public class WorkspaceController extends BaseController {
 
@@ -25,26 +39,16 @@ public class WorkspaceController extends BaseController {
     private HBox projectHBox;
     private Stage stage;
 
-    @FXML
-    private MenuBar workspaceMenuBar;
-    @FXML
-    private Menu projectMenu;
-    @FXML
-    private MenuItem addColumnMenuItem;
-    @FXML
-    private MenuItem renameProjectMenuItem;
-    @FXML
-    private MenuItem setDefaultProjectMenuItem;
-    @FXML
-    private MenuItem deleteProjectMenuItem;
-    @FXML
-    private ImageView profilePhotoImageView;
-    @FXML
-    private Label firstNameLabel;
-    @FXML
-    private TabPane tabPane;
-    @FXML
-    private Label quoteLabel;
+    public MenuBar workspaceMenuBar;
+    public Menu projectMenu;
+    public MenuItem addColumnMenuItem;
+    public MenuItem renameProjectMenuItem;
+    public CheckMenuItem setDefaultProjectCheckMenuItem;
+    public MenuItem deleteProjectMenuItem;
+    public ImageView profilePhotoImageView;
+    public Label firstNameLabel;
+    public TabPane tabPane;
+    public Label quoteLabel;
 
     public WorkspaceController(Model model, ViewFactory viewFactory, String fxml) {
         super(model, viewFactory, fxml);
@@ -84,24 +88,28 @@ public class WorkspaceController extends BaseController {
 
     }
 
-    public void onLogOutButtonClick(ActionEvent event) throws IOException {
+    public void onLogOutButtonClick(ActionEvent event) throws IOException, SQLException {
 
         System.out.println("onLogOutButtonClick");
         // Display Sign Up view
         viewFactory.displayLoginView();
+
+        // Save user projects
+        this.model.getDatabaseHelper().setProjects(this.model.getCurrentUser().getUsername(), this.model.getProjects());
+
+        // Reset user data
         this.model.getWorkspaceViewModel().setUserImage(null);
         this.model.getWorkspaceViewModel().setUserFirstName(null);
 
-
+        // Reset model
         this.model = new Model();
-
 
         // Close Workspace stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         viewFactory.closeStage(stage);
     }
 
-    public void onNewProjectMenuItemClicked(ActionEvent event) throws IOException {
+    public void onNewProjectMenuItemClick(ActionEvent event) throws IOException {
 
         System.out.println("onNewProjectMenuItemClicked");
 
@@ -110,7 +118,7 @@ public class WorkspaceController extends BaseController {
         viewFactory.displayCreateProjectView(stage);
     }
 
-    public void onAddColumnMenuItemClicked() throws IOException {
+    public void onAddColumnMenuItemClick() throws IOException {
 
         // Display Create Project view
         this.stage = (Stage) workspaceMenuBar.getScene().getWindow();
@@ -119,7 +127,7 @@ public class WorkspaceController extends BaseController {
 
     }
 
-    public void onRenameMenuItemClicked(ActionEvent event) throws IOException {
+    public void onRenameMenuItemClick(ActionEvent event) throws IOException {
 
         System.out.println("onRenameMenuItemClicked");
 
@@ -128,11 +136,37 @@ public class WorkspaceController extends BaseController {
         viewFactory.displayRenameProjectView(stage);
     }
 
-    public void onSetAsDefaultMenuItemClicked(ActionEvent event) {
-        System.out.println("Set project as default");
+
+    // On set as default check menu item click
+    public void onSetAsDefaultCheckMenuItemClick(ActionEvent event) {
+
+        // On check menu item selected condition
+        if (setDefaultProjectCheckMenuItem.isSelected()) {
+
+            // Set default true
+            this.model.getProjects().get(this.model.getProjectIndex()).setIsDefault(true);
+            // Add default style class
+            this.model.getProjectViewModel().getProjectTabs().get(getModel().getProjectIndex()).getStyleClass().add("default-project");
+
+        } else {
+
+            // For each project set default false
+            this.model.getProjects().forEach(project -> {
+
+                project.setIsDefault(false);
+
+                // For each project tab remove default style class
+                this.model.getProjectViewModel().getProjectTabs().forEach(tab -> {
+                    tab.getStyleClass().remove("default-project");
+                });
+
+            });
+
+        }
     }
 
-    public void onDeleteProjectMenuItemClicked() throws IOException {
+
+    public void onDeleteProjectMenuItemClick() throws IOException {
 
         System.out.println("onDeleteMenuItemClicked");
 
@@ -149,7 +183,7 @@ public class WorkspaceController extends BaseController {
         Bindings.bindBidirectional(addColumnMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
         Bindings.bindBidirectional(renameProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
         Bindings.bindBidirectional(deleteProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
-        Bindings.bindBidirectional(setDefaultProjectMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
+        Bindings.bindBidirectional(setDefaultProjectCheckMenuItem.disableProperty(), this.model.getWorkspaceViewModel().emptyWorkspaceProperty());
 
         // Bind user profile picture and first name to view model
         Bindings.bindBidirectional(profilePhotoImageView.imageProperty(), this.model.getWorkspaceViewModel().userImageProperty());
@@ -171,6 +205,11 @@ public class WorkspaceController extends BaseController {
 
         // Set selected column
         this.model.getColumnViewModel().setColumn(column);
+        ColumnView columnView = (ColumnView) column;
+
+        columnView.getTaskViews().forEach(task -> task.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
+            this.taskEventFilter(task, e);
+        }));
 
         // Get column header
         VBox vBox = (VBox) mouseEvent.getSource();
@@ -199,7 +238,7 @@ public class WorkspaceController extends BaseController {
                 menuButton.getItems().get(0).setOnAction(actionEvent -> {
                     System.out.println("OnRenameMenuItemClicked");
                     try {
-                        // Display Edit Profile view
+                        // Display Rename column view
                         this.stage = (Stage) menuButton.getScene().getWindow();
                         viewFactory.displayRenameColumnView(stage);
                     } catch (IOException e) {
@@ -210,7 +249,7 @@ public class WorkspaceController extends BaseController {
                 menuButton.getItems().get(1).setOnAction(actionEvent -> {
                     System.out.println("OnDeleteMenuItemClicked");
                     try {
-                        // Display Edit Profile view
+                        // Display delete column view
                         this.stage = (Stage) menuButton.getScene().getWindow();
                         viewFactory.displayDeleteColumnView(stage);
                     } catch (IOException e) {
@@ -219,6 +258,47 @@ public class WorkspaceController extends BaseController {
                 });
 
             }
+        }
+    }
+
+    private void taskEventFilter(TaskView task, MouseEvent mouseEvent) {
+
+        // Set selected task
+        this.model.getTaskViewModel().setTask(task);
+
+        // Get menu button
+        VBox vBox = (VBox) mouseEvent.getSource();
+        HBox hBox = (HBox) vBox.getChildren().get(0);
+        VBox right = (VBox) hBox.getChildren().get(2);
+
+        for (Node node : right.getChildren()) {
+            // Add actions to menu button menu items
+            if (node instanceof MenuButton menuButton) {
+
+                menuButton.getItems().get(0).setOnAction(actionEvent -> {
+                    System.out.println("OnEditMenuItemClicked");
+                    try {
+                        // Display Edit task view
+                        this.stage = (Stage) menuButton.getScene().getWindow();
+                        viewFactory.displayEditTaskView(stage);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+                menuButton.getItems().get(1).setOnAction(actionEvent -> {
+                    System.out.println("OnDeleteMenuItemClicked");
+                    try {
+                        // Display delete task view
+                        this.stage = (Stage) menuButton.getScene().getWindow();
+                        viewFactory.displayDeleteTaskView(stage);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+            }
+
         }
     }
 }

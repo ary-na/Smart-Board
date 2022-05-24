@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
-            prefWidth="1100.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1100.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -16,50 +13,45 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Workspace">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#onNewProjectMenuItemClicked"
-                                          text="New project"/>
+                                <MenuItem mnemonicParsing="false" onAction="#onNewProjectMenuItemClick" text="New project" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Project">
                             <items>
-                                <MenuItem fx:id="addColumnMenuItem" mnemonicParsing="false" onAction="#onAddColumnMenuItemClicked"
-                                          text="Add column"/>
-                                <MenuItem fx:id="renameProjectMenuItem" mnemonicParsing="false" onAction="#onRenameMenuItemClicked" text="Rename"/>
-                                <SeparatorMenuItem mnemonicParsing="false"/>
-                                <CheckMenuItem fx:id="setDefaultProjectMenuItem" mnemonicParsing="false" onAction="#onSetAsDefaultMenuItemClicked"
-                                               text="Set as default"/>
-                                <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem fx:id="deleteProjectMenuItem" mnemonicParsing="false" onAction="#onDeleteProjectMenuItemClicked" text="Delete"/>
+                                <MenuItem fx:id="addColumnMenuItem" mnemonicParsing="false" onAction="#onAddColumnMenuItemClick" text="Add column" />
+                                <MenuItem fx:id="renameProjectMenuItem" mnemonicParsing="false" onAction="#onRenameMenuItemClick" text="Rename" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <CheckMenuItem fx:id="setDefaultProjectCheckMenuItem" mnemonicParsing="false" onAction="#onSetAsDefaultCheckMenuItemClick" text="Set as default" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem fx:id="deleteProjectMenuItem" mnemonicParsing="false" onAction="#onDeleteProjectMenuItemClick" text="Delete" />
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
                 <HBox alignment="CENTER" spacing="20.0">
                     <children>
-                        <ImageView fx:id="profilePhotoImageView" fitWidth="30.0" pickOnBounds="true"
-                                   preserveRatio="true">
+                        <ImageView fx:id="profilePhotoImageView" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../assets/default-profile-photo.png"/>
+                                <Image url="@../../../assets/default-profile-photo.png" />
                             </image>
                             <HBox.margin>
-                                <Insets/>
+                                <Insets />
                             </HBox.margin>
                         </ImageView>
                         <Label fx:id="firstNameLabel" styleClass="label-username">
                             <HBox.margin>
-                                <Insets/>
+                                <Insets />
                             </HBox.margin>
                         </Label>
-                        <Region HBox.hgrow="ALWAYS"/>
-                        <Button mnemonicParsing="false" onAction="#onProfileButtonClick" text="Profile"/>
-                        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutButtonClick"
-                                styleClass="button-log-out" text="Log out"/>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#onProfileButtonClick" text="Profile" textAlignment="CENTER" />
+                        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutButtonClick" styleClass="button-log-out" text="Log out" textAlignment="CENTER" />
                     </children>
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <padding>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </padding>
                 </HBox>
             </children>
@@ -70,13 +62,13 @@
             <children>
                 <Label fx:id="quoteLabel" styleClass="label-quote" textAlignment="CENTER">
                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </Label>
             </children>
         </HBox>
     </bottom>
     <center>
-            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER"/>
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
     </center>
 </BorderPane>

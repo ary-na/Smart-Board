@@ -12,9 +12,13 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
+
 public class TaskView extends VBox {
 
     private final Task task;
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public TaskView(Task task) {
         this.task = task;
@@ -31,13 +35,12 @@ public class TaskView extends VBox {
 
         // Task title, due date and checklist
         Label taskTitle = new Label(this.task.getName());
-        Label taskDueDate = new Label(String.valueOf(this.task.getDueDate()));
-        Label checkList = new Label(String.valueOf(this.task.getCheckList().size()));
+        taskTitle.getStyleClass().add("label-task-title");
+        Label taskDueDate = new Label(dateTimeFormatter.format(this.task.getDueDate()));
 
         left.getChildren().addAll(
                 taskTitle,
-                taskDueDate,
-                checkList
+                taskDueDate
         );
 
         // Task right container
@@ -47,13 +50,14 @@ public class TaskView extends VBox {
         right.getStyleClass().add("vbox-task-right-container");
 
         // Task Button
-        ImageView menuIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/menu-icon.png"))));
+        ImageView menuIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/column-header-menu-icon.png"))));
         menuIconImageView.setFitWidth(12);
         menuIconImageView.setFitHeight(12);
         MenuItem edit = new MenuItem("Edit");
         MenuItem delete = new MenuItem("Delete");
         MenuButton taskMenuButton = new MenuButton("", null, edit, delete);
         taskMenuButton.setGraphic(menuIconImageView);
+        taskMenuButton.getStyleClass().add("menu-button-task");
 
         right.getChildren().addAll(
                 taskMenuButton

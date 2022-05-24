@@ -22,7 +22,7 @@ public class CreateColumnController extends BaseController {
         super(model, viewFactory, fxml);
     }
 
-    // On Confirm button click
+    // On confirm button click
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
 
         if (!validInput()) {
@@ -31,8 +31,7 @@ public class CreateColumnController extends BaseController {
 
             // Create column
             Nameable nameable = this.model.createNameable("Column", this.columnNameTextField.getText().trim());
-            this.model.getProjects().get(this.model.getProjectIndex()).addColumn((Column) nameable);
-
+            this.model.getProjects().get(this.model.getProjectIndex()).getColumn().addLast((Column) nameable);
 
             // Create column VBox
             this.viewFactory.initializeColumn(nameable);
@@ -43,7 +42,7 @@ public class CreateColumnController extends BaseController {
         }
     }
 
-    // On Cancel button click
+    // On cancel button click
     public void onCancelButtonClick(ActionEvent event) {
 
         // Close stage

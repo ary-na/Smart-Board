@@ -1,17 +1,27 @@
 package app.smartboard.model;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
-public class Task extends Nameable {
+public class Task extends Nameable implements Serializable {
 
+    private LocalDate dueDate;
     private String description;
-    private Date dueDate;
+    private boolean completed;
     private final LinkedList<String> checkList;
 
     public Task(String name) {
         super(name);
         this.checkList = new LinkedList<>();
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     public String getDescription() {
@@ -22,12 +32,12 @@ public class Task extends Nameable {
         this.description = description;
     }
 
-    public Date getDueDate() {
-        return dueDate;
+    public boolean getCompleted() {
+        return completed;
     }
 
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public LinkedList<String> getCheckList() {

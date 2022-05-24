@@ -18,7 +18,7 @@ public class CreateProjectController extends BaseController {
         super(model, viewFactory, fxml);
     }
 
-    // On Confirm button click
+    // On confirm button click
     public void onConfirmButtonClick(ActionEvent event) {
 
         if (!validInput()) {
@@ -37,7 +37,7 @@ public class CreateProjectController extends BaseController {
         }
     }
 
-    // On Cancel button click
+    // On cancel button click
     public void onCancelButtonClick(ActionEvent event) {
 
         // Close stage

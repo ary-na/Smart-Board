@@ -1,9 +1,9 @@
 package app.smartboard.controller;
 
 import app.smartboard.model.Model;
+import app.smartboard.view.ProjectView;
 import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,10 +12,9 @@ import javafx.stage.Stage;
 
 
 public class RenameColumnController extends BaseController {
-    Stage stage;
-    @FXML
+
+    private Stage stage;
     public TextField columnNameTextField;
-    @FXML
     public Label errorLabel;
 
     public RenameColumnController(Model model, ViewFactory viewFactory, String fxml) {
@@ -24,23 +23,34 @@ public class RenameColumnController extends BaseController {
 
     public void onConfirmButtonClick(ActionEvent event) {
 
-        // Rename column
-        this.model.getProjects().get(this.model.getProjectIndex()).getColumn().forEach(column -> System.out.println("Column names before renaming: " + column.getName()));
 
-        this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).setName(columnNameTextField.getText().trim());
-        HBox columnHeader = (HBox) this.model.getColumnViewModel().getColumnVBoxes().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).getChildren().get(0);
+        System.out.println();
+        this.model.getProjects().get(this.model.getProjectIndex()).getColumn().forEach(column -> System.out.println("Column names before renaming: " + column.getName()));
+        System.out.println();
+
+        // Rename column UI
+        ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+        HBox columnHeader = (HBox) projectView.getColumnViews().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).getChildren().get(0);
         Label label = (Label) columnHeader.getChildren().get(0);
         label.textProperty().set(columnNameTextField.getText().trim());
 
+        // Rename column object
+        this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).setName(columnNameTextField.getText().trim());
 
+        System.out.println();
         this.model.getProjects().get(this.model.getProjectIndex()).getColumn().forEach(column -> System.out.println("Column names after renaming: " + column.getName()));
+        System.out.println();
 
+        // Close stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         viewFactory.closeStage(stage);
     }
 
     public void onCancelButtonClick(ActionEvent event) {
+
+        // Close stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         viewFactory.closeStage(stage);
+
     }
 }

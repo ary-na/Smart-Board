@@ -23,6 +23,7 @@
     -fx-font-family: "lato light";
     src: url('../fonts/lato-light.ttf');
 }
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* BUTTON ********************************************************************************************** */
@@ -53,11 +54,12 @@
     -fx-border-color: #4f5d75;
     -fx-text-fill: #4f5d75;
 }
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* HBOX ************************************************************************************************ */
 .hbox-column-header {
-    -fx-padding: 10;
+    -fx-padding: 10 20;
     -fx-border-color: #E0E0DD;
     -fx-border-radius: 4px;
 }
@@ -68,23 +70,10 @@
     -fx-font-family: "lato-light";
 }
 
-.hbox-column-header > .menu-button {
-    -fx-font-size: 8px;
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.hbox-column-header > .menu-button > .arrow-button {
-    -fx-padding: 0;
-}
-
-.hbox-column-header > .menu-button > .arrow-button > .arrow {
-    -fx-padding: 0;
-}
-
 .hbox-project {
     -fx-background-color: #FFFEFC;
 }
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* HYPERLINK ******************************************************************************************* */
@@ -94,6 +83,7 @@
     -fx-font-family: "lato regular";
     -fx-smooth: smooth;
 }
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* LABEL *********************************************************************************************** */
@@ -124,6 +114,13 @@
     -fx-font-size: 12px;
     -fx-text-fill: #84837E;
 }
+
+.label-task-title {
+    -fx-font-family: "lato regular";
+    -fx-font-size: 12;
+    -fx-text-fill: #4f5d75;
+}
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* MENU BAR ******************************************************************************************** */
@@ -145,6 +142,9 @@
     -fx-border-color: #FFFEFC;
 }
 
+.context-menu .separator .line {
+}
+
 .menu-item .label {
     -fx-text-fill: #2D3142;
 }
@@ -152,16 +152,36 @@
 .menu-item:focused {
     -fx-background-color: #EF8354;
 }
+
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* MENU BUTTON ***************************************************************************************** */
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
+.menu-button-column, .menu-button-task {
+    -fx-font-size: 8px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* ROOT ************************************************************************************************ */
 .root {
     -fx-background-color: #FFFEFC;
 }
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* SCROLL PANE ***************************************************************************************** */
-.scroll-pane .viewport{
+.scroll-pane .viewport {
     -fx-background-color: #FFFEFC;
 }
 
@@ -187,6 +207,7 @@
     -fx-background-color: #84837E;
     -fx-border-color: transparent;
 }
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* TAB PANE ******************************************************************************************** */
@@ -202,10 +223,10 @@
     -fx-background-color: #FFFEFC;
     -fx-font-family: "lato light";
     -fx-font-size: 16;
-    -fx-padding: 4, 16, 4, 16;
     -fx-border-color: transparent transparent transparent transparent;
-    -fx-border-width: 2;
-    -fx-border-insets: 0 8 0 8;
+    -fx-padding: 2 8 2 8;
+    -fx-border-insets: 8 8 8 8;
+    -fx-background-insets: 8 8 8 8;
 }
 
 .tab .tab-label {
@@ -213,8 +234,9 @@
 }
 
 .tab:selected {
-    -fx-border-color: transparent transparent #EF8354 transparent;
-    -fx-border-width: 2;
+    -fx-background-color: #FDEEE8;
+    -fx-background-radius: 4;
+    -fx-text-fill: #4F5D75;
 }
 
 .tab:selected .focus-indicator {
@@ -233,6 +255,11 @@
     -fx-background-color: #FFFEFC;
     -fx-border-color: #E0E0DD transparent transparent transparent;
 }
+
+.default-project {
+    -fx-font-family: "lato bold";
+}
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* TEXT AREA ******************************************************************************************* */
@@ -246,12 +273,13 @@
 }
 
 .text-area .content {
-    -fx-background-color:  #F7F7F4;
+    -fx-background-color: #F7F7F4;
 }
 
 .text-area:focused .content {
-    -fx-background-color:  #F7F7F4;
+    -fx-background-color: #F7F7F4;
 }
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 
@@ -264,6 +292,7 @@
     -fx-border-color: #E0E0DD;
     -fx-border-radius: 4px;
 }
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* VBOX ************************************************************************************************ */
@@ -277,4 +306,5 @@
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
 }
+
 /* ----------------------------------------------------------------------------------------------------- */

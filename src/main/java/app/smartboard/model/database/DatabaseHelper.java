@@ -1,10 +1,14 @@
 package app.smartboard.model.database;
 
 import app.smartboard.model.Profile;
+import app.smartboard.model.Project;
 import app.smartboard.model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseHelper implements DataAccessObject {
 
@@ -15,6 +19,9 @@ public class DatabaseHelper implements DataAccessObject {
     private static final String CREATE_USER_QUERY = "INSERT INTO user (username, password, profile) VALUES (?, ?, ?)";
     private static final String SELECT_USER_QUERY = "SELECT * FROM user WHERE username = ? AND password = ?";
     private static final String UPDATE_PROFILE_QUERY = "UPDATE user SET profile = ? WHERE username = ?";
+    private static final String INSERT_PROJECT_QUERY = "INSERT INTO project (username, project) VALUES (?, ?)";
+    private static final String DELETE_PROJECT_QUERY = "DELETE FROM project WHERE username = ?";
+    private static final String SELECT_PROJECT_QUERY = "SELECT * FROM project WHERE username = ?";
 
     @Override
     public String getQuote(int rowID) {
@@ -102,6 +109,62 @@ public class DatabaseHelper implements DataAccessObject {
             statement.setBytes(1, byteArrayOutputStream.toByteArray());
             statement.setString(2, username);
             statement.executeUpdate();
+        }
+    }
+
+    @Override
+    public ArrayList<Project> getProjects(String username) throws SQLException {
+
+        byte[] project;
+        ArrayList<Project> projects = new ArrayList<>();
+
+        ByteArrayInputStream byteArrayInputStream;
+        ObjectInputStream objectInputStream;
+
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_PROJECT_QUERY)) {
+
+            statement.setString(1, username);
+            result = statement.executeQuery();
+
+            if (result.next()) {
+                project = result.getBytes("project");
+                if (project != null) {
+                    byteArrayInputStream = new ByteArrayInputStream(project);
+                    objectInputStream = new ObjectInputStream(byteArrayInputStream);
+                    projects = (ArrayList<Project>) objectInputStream.readObject();
+                    objectInputStream.close();
+                }
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return projects;
+    }
+
+    @Override
+    public void setProjects(String username, ArrayList<Project> projects) throws SQLException, IOException {
+
+        // Delete existing projects
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_PROJECT_QUERY)) {
+            statement.setString(1, username);
+            statement.executeUpdate();
+        }
+
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+
+        // Insert projects
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(INSERT_PROJECT_QUERY)) {
+
+            objectOutputStream.writeObject(projects);
+            objectOutputStream.flush();
+            statement.setString(1, username);
+            statement.setBytes(2, byteArrayOutputStream.toByteArray());
+            statement.executeUpdate();
+
         }
     }
 }

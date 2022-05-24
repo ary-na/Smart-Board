@@ -3,22 +3,21 @@ package app.smartboard.model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public abstract class Nameable {
-    private final StringProperty name = new SimpleStringProperty();
+import java.io.Serializable;
+
+public abstract class Nameable implements Serializable {
+    private String name;
 
     public Nameable(String name) {
-        this.name.set(name);
+        this.name = name;
     }
 
     public String getName() {
-        return name.get();
+        return name;
     }
 
     public void setName(String name) {
-        this.name.set(name);
+        this.name = name;
     }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
 }

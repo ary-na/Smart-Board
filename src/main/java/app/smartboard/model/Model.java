@@ -7,8 +7,9 @@ import app.smartboard.model.viewmodel.TaskViewModel;
 import app.smartboard.model.viewmodel.WorkspaceViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
 
 public class Model {
 
@@ -18,7 +19,7 @@ public class Model {
     private TaskViewModel taskViewModel;
     private final DatabaseHelper databaseHelper;
     private User currentUser;
-    private ObservableList<Project> projects;
+    private ArrayList<Project> projects;
     private final NameableFactory nameableFactory;
 
     public Model() {
@@ -27,7 +28,7 @@ public class Model {
         this.columnViewModel = new ColumnViewModel();
         this.taskViewModel = new TaskViewModel();
         this.databaseHelper = new DatabaseHelper();
-        this.projects = FXCollections.observableArrayList();
+        this.projects = new ArrayList<>();
         this.nameableFactory = new NameableFactory();
     }
 
@@ -83,11 +84,15 @@ public class Model {
         return this.projects.get(this.getProjectIndex()).getColumn().indexOf(this.columnViewModel.getColumnMap().get(column));
     }
 
-    public ObservableList<Project> getProjects() {
+    public int getTaskIndex(VBox task) {
+        return this.projects.get(this.getProjectIndex()).getColumn().get(this.getColumnIndex(this.getColumnViewModel().getColumn())).getTask().indexOf(this.taskViewModel.getTaskMap().get(task));
+    }
+
+    public ArrayList<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(ObservableList<Project> projects) {
+    public void setProjects(ArrayList<Project> projects) {
         this.projects = projects;
     }
 

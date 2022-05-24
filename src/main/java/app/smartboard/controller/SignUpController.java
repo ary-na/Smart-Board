@@ -6,7 +6,6 @@ import app.smartboard.view.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -14,31 +13,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SignUpController extends BaseController {
 
-    @FXML
-    private Button cancelButton;
-    @FXML
-    private TextField username;
-    @FXML
-    private TextField firstName;
-    @FXML
-    private TextField lastName;
-    @FXML
-    private TextField password;
-
-
     private Stage stage;
+    public Button cancelButton;
+    public TextField username;
+    public TextField firstName;
+    public TextField lastName;
+    public TextField password;
+
 
     public SignUpController(Model model, ViewFactory viewFactory, String fxml) {
         super(model, viewFactory, fxml);
     }
 
-
+    // On sign up button click
     public void onSignUpButtonClick(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
 
         // Create user profile
@@ -57,7 +50,7 @@ public class SignUpController extends BaseController {
             System.out.println("User created");
 
             User user = this.model.getDatabaseHelper().getUser(username.getText(), password.getText());
-            ObservableList<Project> projects = FXCollections.observableArrayList();
+            ArrayList<Project> projects = new ArrayList<>();
             ObservableList<Tab> projectTabs = FXCollections.observableArrayList();
 
             // Set the current user
@@ -68,7 +61,7 @@ public class SignUpController extends BaseController {
             // Display Workspace view
             viewFactory.displayWorkspaceView();
 
-            // Close Log In stage
+            // Close sign up In stage
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             viewFactory.closeStage(stage);
 
@@ -78,9 +71,11 @@ public class SignUpController extends BaseController {
         }
     }
 
+    // On cancel button click
     public void onCancelButtonClick(ActionEvent event) throws IOException {
 
         System.out.println("onCancelButtonClick");
+
         // Display Sign Up view
         viewFactory.displayLoginView();
 

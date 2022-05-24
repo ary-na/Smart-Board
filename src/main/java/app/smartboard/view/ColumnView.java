@@ -75,14 +75,14 @@ public class ColumnView extends VBox {
         columnHeaderAddTaskButton.getStyleClass().add("button-create-task");
 
         // Column header Menu button
-        ImageView menuIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/menu-icon.png"))));
+        ImageView menuIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/column-header-menu-icon.png"))));
         menuIconImageView.setFitWidth(12);
         menuIconImageView.setFitHeight(12);
         MenuItem rename = new MenuItem("Rename");
         MenuItem delete = new MenuItem("Delete");
         MenuButton columnHeaderMenuButton = new MenuButton("", null, rename, delete);
         columnHeaderMenuButton.setGraphic(menuIconImageView);
-
+        columnHeaderMenuButton.getStyleClass().add("menu-button-column");
 
         // Add column header children
         columnHeader.getChildren().addAll(

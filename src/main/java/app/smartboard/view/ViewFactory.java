@@ -123,6 +123,24 @@ public class ViewFactory {
 
     }
 
+    // Display Edit Task stage
+    public void displayEditTaskView(Stage owner) throws IOException {
+
+        System.out.println("Edit Task View stage");
+        BaseController controller = new EditTaskController(this.model, this, "view/edit-task-view.fxml");
+        initializeChildStage(controller, owner, "Edit Task");
+
+    }
+
+    // Display Delete Task stage
+    public void displayDeleteTaskView(Stage owner) throws IOException {
+
+        System.out.println("Delete Task View stage");
+        BaseController controller = new DeleteTaskController(this.model, this, "view/delete-task-view.fxml");
+        initializeChildStage(controller, owner, "Delete Task");
+
+    }
+
     // Display Edit Project stage
     public void displayEditProfileView(Stage owner) throws IOException {
 

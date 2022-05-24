@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LogInController extends BaseController {
 
@@ -47,7 +48,7 @@ public class LogInController extends BaseController {
     public void onLogInButtonClick(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
 
         User user = this.model.getDatabaseHelper().getUser(username.getText().trim(), psw.getText().trim());
-        ObservableList<Project> projects = FXCollections.observableArrayList();
+        ArrayList<Project> projects = new ArrayList<>();
         ObservableList<Tab> projectTabs = FXCollections.observableArrayList();
 
         if (user != null) {
@@ -56,8 +57,17 @@ public class LogInController extends BaseController {
 
             // Set the current user
             this.model.setCurrentUser(user);
-            this.model.setProjects(projects);
+
+            // Test -> to be deleted
+            projects = this.model.getDatabaseHelper().getProjects(this.model.getCurrentUser().getUsername());
+
+            this.model.setProjects(this.model.getDatabaseHelper().getProjects(this.model.getCurrentUser().getUsername()));
             this.model.getProjectViewModel().setProjectTabs(projectTabs);
+
+            // Test -> to be deleted
+            projects.forEach(project -> {
+                System.out.println(project.getName());
+            });
 
             // Load user data
             if (this.model.getCurrentUser().getProfile().getProfilePhoto() == null) {
@@ -74,9 +84,11 @@ public class LogInController extends BaseController {
         }
     }
 
-    public void onSignUpHyperLinkClick(ActionEvent event) throws IOException {
+    // On sign up hyperlink click
+    public void onSignUpHyperlinkClick(ActionEvent event) throws IOException {
 
         System.out.println("onSignUpHyperLinkClick");
+
         // Display Sign Up view
         viewFactory.displaySignUpView();
 

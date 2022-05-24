@@ -1,10 +1,12 @@
 package app.smartboard.model;
 
-import javafx.scene.control.Tab;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Project extends Nameable implements DefaultProject {
+public class Project extends Nameable implements Serializable {
 
     private boolean isDefault;
     private final LinkedList<Column> column;
@@ -15,25 +17,19 @@ public class Project extends Nameable implements DefaultProject {
         this.column = new LinkedList<>();
     }
 
+    public boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
     public LinkedList<Column> getColumn() {
         return column;
     }
 
     public void addColumn(Column column) {
         this.column.addLast(column);
-    }
-
-    public void deleteColumn(Column column) {
-        this.column.remove(column);
-    }
-
-    @Override
-    public void setDefaultProject(boolean set) {
-        this.isDefault = set;
-    }
-
-    @Override
-    public boolean getDefaultProject() {
-        return this.isDefault;
     }
 }
