@@ -8,6 +8,7 @@ import app.smartboard.view.ViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class WorkspaceController extends BaseController {
 
@@ -215,8 +217,11 @@ public class WorkspaceController extends BaseController {
 
     private void columnEventFilter(VBox column, MouseEvent mouseEvent) {
 
+        System.out.println("Column selected");
+
         // Set selected column
         this.model.getColumnViewModel().setColumn(column);
+
         ColumnView columnView = (ColumnView) column;
 
         columnView.getTaskViews().forEach(task -> task.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
@@ -310,7 +315,99 @@ public class WorkspaceController extends BaseController {
                 });
 
             }
-
         }
+        this.dragAndDrop();
+    }
+
+
+    // links to look for
+    //https://docs.oracle.com/javafx/2/events/filters.htm
+    //https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
+    // http://www.java2s.com/Tutorials/Java/JavaFX_How_to/Shape/Handle_Shape_drag_and_drop_events.htm
+    // https://examples.javacodegeeks.com/desktop-java/javafx/event-javafx/javafx-drag-drop-example/
+    // https://stackoverflow.com/questions/68475291/javafx-finding-node-by-id
+    // https://docs.oracle.com/javase/8/javafx/events-tutorial/paper-doll.htm#CBHFHJID
+
+
+    private void dragAndDrop() {
+
+        VBox sourceTaskView = this.model.getTaskViewModel().getTask();
+        VBox targetColumnView = this.model.getColumnViewModel().getColumn();
+
+        ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+
+
+        // Source
+        sourceTaskView.setOnDragDetected(e -> {
+            System.out.println("source task name -> " + this.model.getTaskViewModel().getTaskMap().get(sourceTaskView).getName());
+            Dragboard db = sourceTaskView.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putString(sourceTaskView.getId());
+            db.setContent(content);
+            e.consume();
+        });
+
+
+        targetColumnView.setOnDragOver(eeee -> {
+            System.out.println("target column name -> " + this.model.getColumnViewModel().getColumnMap().get(targetColumnView).getName());
+            if (eeee.getGestureSource() != targetColumnView &&
+                    eeee.getDragboard().hasString()) {
+                eeee.acceptTransferModes(TransferMode.MOVE);
+            }
+            eeee.consume();
+
+        });
+
+        targetColumnView.setOnDragDropped(yee -> {
+            System.out.println("setOnDragDropped");
+            Dragboard db = yee.getDragboard();
+            boolean success = false;
+            if (db.hasString()) {
+
+                success = true;
+//                Scene scene = sourceTaskView.getScene();
+//                VBox vBox1 = (VBox) scene.lookup("#" + db.getString());
+//                VBox vBox = (VBox) vBox1.getParent();
+//                VBox columnVBox = (VBox) vBox.getParent();
+
+                Scene scene = targetColumnView.getScene();
+                VBox task = (VBox) scene.lookup("#" + db.getString());
+
+//                VBox taskContainer = (VBox) sourceTaskView.getParent();
+//                VBox column = (VBox) taskContainer.getParent();
+
+
+                Nameable nameable = this.model.getTaskViewModel().getTaskMap().get(task);
+                this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(targetColumnView)).addTask((Task) nameable);
+
+
+                // Create task UI
+                int targetColumnViewIndex = projectView.getColumnViews().indexOf(targetColumnView);
+                this.viewFactory.moveTask(nameable, targetColumnViewIndex);
+
+            }
+            yee.setDropCompleted(success);
+            yee.consume();
+        });
+
+
+        sourceTaskView.setOnDragDone(e -> {
+            System.out.println("setOnDragDone");
+            /* the drag and drop gesture ended */
+            /* if the data was successfully moved, clear it */
+            if (e.getTransferMode() == TransferMode.MOVE) {
+                VBox vBox = (VBox) sourceTaskView.getParent();
+                VBox columnVBox = (VBox) vBox.getParent();
+
+                ColumnView columnView = ((ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex())).getColumnViews().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn()));
+                columnView.getTaskViews().remove(this.model.getTaskIndex(sourceTaskView));
+
+                // Delete task object
+                this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(columnVBox)).getTask().remove(this.model.getTaskIndex(sourceTaskView));
+            }
+            e.consume();
+
+        });
+
     }
 }

@@ -30,6 +30,7 @@ public class ViewFactory {
     private Scene scene;
     private FXMLLoader fxmlLoader;
     private ProjectView projectView;
+    private int counter = 0;
 
     public ViewFactory(Model model) {
         this.model = model;
@@ -210,12 +211,25 @@ public class ViewFactory {
     public void initializeTask(Nameable nameable) {
 
         TaskView taskView = new TaskView((Task) nameable);
+        taskView.setId(String.valueOf(counter));
 
         this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
         this.projectView.getColumnViews().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTaskView(taskView);
 
         this.model.getTaskViewModel().getTaskMap().put(taskView, (Task) nameable);
+        counter++;
 
+    }
+
+    public void moveTask(Nameable nameable, int targetColumnIndex) {
+        TaskView taskView = new TaskView((Task) nameable);
+        taskView.setId(String.valueOf(counter));
+
+        this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+        this.projectView.getColumnViews().get(targetColumnIndex).addTaskView(taskView);
+
+        this.model.getTaskViewModel().getTaskMap().put(taskView, (Task) nameable);
+        counter++;
     }
 
     // Close stage

@@ -41,14 +41,14 @@ public class CreateTaskController extends BaseController {
     // On confirm button click
     public void onConfirmButtonClick(ActionEvent event) {
 
-        // Create column
+        // Create task
         Nameable nameable = this.model.createNameable("Task", this.taskNameTextField.getText().trim());
         Task task = (Task) nameable;
         task.setDueDate(datePicker.getValue());
         task.setDescription(this.taskDescriptionTextArea.getText());
         this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTask(task);
 
-        // Create column VBox
+        // Create task VBox
         this.viewFactory.initializeTask(nameable);
 
         // Close stage

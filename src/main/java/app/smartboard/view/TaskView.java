@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 public class TaskView extends VBox {
 
     private final Task task;
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public TaskView(Task task) {
         this.task = task;
