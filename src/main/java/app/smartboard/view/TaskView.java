@@ -2,6 +2,7 @@ package app.smartboard.view;
 
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.model.Task;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -12,7 +13,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-import java.text.DateFormat;
 import java.time.format.DateTimeFormatter;
 
 public class TaskView extends VBox {
@@ -36,7 +36,9 @@ public class TaskView extends VBox {
         // Task title, due date and checklist
         Label taskTitle = new Label(this.task.getName());
         taskTitle.getStyleClass().add("label-task-title");
-        Label taskDueDate = new Label(dateTimeFormatter.format(this.task.getDueDate()));
+        Label taskDueDate = new Label("");
+        if(task.getDueDate() != null)
+            taskDueDate.setText(dateTimeFormatter.format(this.task.getDueDate()));
 
         left.getChildren().addAll(
                 taskTitle,

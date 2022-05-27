@@ -4,6 +4,9 @@ import app.smartboard.model.Column;
 import app.smartboard.model.Model;
 import app.smartboard.model.Nameable;
 import app.smartboard.model.Task;
+import app.smartboard.view.ColumnView;
+import app.smartboard.view.ProjectView;
+import app.smartboard.view.TaskView;
 import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -15,10 +18,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class EditTaskController extends BaseController {
 
     private Stage stage;
+    private Task task;
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public Label errorLabel;
     public Label taskNameLabel;
     public TextField taskNameTextField;
@@ -41,9 +47,11 @@ public class EditTaskController extends BaseController {
 
     public void initialize() {
 
-        Task task = this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).getTask().get(this.model.getTaskIndex(this.model.getTaskViewModel().getTask()));
+        task = this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).getTask().get(this.model.getTaskIndex(this.model.getTaskViewModel().getTask()));
+
+
         this.taskNameTextField.setText(task.getName());
-        if(task.getDueDate() != null){
+        if (task.getDueDate() != null) {
             this.dueDateLabel.setText("Due date");
             HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
             this.datePicker = new DatePicker(LocalDate.now());
@@ -58,14 +66,26 @@ public class EditTaskController extends BaseController {
     // On confirm button click
     public void onConfirmButtonClick(ActionEvent event) {
 
-//        // Create column
-//        Nameable nameable = this.model.createNameable("Task", this.taskNameTextField.getText().trim());
-//        Task task = (Task) nameable;
-//        task.setDueDate(datePicker.getValue());
-//        this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTask(task);
-//
-//        // Create column VBox
-//        this.viewFactory.initializeTask(nameable);
+
+        // Get task UI
+        TaskView taskView = ((ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex())).getColumnViews().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).getTaskViews().get(this.model.getTaskIndex(this.model.getTaskViewModel().getTask()));
+        HBox taskContainer = (HBox) taskView.getChildren().get(0);
+        VBox left = (VBox) taskContainer.getChildren().get(0);
+        Label taskTitle = (Label) left.getChildren().get(0);
+        Label taskDueDate = (Label) left.getChildren().get(1);
+
+        // Edit task UI
+        taskTitle.setText(this.taskNameTextField.getText().trim());
+        if(this.datePicker != null)
+            taskDueDate.setText(dateTimeFormatter.format(this.datePicker.getValue()));
+
+
+        // Edit task object
+        task.setName(this.taskNameTextField.getText().trim());
+        if (datePicker != null)
+            task.setDueDate(datePicker.getValue());
+        task.setDescription(this.taskDescriptionTextArea.getText());
+
 
         // Close stage
         this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -73,30 +93,30 @@ public class EditTaskController extends BaseController {
 
     }
 
-    public void onAddDueDateHyperlinkClick(ActionEvent event){
-//        System.out.println("onAddDueDateHyperlinkClick");
-//
-//        if(!this.dueDateVBox.getChildren().contains(this.datePicker)) {
-//            this.dueDateLabel.setText("Due date");
-//            HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
-//            this.datePicker = new DatePicker(LocalDate.now());
-//            dueDateVBox.getChildren().add(datePicker);
-//            addDueDateHyperlink.setText("Delete");
-//        }
-//        else{
-//            this.dueDateLabel.setText(null);
-//            HBox.setHgrow(this.dueDateRegion, Priority.NEVER);
-//            dueDateVBox.getChildren().remove(datePicker);
-//            addDueDateHyperlink.setText("Add due date");
-//        }
+    public void onAddDueDateHyperlinkClick(ActionEvent event) {
+        System.out.println("onAddDueDateHyperlinkClick");
+
+        if(!this.dueDateVBox.getChildren().contains(this.datePicker)) {
+            this.dueDateLabel.setText("Due date");
+            HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
+            this.datePicker = new DatePicker(LocalDate.now());
+            dueDateVBox.getChildren().add(datePicker);
+            addDueDateHyperlink.setText("Delete");
+        }
+        else{
+            this.dueDateLabel.setText(null);
+            HBox.setHgrow(this.dueDateRegion, Priority.NEVER);
+            dueDateVBox.getChildren().remove(datePicker);
+            addDueDateHyperlink.setText("Add due date");
+        }
     }
 
-    public void onAddChecklistHyperlinkClick(ActionEvent event){
-//        System.out.println("onAddChecklistHyperlinkClick");
-//
-//        this.checklistLabel.setText("Checklist");
-//        HBox.setHgrow(this.checklistRegion, Priority.ALWAYS);
-//        this.addChecklistHyperlink.setText("Delete");
+    public void onAddChecklistHyperlinkClick(ActionEvent event) {
+        System.out.println("onAddChecklistHyperlinkClick");
+
+        this.checklistLabel.setText("Checklist");
+        HBox.setHgrow(this.checklistRegion, Priority.ALWAYS);
+        this.addChecklistHyperlink.setText("Delete");
 
     }
 

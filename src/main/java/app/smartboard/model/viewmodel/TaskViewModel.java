@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import java.util.HashMap;
 
 public class TaskViewModel {
+
     private ObservableList<VBox> taskVBoxes = FXCollections.observableArrayList();
     private HashMap<TaskView, Task> taskMap = new HashMap<>();
     private VBox task;

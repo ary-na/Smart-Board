@@ -64,11 +64,17 @@ public class WorkspaceController extends BaseController {
         if (this.model.getProjects().size() > 0) {
 
             this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
-            this.projectView.getColumnViews().forEach(column -> column.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
-                this.columnEventFilter(column, mouseEvent);
+            this.projectView.getColumnViews().forEach(columnUI -> columnUI.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
+                this.columnEventFilter(columnUI, e);
             }));
 
         }
+
+        // Save workspace on close request
+        if (stage != null)
+            stage.setOnCloseRequest(e -> {
+                System.out.println("Workspace Saved");
+            });
     }
 
     // On profile button click
@@ -102,7 +108,6 @@ public class WorkspaceController extends BaseController {
         // Close Workspace stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         viewFactory.closeStage(stage);
-
     }
 
     // On new project menu item click
@@ -182,23 +187,43 @@ public class WorkspaceController extends BaseController {
     // Load projects from database
     private void loadProjects() {
 
-        // Load projects from database
+        // Load projects from database on condition
         if (this.model.getProjects().size() > 0 && this.model.getProjectViewModel().getProjectTabs().size() == 0) {
 
             this.model.getProjects().forEach(project -> {
+
+                // Create project UI
                 this.viewFactory.initializeProject(project);
+
+                // Set as default on condition
+                if (project.getIsDefault()) {
+                    this.setDefaultProjectCheckMenuItem.setSelected(true);
+                    this.model.getProjectViewModel().getTabPane().getSelectionModel().select(this.model.getProjectViewModel().getProjectMap().get(project));
+                    this.model.getProjectViewModel().getProjectTabs().get(getModel().getProjectIndex()).getStyleClass().add("default-project");
+                }
+
                 project.getColumn().forEach(column -> {
+
+                    // Create column UI
                     this.viewFactory.initializeColumn(column);
 
-                    ProjectView projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
-                    projectView.getColumnViews().forEach(columnUI -> columnUI.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
-                        this.columnEventFilter(columnUI, mouseEvent);
+                    // Add event filter to column UI
+                    this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
+                    projectView.getColumnViews().forEach(columnUI -> columnUI.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
+                        this.columnEventFilter(columnUI, e);
                     }));
 
-                    for (Map.Entry<ColumnView, Column> e : this.model.getColumnViewModel().getColumnMap().entrySet()) {
-                        if (e.getValue() == column) {
-                            this.model.getColumnViewModel().setColumn(e.getKey());
+                    // For each column create task UI
+                    for (Map.Entry<ColumnView, Column> columnMap : this.model.getColumnViewModel().getColumnMap().entrySet()) {
+
+                        // Get column on condition
+                        if (columnMap.getValue() == column) {
+
+                            // Set column
+                            this.model.getColumnViewModel().setColumn(columnMap.getKey());
                             column.getTask().forEach(task -> {
+
+                                // Create task UI
                                 this.viewFactory.initializeTask(task);
                             });
                         }
@@ -238,17 +263,15 @@ public class WorkspaceController extends BaseController {
     }
 
     // Add event filter to column UI
-    private void columnEventFilter(VBox column, MouseEvent mouseEvent) {
-
-        System.out.println("Column selected");
+    private void columnEventFilter(VBox columnUI, MouseEvent mouseEvent) {
 
         // Set selected column
-        this.model.getColumnViewModel().setColumn(column);
-        ColumnView columnView = (ColumnView) column;
+        this.model.getColumnViewModel().setColumn(columnUI);
+        ColumnView columnView = (ColumnView) columnUI;
 
         // Add event filter to task UI
-        columnView.getTaskViews().forEach(task -> task.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
-            this.taskEventFilter(task, e);
+        columnView.getTaskViews().forEach(taskUI -> taskUI.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
+            this.taskEventFilter(taskUI, e);
         }));
 
         // Get column header
@@ -272,7 +295,6 @@ public class WorkspaceController extends BaseController {
                         throw new RuntimeException(exception);
                     }
                 });
-
             }
 
             // Add actions to menu button menu items
@@ -306,16 +328,15 @@ public class WorkspaceController extends BaseController {
                         throw new RuntimeException(exception);
                     }
                 });
-
             }
         }
     }
 
     // Add event filter to task UI
-    private void taskEventFilter(TaskView task, MouseEvent mouseEvent) {
+    private void taskEventFilter(VBox taskUI, MouseEvent mouseEvent) {
 
         // Set selected task
-        this.model.getTaskViewModel().setTask(task);
+        this.model.getTaskViewModel().setTask(taskUI);
 
         // Task drag and drop
         this.taskDragAndDrop();
@@ -360,16 +381,13 @@ public class WorkspaceController extends BaseController {
         }
     }
 
-
-    // links to look for
-    //https://docs.oracle.com/javafx/2/events/filters.htm
-    //https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
-    // http://www.java2s.com/Tutorials/Java/JavaFX_How_to/Shape/Handle_Shape_drag_and_drop_events.htm
-    // https://examples.javacodegeeks.com/desktop-java/javafx/event-javafx/javafx-drag-drop-example/
-    // https://stackoverflow.com/questions/68475291/javafx-finding-node-by-id
-    // https://docs.oracle.com/javase/8/javafx/events-tutorial/paper-doll.htm#CBHFHJID
-    // https://docs.oracle.com/javase/8/javafx/events-tutorial/paperdolljava.htm#BGBICFDH
-    // https://stackoverflow.com/questions/12201712/how-to-find-an-element-with-an-id-in-javafx
+    /*
+     * Code sourced and adapted from:
+     * https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
+     * https://docs.oracle.com/javase/8/javafx/events-tutorial/paper-doll.htm#CBHFHJID
+     * https://docs.oracle.com/javase/8/javafx/events-tutorial/paperdolljava.htm#BGBICFDH
+     * https://stackoverflow.com/questions/12201712/how-to-find-an-element-with-an-id-in-javafx
+     */
 
     // Task drag and drop
     private void taskDragAndDrop() {
@@ -470,6 +488,5 @@ public class WorkspaceController extends BaseController {
             e.consume();
 
         });
-
     }
 }

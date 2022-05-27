@@ -1,7 +1,5 @@
 package app.smartboard.model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 
 import java.io.Serializable;
 import java.util.LinkedList;

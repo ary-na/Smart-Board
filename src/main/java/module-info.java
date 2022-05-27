@@ -7,6 +7,7 @@ module app.smartboard {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires junit;
 
     opens app.smartboard to javafx.fxml;
     exports app.smartboard;
@@ -19,4 +20,6 @@ module app.smartboard {
     exports app.smartboard.view;
     exports app.smartboard.model.viewmodel;
     opens app.smartboard.view to javafx.fxml;
+    exports app.smartboard.model.test;
+    opens app.smartboard.model.test to javafx.fxml;
 }

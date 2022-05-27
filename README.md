@@ -28,6 +28,8 @@ Barosanuemailtest, 2022. Abstract controller and dependencies · barosanuemailte
 
 Biy, U., 2022. How do I add margin to a JavaFX element using CSS?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16977100/how-do-i-add-margin-to-a-javafx-element-using-css> [Accessed 11 May 2022].
 
+Biy, U., 2022. How to find an element with an ID in JavaFX?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/12201712/how-to-find-an-element-with-an-id-in-javafx> [Accessed 27 May 2022].
+
 Biy, U., 2022. How to set tab name size in JavaFX. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16922138/how-to-set-tab-name-size-in-javafx> [Accessed 5 May 2022].
 
 Biy, U., 2022. JavaFX : Highlight VBox on mouse click and change color when unfocused. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/33840436/javafx-highlight-vbox-on-mouse-click-and-change-color-when-unfocused> [Accessed 5 May 2022].
@@ -44,6 +46,10 @@ Chappell, G. and Hildebrandt, N., 2022. Getting Started with JavaFX: Using FXML 
 
 Diwan, A., 2022. Connecting to a MySQL database with Java. [online] Tutorialspoint.com. Available at: <https://www.tutorialspoint.com/connecting-to-a-mysql-database-with-java> [Accessed 11 April 2022].
 
+Docs.oracle.com. 2022. 8 PaperDoll Drag-and-Drop Application (Release 8). [online] Available at: <https://docs.oracle.com/javase/8/javafx/events-tutorial/paper-doll.htm#CBHFHJID> [Accessed 27 May 2022].
+
+Docs.oracle.com. 2022. F Paper Doll Drag-and-Drop Sample (Release 8). [online] Available at: <https://docs.oracle.com/javase/8/javafx/events-tutorial/paperdolljava.htm#BGBICFDH> [Accessed 27 May 2022].
+
 DVarga and Brucker, P., 2022. JavaFX ScrollPane styling. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41804373/javafx-scrollpane-styling> [Accessed 11 May 2022].
 
 Eder, L., 2022. Easiest way to convert a Blob into a byte array. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/6662432/easiest-way-to-convert-a-blob-into-a-byte-array> [Accessed 27 April 2022].
@@ -51,6 +57,8 @@ Eder, L., 2022. Easiest way to convert a Blob into a byte array. [online] Stack 
 Fabian and Sethi, H., 2022. [Solved] How to determine if the user clicked outside a particular JavaFX node? - Local Coder. [online] Localcoder.org. Available at: <https://localcoder.org/how-to-determine-if-the-user-clicked-outside-a-particular-javafx-node> [Accessed 22 May 2022].
 
 Fadatare, R., 2022. Login Form Using JavaFX with MySQL Database. [online] Javaguides.net. Available at: <https://www.javaguides.net/2019/07/login-form-using-javafx-with-mysql-database.html> [Accessed 11 April 2022].
+
+Fedortsova, I., 2022. Drag-and-Drop Feature in JavaFX Applications | JavaFX 2 Tutorials and Documentation. [online] Docs.oracle.com. Available at: <https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm> [Accessed 27 May 2022].
 
 Figma. 2022. Figma: the collaborative interface design tool.. [online] Available at: <https://www.figma.com/> [Accessed 15 April 2022].
 
@@ -88,6 +96,8 @@ James_D, 2022. JavaFX How to get a children (WebView) from a Tab?. [online] Stac
 
 Java2s.com. 2022. JavaFX How to - Add two controls to HBox. [online] Available at: <http://www.java2s.com/Tutorials/Java/JavaFX_How_to/HBox/Add_two_controls_to_HBox.htm> [Accessed 5 May 2022].
 
+Java2s.com. 2022. JavaFX How to - Handle Shape drag and drop events. [online] Available at: <http://www.java2s.com/Tutorials/Java/JavaFX_How_to/Shape/Handle_Shape_drag_and_drop_events.htm> [Accessed 27 May 2022].
+
 Jenkov, J., 2022. JavaFX CheckBox. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/checkbox.html> [Accessed 24 May 2022].
 
 Jenkov, J., 2022. JavaFX DatePicker. [online] Jenkov.com. Available at: <https://jenkov.com/tutorials/javafx/datepicker.html> [Accessed 24 May 2022].
@@ -99,6 +109,8 @@ Jenkov, J., 2022. JavaFX TabPane. [online] Jenkov.com. Available at: <https://je
 Jetbrains.com. 2022. IntelliJ IDEA Ultimate – the IDE for Spring development. [online] Available at: <https://www.jetbrains.com/lp/intellij-frameworks/> [Accessed 3 April 2022].
 
 Jewelsea and Tonkel, 2022. JavaFX: setHgrow(...) doesn't work. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/21865044/javafx-sethgrow-doesnt-work> [Accessed 11 May 2022].
+
+Jewelsea, 2022. JavaFX, finding node by Id. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/68475291/javafx-finding-node-by-id> [Accessed 27 May 2022].
 
 Kaltstahl, Z., 2022. JavaFx USE_COMPUTED_SIZE for Stage without using FXML. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/28573700/javafx-use-computed-size-for-stage-without-using-fxml> [Accessed 5 May 2022].
 
@@ -128,6 +140,8 @@ Mevada, R., 2022. How can I style a JavaFX menu and its items in CSS?. [online] 
 
 Mrak, 2022. How to extend custom JavaFX components that use FXML. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/31569299/how-to-extend-custom-javafx-components-that-use-fxml> [Accessed 24 May 2022].
 
+Nerád, Ľ. and Gordon, J., 2022. Handling JavaFX Events: Working with Event Filters | JavaFX 2 Tutorials and Documentation. [online] Docs.oracle.com. Available at: <https://docs.oracle.com/javafx/2/events/filters.htm> [Accessed 27 May 2022].
+
 Pankaj, 2022. Java SQL Blob - JournalDev. [online] JournalDev. Available at: <https://www.journaldev.com/44618/java-sql-blob> [Accessed 27 April 2022].
 
 Parashar, A., 2022. How to change the tab pane style. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/17091605/how-to-change-the-tab-pane-style> [Accessed 11 May 2022].
@@ -139,6 +153,8 @@ Pedamkar, P., 2022. SQL DELETE Row | How to Implement SQL DELETE ROW | Examples.
 Pereda, J., 2022. In javafx, how to change scrollbar arrow color?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/42808539/in-javafx-how-to-change-scrollbar-arrow-color> [Accessed 11 May 2022].
 
 Pethani, A., 2022. Switching between Scenes (Screens) in JavaFx using the FXML. [online] Gist. Available at: <https://gist.github.com/pethaniakshay/302072fda98098a24ce382a361bdf477> [Accessed 11 April 2022].
+
+Pomarolli, A., 2022. JavaFX Drag and Drop Example. [online] Examples Java Code Geeks. Available at: <https://examples.javacodegeeks.com/desktop-java/javafx/event-javafx/javafx-drag-drop-example/> [Accessed 27 May 2022].
 
 Pratt, E. and mh-dev, 2022. How do I add margin to a JavaFX element using CSS?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16977100/how-do-i-add-margin-to-a-javafx-element-using-css> [Accessed 24 May 2022].
 

@@ -3,19 +3,13 @@ package app.smartboard.view;
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.controller.*;
 import app.smartboard.model.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
  * Code sourced and adapted from:
@@ -190,8 +184,25 @@ public class ViewFactory {
 
         // Add tab to tab pane
         this.model.getProjectViewModel().getTabPane().getTabs().add(this.projectView);
+        this.model.getProjectViewModel().getProjectMap().put((Project) nameable, projectView);
 
-        this.model.getProjectViewModel().getTabPane().getSelectionModel().select(this.projectView);
+        boolean defaultProject = false;
+
+        // For projects get default value
+        for (Project project : this.model.getProjects()) {
+
+            defaultProject = project.getIsDefault();
+
+            // Break on condition
+            if (defaultProject)
+                break;
+        }
+
+        // Select last project on condition
+        if (!defaultProject)
+            this.model.getProjectViewModel().getTabPane().getSelectionModel().select(this.projectView);
+
+        // Enable menu items
         this.model.getWorkspaceViewModel().setEmptyWorkspace(false);
 
     }
@@ -201,9 +212,9 @@ public class ViewFactory {
 
         this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
 
-        ColumnView viewColumn = new ColumnView((Column) nameable);
-        this.model.getColumnViewModel().getColumnMap().put(viewColumn, (Column) nameable);
-        this.projectView.addColumnView(viewColumn);
+        ColumnView columnView = new ColumnView((Column) nameable);
+        this.model.getColumnViewModel().getColumnMap().put(columnView, (Column) nameable);
+        this.projectView.addColumnView(columnView);
 
     }
 
@@ -221,6 +232,7 @@ public class ViewFactory {
 
     }
 
+    // Move task
     public void moveTask(Nameable nameable, int targetColumnIndex) {
         TaskView taskView = new TaskView((Task) nameable);
         taskView.setId(String.valueOf(counter));

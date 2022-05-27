@@ -1,5 +1,7 @@
 package app.smartboard.model.viewmodel;
 
+import app.smartboard.model.Column;
+import app.smartboard.model.Project;
 import app.smartboard.view.ColumnView;
 import app.smartboard.view.ProjectView;
 import javafx.collections.FXCollections;
@@ -15,6 +17,7 @@ import java.util.LinkedList;
 public class ProjectViewModel {
 
     private ObservableList<Tab> projectTabs = FXCollections.observableArrayList();
+    private HashMap<Project, ProjectView> projectMap = new HashMap<>();
     private TabPane tabPane = new TabPane();
 
     public ObservableList<Tab> getProjectTabs() {
@@ -23,6 +26,14 @@ public class ProjectViewModel {
 
     public void setProjectTabs(ObservableList<Tab> projectTabs) {
         this.projectTabs = projectTabs;
+    }
+
+    public HashMap<Project, ProjectView> getProjectMap() {
+        return projectMap;
+    }
+
+    public void setProjectMap(HashMap<Project, ProjectView> projectMap) {
+        this.projectMap = projectMap;
     }
 
     public TabPane getTabPane() {

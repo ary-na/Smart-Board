@@ -1,6 +1,5 @@
 package app.smartboard.controller;
 
-import app.smartboard.model.Column;
 import app.smartboard.model.Model;
 import app.smartboard.model.Nameable;
 import app.smartboard.model.Task;
@@ -44,7 +43,9 @@ public class CreateTaskController extends BaseController {
         // Create task
         Nameable nameable = this.model.createNameable("Task", this.taskNameTextField.getText().trim());
         Task task = (Task) nameable;
-        task.setDueDate(datePicker.getValue());
+
+        if (datePicker != null)
+            task.setDueDate(datePicker.getValue());
         task.setDescription(this.taskDescriptionTextArea.getText());
         this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTask(task);
 
@@ -57,17 +58,16 @@ public class CreateTaskController extends BaseController {
 
     }
 
-    public void onAddDueDateHyperlinkClick(ActionEvent event){
+    public void onAddDueDateHyperlinkClick(ActionEvent event) {
         System.out.println("onAddDueDateHyperlinkClick");
 
-        if(!this.dueDateVBox.getChildren().contains(this.datePicker)) {
+        if (!this.dueDateVBox.getChildren().contains(this.datePicker)) {
             this.dueDateLabel.setText("Due date");
             HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
             this.datePicker = new DatePicker(LocalDate.now());
             dueDateVBox.getChildren().add(datePicker);
             addDueDateHyperlink.setText("Delete");
-        }
-        else{
+        } else {
             this.dueDateLabel.setText(null);
             HBox.setHgrow(this.dueDateRegion, Priority.NEVER);
             dueDateVBox.getChildren().remove(datePicker);
@@ -75,7 +75,7 @@ public class CreateTaskController extends BaseController {
         }
     }
 
-    public void onAddChecklistHyperlinkClick(ActionEvent event){
+    public void onAddChecklistHyperlinkClick(ActionEvent event) {
         System.out.println("onAddChecklistHyperlinkClick");
 
         this.checklistLabel.setText("Checklist");
