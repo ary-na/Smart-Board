@@ -25,8 +25,10 @@ public class CreateColumnController extends BaseController {
     // On confirm button click
     public void onConfirmButtonClick(ActionEvent event) throws IOException {
 
+        // On invalid input condition
         if (!validInput()) {
             this.errorLabel.setText("Enter a valid name");
+            this.columnNameTextField.requestFocus();
         } else {
 
             // Create column
@@ -39,6 +41,7 @@ public class CreateColumnController extends BaseController {
             // Close stage
             this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             this.viewFactory.closeStage(stage);
+
         }
     }
 

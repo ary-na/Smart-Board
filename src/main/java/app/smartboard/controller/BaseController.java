@@ -14,8 +14,8 @@ public abstract class BaseController {
 
     protected Model model;
     protected ViewFactory viewFactory;
-    private Stage stage;
     private String fxml;
+    private Stage stage;
 
     public BaseController(Model model, ViewFactory viewFactory, String fxml) {
         this.model = model;
@@ -39,19 +39,19 @@ public abstract class BaseController {
         this.viewFactory = viewFactory;
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     public String getFxml() {
         return fxml;
     }
 
     public void setFxml(String fxml) {
         this.fxml = fxml;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

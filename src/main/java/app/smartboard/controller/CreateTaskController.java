@@ -18,20 +18,14 @@ import java.time.LocalDate;
 public class CreateTaskController extends BaseController {
 
     private Stage stage;
-    public Label errorLabel;
     public TextField taskNameTextField;
-    public TextArea taskDescriptionTextArea;
     public VBox dueDateVBox;
-    public HBox dueDateHBox;
-    public Label dueDateLabel;
-    public Label checklistLabel;
-    public Region dueDateRegion;
-    public Region checklistRegion;
-    public VBox checklistVBox;
     public Hyperlink addDueDateHyperlink;
-    public Hyperlink addChecklistHyperlink;
+    public Label dueDateLabel;
+    public Region dueDateRegion;
     private DatePicker datePicker;
-    private CheckBox checkBox;
+    public TextArea taskDescriptionTextArea;
+    public Label errorLabel;
 
     public CreateTaskController(Model model, ViewFactory viewFactory, String fxml) {
         super(model, viewFactory, fxml);
@@ -40,27 +34,37 @@ public class CreateTaskController extends BaseController {
     // On confirm button click
     public void onConfirmButtonClick(ActionEvent event) {
 
-        // Create task
-        Nameable nameable = this.model.createNameable("Task", this.taskNameTextField.getText().trim());
-        Task task = (Task) nameable;
+        // On invalid input condition
+        if (!validInput()) {
+            this.errorLabel.setText("Enter task name");
+            this.taskNameTextField.requestFocus();
+        } else {
 
-        if (datePicker != null)
-            task.setDueDate(datePicker.getValue());
-        task.setDescription(this.taskDescriptionTextArea.getText());
-        this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTask(task);
+            // Create task
+            Nameable nameable = this.model.createNameable("Task", this.taskNameTextField.getText().trim());
+            Task task = (Task) nameable;
 
-        // Create task VBox
-        this.viewFactory.initializeTask(nameable);
+            if (datePicker != null)
+                task.setDueDate(datePicker.getValue());
+            task.setDescription(this.taskDescriptionTextArea.getText());
+            this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTask(task);
 
-        // Close stage
-        this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        this.viewFactory.closeStage(stage);
+            // Create task VBox
+            this.viewFactory.initializeTask(nameable);
+
+            // Close stage
+            this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            this.viewFactory.closeStage(stage);
+        }
 
     }
 
+    // On add due date hyperlink click
     public void onAddDueDateHyperlinkClick(ActionEvent event) {
+
         System.out.println("onAddDueDateHyperlinkClick");
 
+        // Get due date VBox children condition
         if (!this.dueDateVBox.getChildren().contains(this.datePicker)) {
             this.dueDateLabel.setText("Due date");
             HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
@@ -75,15 +79,6 @@ public class CreateTaskController extends BaseController {
         }
     }
 
-    public void onAddChecklistHyperlinkClick(ActionEvent event) {
-        System.out.println("onAddChecklistHyperlinkClick");
-
-        this.checklistLabel.setText("Checklist");
-        HBox.setHgrow(this.checklistRegion, Priority.ALWAYS);
-        this.addChecklistHyperlink.setText("Delete");
-
-    }
-
     // On cancel button click
     public void onCancelButtonClick(ActionEvent event) {
 
@@ -91,5 +86,10 @@ public class CreateTaskController extends BaseController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         this.viewFactory.closeStage(stage);
 
+    }
+
+    // Input validation
+    private boolean validInput() {
+        return !this.taskNameTextField.getText().isEmpty() && this.taskNameTextField.getText().length() <= 45;
     }
 }

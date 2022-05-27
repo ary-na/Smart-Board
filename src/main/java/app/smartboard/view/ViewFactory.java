@@ -180,27 +180,14 @@ public class ViewFactory {
         this.projectView = new ProjectView((Project) nameable);
 
         // Add tab to list
+        this.model.getProjectViewModel().getProjectMap().put((Project) nameable, projectView);
         this.model.getProjectViewModel().getProjectTabs().add(this.projectView);
 
         // Add tab to tab pane
         this.model.getProjectViewModel().getTabPane().getTabs().add(this.projectView);
-        this.model.getProjectViewModel().getProjectMap().put((Project) nameable, projectView);
 
-        boolean defaultProject = false;
-
-        // For projects get default value
-        for (Project project : this.model.getProjects()) {
-
-            defaultProject = project.getIsDefault();
-
-            // Break on condition
-            if (defaultProject)
-                break;
-        }
-
-        // Select last project on condition
-        if (!defaultProject)
-            this.model.getProjectViewModel().getTabPane().getSelectionModel().select(this.projectView);
+        // Select last project
+        this.model.getProjectViewModel().getTabPane().getSelectionModel().select(this.projectView);
 
         // Enable menu items
         this.model.getWorkspaceViewModel().setEmptyWorkspace(false);
@@ -226,8 +213,8 @@ public class ViewFactory {
 
         this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
         this.projectView.getColumnViews().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTaskView(taskView);
-
         this.model.getTaskViewModel().getTaskMap().put(taskView, (Task) nameable);
+
         counter++;
 
     }

@@ -21,7 +21,7 @@
                <children>
                   <Label fx:id="dueDateLabel" />
                   <Region fx:id="dueDateRegion" />
-                  <Hyperlink fx:id="addDueDateHyperlink" onAction="#onAddDueDateHyperlinkClick" text="Add due date" />
+                  <Hyperlink fx:id="addDueDateHyperlink" onAction="#onAddDueDateHyperlinkClick" styleClass="hyperlink-task" text="Add due date" />
                </children>
             </HBox>
             <VBox fx:id="dueDateVBox" alignment="CENTER_LEFT" />
@@ -31,14 +31,6 @@
                   <Insets bottom="6.0" left="4.0" right="4.0" top="6.0" />
                </padding>
             </TextArea>
-            <HBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="94.0">
-               <children>
-                  <Label fx:id="checklistLabel" />
-                  <Region fx:id="checklistRegion" />
-                  <Hyperlink fx:id="addChecklistHyperlink" onAction="#onAddChecklistHyperlinkClick" text="Add checklist" />
-               </children>
-            </HBox>
-            <VBox fx:id="checklistVBox" alignment="CENTER_LEFT" />
                 <Label fx:id="errorLabel" />
             </children>
             <VBox.margin>

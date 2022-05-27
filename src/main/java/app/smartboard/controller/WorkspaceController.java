@@ -3,7 +3,6 @@ package app.smartboard.controller;
 import app.smartboard.model.*;
 import app.smartboard.view.ColumnView;
 import app.smartboard.view.ProjectView;
-import app.smartboard.view.TaskView;
 import app.smartboard.view.ViewFactory;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -27,12 +26,13 @@ public class WorkspaceController extends BaseController {
 
     private Stage stage;
     private ProjectView projectView;
-    public TabPane tabPane;
     public MenuBar workspaceMenuBar;
     public MenuItem addColumnMenuItem;
     public MenuItem renameProjectMenuItem;
     public CheckMenuItem setDefaultProjectCheckMenuItem;
     public MenuItem deleteProjectMenuItem;
+    public TabPane tabPane;
+    private boolean executed = false;
     public Label firstNameLabel;
     public ImageView profilePhotoImageView;
     public Label quoteLabel;
@@ -48,6 +48,9 @@ public class WorkspaceController extends BaseController {
 
         // Load user projects from database
         this.loadProjects();
+
+        // Select default project
+        this.selectDefaultProject();
 
         // Bind workspace content to workspace view model
         this.bindWorkspaceContent();
@@ -70,11 +73,9 @@ public class WorkspaceController extends BaseController {
 
         }
 
-        // Save workspace on close request
-        if (stage != null)
-            stage.setOnCloseRequest(e -> {
-                System.out.println("Workspace Saved");
-            });
+        // Save user projects on close request
+        this.saveOnCloseRequest();
+
     }
 
     // On profile button click
@@ -92,7 +93,8 @@ public class WorkspaceController extends BaseController {
     public void onLogOutButtonClick(ActionEvent event) throws IOException, SQLException {
 
         System.out.println("onLogOutButtonClick");
-        // Display Sign Up view
+
+        // Display log in view
         viewFactory.displayLoginView();
 
         // Save user projects
@@ -113,7 +115,7 @@ public class WorkspaceController extends BaseController {
     // On new project menu item click
     public void onNewProjectMenuItemClick(ActionEvent event) throws IOException {
 
-        System.out.println("onNewProjectMenuItemClicked");
+        System.out.println("onNewProjectMenuItemClick");
 
         // Display Create Project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();
@@ -124,7 +126,7 @@ public class WorkspaceController extends BaseController {
     // On add column menu item click
     public void onAddColumnMenuItemClick() throws IOException {
 
-        // Display Create Project view
+        // Display create column view
         this.stage = (Stage) workspaceMenuBar.getScene().getWindow();
         viewFactory.displayCreateColumnView(stage);
 
@@ -135,9 +137,9 @@ public class WorkspaceController extends BaseController {
     // On rename menu button click
     public void onRenameMenuItemClick(ActionEvent event) throws IOException {
 
-        System.out.println("onRenameMenuItemClicked");
+        System.out.println("onRenameMenuItemClick");
 
-        // Display Rename Project view
+        // Display rename project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();
         viewFactory.displayRenameProjectView(stage);
     }
@@ -165,21 +167,19 @@ public class WorkspaceController extends BaseController {
                 this.model.getProjectViewModel().getProjectTabs().forEach(tab -> {
                     tab.getStyleClass().remove("default-project");
                 });
-
             });
-
         }
     }
 
     // On delete project menu item click
     public void onDeleteProjectMenuItemClick() throws IOException {
 
-        System.out.println("onDeleteMenuItemClicked");
+        System.out.println("onDeleteMenuItemClick");
 
         // Set tab pane
         this.model.getProjectViewModel().setTabPane(this.tabPane);
 
-        // Display Create Project view
+        // Display delete project view
         stage = (Stage) workspaceMenuBar.getScene().getWindow();
         viewFactory.displayDeleteProjectView(stage);
     }
@@ -198,7 +198,6 @@ public class WorkspaceController extends BaseController {
                 // Set as default on condition
                 if (project.getIsDefault()) {
                     this.setDefaultProjectCheckMenuItem.setSelected(true);
-                    this.model.getProjectViewModel().getTabPane().getSelectionModel().select(this.model.getProjectViewModel().getProjectMap().get(project));
                     this.model.getProjectViewModel().getProjectTabs().get(getModel().getProjectIndex()).getStyleClass().add("default-project");
                 }
 
@@ -230,6 +229,31 @@ public class WorkspaceController extends BaseController {
                     }
                 });
             });
+        }
+    }
+
+    // Select default project
+    private void selectDefaultProject() {
+
+        // Run script on condition
+        if (!executed) {
+
+            Project defaultProject = null;
+            boolean defaultProjectBoolean = false;
+
+            // Get default project boolean value
+            for (Project project : this.model.getProjects()) {
+
+                defaultProjectBoolean = project.getIsDefault();
+
+                // Set default project on condition
+                if (defaultProjectBoolean) {
+                    defaultProject = project;
+                    // Select default project
+                    this.model.getProjectViewModel().getTabPane().getSelectionModel().select(this.model.getProjectViewModel().getProjectMap().get(defaultProject));
+                }
+            }
+            this.executed = true;
         }
     }
 
@@ -288,7 +312,7 @@ public class WorkspaceController extends BaseController {
                 button.setOnAction(e -> {
                     System.out.println("onAddTaskButtonClick");
                     try {
-                        // Display Edit Profile view
+                        // Display create task view
                         this.stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                         viewFactory.displayCreateTaskView(stage);
                     } catch (IOException exception) {
@@ -306,7 +330,7 @@ public class WorkspaceController extends BaseController {
                     System.out.println("OnRenameMenuItemClick");
 
                     try {
-                        // Display Rename column view
+                        // Display rename column view
                         this.stage = (Stage) menuButton.getScene().getWindow();
                         viewFactory.displayRenameColumnView(stage);
                     } catch (IOException exception) {
@@ -355,7 +379,7 @@ public class WorkspaceController extends BaseController {
 
                     System.out.println("OnEditMenuItemClick");
                     try {
-                        // Display Edit task view
+                        // Display edit task view
                         this.stage = (Stage) menuButton.getScene().getWindow();
                         viewFactory.displayEditTaskView(stage);
                     } catch (IOException e) {
@@ -417,7 +441,6 @@ public class WorkspaceController extends BaseController {
             e.consume();
 
         });
-
 
         // Target on drag over
         targetColumn.setOnDragOver(e -> {
@@ -488,5 +511,22 @@ public class WorkspaceController extends BaseController {
             e.consume();
 
         });
+    }
+
+    // Save user projects on close request
+    private void saveOnCloseRequest() {
+
+        if (stage != null)
+            stage.setOnCloseRequest(e -> {
+
+                System.out.println("Workspace Saved");
+
+                // Save user projects
+                try {
+                    this.model.getDatabaseHelper().setProjects(this.model.getCurrentUser().getUsername(), this.model.getProjects());
+                } catch (SQLException | IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
     }
 }

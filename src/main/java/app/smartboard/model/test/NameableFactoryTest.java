@@ -28,7 +28,6 @@ public class NameableFactoryTest {
         projectNull = null;
         columnNull = null;
         taskNull = null;
-
     }
 
     @After

@@ -116,6 +116,8 @@ Kaltstahl, Z., 2022. JavaFx USE_COMPUTED_SIZE for Stage without using FXML. [onl
 
 Kapoor, V., 2022. [online] Foxinfotech.in. Available at: <https://www.foxinfotech.in/2019/12/github-markdown-add-an-image-to-readme-md-file.html> [Accessed 12 May 2022].
 
+Kasim, R., 2022. Is is possible to make a method execute only once?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/2665993/is-is-possible-to-make-a-method-execute-only-once> [Accessed 27 May 2022].
+
 Kiers, B., 2022. How to find the index of an element in an array in Java?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/1522108/how-to-find-the-index-of-an-element-in-an-array-in-java> [Accessed 11 May 2022].
 
 Kleopatra, 2022. JavaFX TextArea style with css. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/51594560/javafx-textarea-style-with-css> [Accessed 22 May 2022].

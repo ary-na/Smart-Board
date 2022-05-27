@@ -21,8 +21,10 @@ public class CreateProjectController extends BaseController {
     // On confirm button click
     public void onConfirmButtonClick(ActionEvent event) {
 
+        // On invalid input condition
         if (!validInput()) {
             this.errorLabel.setText("Enter a valid name");
+            this.projectNameTextField.requestFocus();
         } else {
 
             // Create project
@@ -34,6 +36,7 @@ public class CreateProjectController extends BaseController {
             // Close stage
             this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             this.viewFactory.closeStage(stage);
+
         }
     }
 

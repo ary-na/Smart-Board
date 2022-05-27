@@ -21,12 +21,13 @@ public class DeleteProjectController extends BaseController {
         this.model.getProjects().forEach(project -> System.out.println("Projects before deletion: " + project.getName()));
         System.out.println();
 
+        // Get tab index
         int index = this.model.getProjectViewModel().getProjectTabs().indexOf(this.model.getProjectViewModel().getTabPane().getSelectionModel().getSelectedItem());
 
         // Delete project UI
         this.model.getProjectViewModel().getProjectTabs().remove(this.model.getProjectIndex());
 
-        // Select a tab
+        // Select a tab after deletion
         if(!(index - 1 < 0))
             this.model.getProjectViewModel().getTabPane().getSelectionModel().select(index - 1);
         else

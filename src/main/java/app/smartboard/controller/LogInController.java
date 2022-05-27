@@ -2,20 +2,14 @@ package app.smartboard.controller;
 
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.model.Model;
-import app.smartboard.model.Nameable;
 import app.smartboard.model.Project;
 import app.smartboard.model.User;
-import app.smartboard.view.ProjectView;
 import app.smartboard.view.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -25,62 +19,67 @@ import java.util.ArrayList;
 
 public class LogInController extends BaseController {
 
-    @FXML
-    public Hyperlink signUpHyperlink;
-
-    @FXML
-    private Button logInButton;
-
-    @FXML
-    private TextField psw;
-
-    @FXML
-    private TextField username;
-
     private Stage stage;
+    public TextField username;
+    public TextField psw;
+    public Label errorLabel;
+    public Button logInButton;
+    public Hyperlink signUpHyperlink;
 
     public LogInController(Model model, ViewFactory viewFactory, String fxml) {
         super(model, viewFactory, fxml);
     }
 
-
-    @FXML
+    // On log in button click
     public void onLogInButtonClick(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
 
-        User user = this.model.getDatabaseHelper().getUser(username.getText().trim(), psw.getText().trim());
-        ArrayList<Project> projects = new ArrayList<>();
-        ObservableList<Tab> projectTabs = FXCollections.observableArrayList();
+        // On invalid input condition
+        if (!validInput()) {
+            this.errorLabel.setText("Enter username and password");
+            this.username.requestFocus();
+        } else {
 
-        if (user != null) {
+            // Get user
+            User user = this.model.getDatabaseHelper().getUser(username.getText().trim(), psw.getText().trim());
+            ArrayList<Project> projects = new ArrayList<>();
+            ObservableList<Tab> projectTabs = FXCollections.observableArrayList();
 
-            System.out.println("User Logged In");
+            // On login successful condition
+            if (user != null) {
 
-            // Set the current user
-            this.model.setCurrentUser(user);
+                System.out.println("User Logged In");
 
-            // Test -> to be deleted
-            projects = this.model.getDatabaseHelper().getProjects(this.model.getCurrentUser().getUsername());
+                // Set the current user
+                this.model.setCurrentUser(user);
 
-            this.model.setProjects(this.model.getDatabaseHelper().getProjects(this.model.getCurrentUser().getUsername()));
-            this.model.getProjectViewModel().setProjectTabs(projectTabs);
+                // Test -> to be deleted
+                projects = this.model.getDatabaseHelper().getProjects(this.model.getCurrentUser().getUsername());
 
-            // Test -> to be deleted
-            projects.forEach(project -> {
-                System.out.println(project.getName());
-            });
+                // Get projects from database
+                this.model.setProjects(this.model.getDatabaseHelper().getProjects(this.model.getCurrentUser().getUsername()));
+                this.model.getProjectViewModel().setProjectTabs(projectTabs);
 
-            // Load user data
-            if (this.model.getCurrentUser().getProfile().getProfilePhoto() == null) {
-                this.model.getWorkspaceViewModel().setUserImage(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/default-profile-photo.png"))));
+                // Test -> to be deleted
+                projects.forEach(project -> {
+                    System.out.println(project.getName());
+                });
+
+                // Load user data
+                if (this.model.getCurrentUser().getProfile().getProfilePhoto() == null) {
+                    this.model.getWorkspaceViewModel().setUserImage(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/default-profile-photo.png"))));
+                }
+                this.model.getWorkspaceViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
+
+                // Display Workspace view
+                viewFactory.displayWorkspaceView();
+
+                // Close Log In stage
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                viewFactory.closeStage(stage);
+
+            } else {
+                this.errorLabel.setText("Incorrect username or password");
             }
-            this.model.getWorkspaceViewModel().setUserFirstName(this.model.getCurrentUser().getProfile().getFirstName());
-
-            // Display Workspace view
-            viewFactory.displayWorkspaceView();
-
-            // Close Log In stage
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            viewFactory.closeStage(stage);
         }
     }
 
@@ -95,5 +94,10 @@ public class LogInController extends BaseController {
         // Close Log In stage
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         viewFactory.closeStage(stage);
+    }
+
+    // Input validation
+    private boolean validInput() {
+        return (!this.username.getText().isEmpty() && this.username.getText().length() <= 45) && (!this.psw.getText().isEmpty() && this.psw.getText().length() <= 45);
     }
 }
