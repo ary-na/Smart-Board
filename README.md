@@ -58,6 +58,8 @@ DVarga and Brucker, P., 2022. JavaFX ScrollPane styling. [online] Stack Overflow
 
 Eder, L., 2022. Easiest way to convert a Blob into a byte array. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/6662432/easiest-way-to-convert-a-blob-into-a-byte-array> [Accessed 27 April 2022].
 
+Eldursi, S. and Halim, B., 2022. Styling javafx checkbox. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/43566587/styling-javafx-checkbox> [Accessed 28 May 2022].
+
 Fabian and Sethi, H., 2022. [Solved] How to determine if the user clicked outside a particular JavaFX node? - Local Coder. [online] Localcoder.org. Available at: <https://localcoder.org/how-to-determine-if-the-user-clicked-outside-a-particular-javafx-node> [Accessed 22 May 2022].
 
 Fadatare, R., 2022. Login Form Using JavaFX with MySQL Database. [online] Javaguides.net. Available at: <https://www.javaguides.net/2019/07/login-form-using-javafx-with-mysql-database.html> [Accessed 11 April 2022].
