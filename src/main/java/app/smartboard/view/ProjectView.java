@@ -8,16 +8,17 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+// ProjectView UI
 public class ProjectView extends Tab {
 
     private final Project project;
+    private final ObservableList<ColumnView> columnViews;
     private final HBox columnContainer;
-    private ObservableList<ColumnView> columnViews;
 
     public ProjectView(Project project) {
         this.project = project;
-        this.columnContainer = new HBox(20);
         this.columnViews = FXCollections.observableArrayList();
+        this.columnContainer = new HBox(20);
         Bindings.bindContent(this.columnContainer.getChildren(), this.columnViews);
         projectLayout();
     }
@@ -26,11 +27,7 @@ public class ProjectView extends Tab {
         return columnViews;
     }
 
-    public void setColumnViews(ObservableList<ColumnView> columnViews) {
-        this.columnViews = columnViews;
-    }
-
-    public void addColumnView(ColumnView columnView){
+    public void addColumnView(ColumnView columnView) {
         this.columnViews.add(columnView);
     }
 
@@ -66,8 +63,7 @@ public class ProjectView extends Tab {
         // Set scroll pane content
         scrollPane.setContent(this.columnContainer);
 
+        // Add columns to column container
         this.columnContainer.getChildren().addAll(this.columnViews);
     }
-
-
 }

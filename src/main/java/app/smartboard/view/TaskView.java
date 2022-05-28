@@ -2,7 +2,6 @@ package app.smartboard.view;
 
 import app.smartboard.SmartBoardApplication;
 import app.smartboard.model.Task;
-import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -15,6 +14,7 @@ import javafx.scene.layout.VBox;
 
 import java.time.format.DateTimeFormatter;
 
+// TaskView UI
 public class TaskView extends VBox {
 
     private final Task task;
@@ -33,15 +33,18 @@ public class TaskView extends VBox {
         left.setAlignment(Pos.CENTER_LEFT);
         left.getStyleClass().add("vbox-task-left-container");
 
-        // Task title, due date and checklist
-        Label taskTitle = new Label(this.task.getName());
-        taskTitle.getStyleClass().add("label-task-title");
+        // Task name
+        Label taskName = new Label(this.task.getName());
+        taskName.getStyleClass().add("label-task-title");
+
+        // Task due date
         Label taskDueDate = new Label("");
-        if(task.getDueDate() != null)
+        if (task.getDueDate() != null)
             taskDueDate.setText(dateTimeFormatter.format(this.task.getDueDate()));
 
+        // Add left container children
         left.getChildren().addAll(
-                taskTitle,
+                taskName,
                 taskDueDate
         );
 
@@ -51,7 +54,7 @@ public class TaskView extends VBox {
         right.setAlignment(Pos.CENTER);
         right.getStyleClass().add("vbox-task-right-container");
 
-        // Task Button
+        // Task menu button
         ImageView menuIconImageView = new ImageView(new Image(String.valueOf(SmartBoardApplication.class.getResource("/assets/column-header-menu-icon.png"))));
         menuIconImageView.setFitWidth(12);
         menuIconImageView.setFitHeight(12);
@@ -61,11 +64,12 @@ public class TaskView extends VBox {
         taskMenuButton.setGraphic(menuIconImageView);
         taskMenuButton.getStyleClass().add("menu-button-task");
 
+        // Add right container children
         right.getChildren().addAll(
                 taskMenuButton
         );
 
-        // Task HBox container
+        // Set task container properties
         HBox taskContainer = new HBox();
         taskContainer.setMinHeight(Control.USE_COMPUTED_SIZE);
         taskContainer.setMinWidth(Control.USE_COMPUTED_SIZE);
@@ -75,17 +79,18 @@ public class TaskView extends VBox {
         taskContainer.setMaxWidth(Control.USE_COMPUTED_SIZE);
         taskContainer.getStyleClass().add("hbox-task-container");
 
-        // task container region
+        // Set task container region
         Region region = new Region();
         HBox.setHgrow(region, Priority.ALWAYS);
 
+        // Add task container children
         taskContainer.getChildren().addAll(
                 left,
                 region,
                 right
         );
 
-        // Set task VBox properties
+        // Set task properties
         this.setSpacing(20);
         this.setPadding(new Insets(20));
         this.setMinHeight(Control.USE_COMPUTED_SIZE);
@@ -96,8 +101,7 @@ public class TaskView extends VBox {
         this.setMaxWidth(Control.USE_COMPUTED_SIZE);
         this.getStyleClass().add("vbox-task");
 
-        // Add task VBox children
+        // Add task children
         this.getChildren().add(taskContainer);
-
     }
 }

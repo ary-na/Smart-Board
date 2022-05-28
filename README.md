@@ -1,6 +1,25 @@
 # Smart-Board
 Smart Board is a desktop-based Kanban-style application for managing personal work.
 
+- Java version 17.0.2
+- Maven version 3.8.1
+
+## To run the application
+
+**1.1** Using the command prompt, navigate to:
+
+```
+Smart-Board 
+```
+
+**1.2** Run the following command:
+
+```
+mvn javafx:run
+```
+
+**Alternatively, import the project to [IntelliJ IDEA](https://www.jetbrains.com/idea/download/?fromIDE=#section=mac) and run the program from the IDE.**
+
 ## Screen Shots
 
 **Log in** view screenshot
@@ -8,6 +27,9 @@ Smart Board is a desktop-based Kanban-style application for managing personal wo
 
 **Sign up** view screenshot
 ![Sign up view](src/main/resources/screenshots/sign-up.png)
+
+**Workspace** view screenshot
+![Workspace view](src/main/resources/screenshots/workspace.png)
 
 **Edit profile** view screenshot
 ![Edit profile view](src/main/resources/screenshots/edit-profile.png)
