@@ -20,7 +20,4 @@ public class Column extends Nameable implements Serializable {
         this.task.addLast(task);
     }
 
-    public void deleteTask(Task task) {
-        this.task.remove(task);
-    }
 }

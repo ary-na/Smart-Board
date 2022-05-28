@@ -152,7 +152,7 @@ public class WorkspaceController extends BaseController {
         if (setDefaultProjectCheckMenuItem.isSelected()) {
 
             // Set default true
-            this.model.getProjects().get(this.model.getProjectIndex()).setIsDefault(true);
+            this.model.getProjects().get(this.model.getProjectIndex()).setDefault(true);
             // Add default style class
             this.model.getProjectViewModel().getProjectTabs().get(getModel().getProjectIndex()).getStyleClass().add("default-project");
 
@@ -161,7 +161,7 @@ public class WorkspaceController extends BaseController {
             // For each project set default false
             this.model.getProjects().forEach(project -> {
 
-                project.setIsDefault(false);
+                project.setDefault(false);
 
                 // For each project tab remove default style class
                 this.model.getProjectViewModel().getProjectTabs().forEach(tab -> {
@@ -196,7 +196,7 @@ public class WorkspaceController extends BaseController {
                 this.viewFactory.initializeProject(project);
 
                 // Set as default on condition
-                if (project.getIsDefault()) {
+                if (project.getDefault()) {
                     this.setDefaultProjectCheckMenuItem.setSelected(true);
                     this.model.getProjectViewModel().getProjectTabs().get(getModel().getProjectIndex()).getStyleClass().add("default-project");
                 }
@@ -244,7 +244,7 @@ public class WorkspaceController extends BaseController {
             // Get default project boolean value
             for (Project project : this.model.getProjects()) {
 
-                defaultProjectBoolean = project.getIsDefault();
+                defaultProjectBoolean = project.getDefault();
 
                 // Set default project on condition
                 if (defaultProjectBoolean) {

@@ -1,8 +1,5 @@
 package app.smartboard.model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 import java.io.Serializable;
 
 public abstract class Nameable implements Serializable {

@@ -15,11 +15,11 @@ public class Project extends Nameable implements Serializable {
         this.column = new LinkedList<>();
     }
 
-    public boolean getIsDefault() {
+    public boolean getDefault() {
         return isDefault;
     }
 
-    public void setIsDefault(boolean isDefault) {
+    public void setDefault(boolean isDefault) {
         this.isDefault = isDefault;
     }
 
@@ -27,7 +27,4 @@ public class Project extends Nameable implements Serializable {
         return column;
     }
 
-    public void addColumn(Column column) {
-        this.column.addLast(column);
-    }
 }

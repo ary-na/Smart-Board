@@ -5,31 +5,31 @@ import app.smartboard.model.viewmodel.ColumnViewModel;
 import app.smartboard.model.viewmodel.ProjectViewModel;
 import app.smartboard.model.viewmodel.TaskViewModel;
 import app.smartboard.model.viewmodel.WorkspaceViewModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
+// Model class
 public class Model {
 
-    private WorkspaceViewModel workspaceViewModel;
-    private ProjectViewModel projectViewModel;
-    private ColumnViewModel columnViewModel;
-    private TaskViewModel taskViewModel;
     private final DatabaseHelper databaseHelper;
     private User currentUser;
     private ArrayList<Project> projects;
     private final NameableFactory nameableFactory;
+    private final WorkspaceViewModel workspaceViewModel;
+    private final ProjectViewModel projectViewModel;
+    private final ColumnViewModel columnViewModel;
+    private final TaskViewModel taskViewModel;
 
     public Model() {
+
+        this.databaseHelper = new DatabaseHelper();
+        this.projects = new ArrayList<>();
+        this.nameableFactory = new NameableFactory();
         this.workspaceViewModel = new WorkspaceViewModel();
         this.projectViewModel = new ProjectViewModel();
         this.columnViewModel = new ColumnViewModel();
         this.taskViewModel = new TaskViewModel();
-        this.databaseHelper = new DatabaseHelper();
-        this.projects = new ArrayList<>();
-        this.nameableFactory = new NameableFactory();
     }
 
     public DatabaseHelper getDatabaseHelper() {
@@ -42,50 +42,6 @@ public class Model {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
-    }
-
-    public WorkspaceViewModel getWorkspaceViewModel() {
-        return workspaceViewModel;
-    }
-
-    public void setWorkspaceViewModel(WorkspaceViewModel workspaceViewModel) {
-        this.workspaceViewModel = workspaceViewModel;
-    }
-
-    public ProjectViewModel getProjectViewModel() {
-        return projectViewModel;
-    }
-
-    public void setProjectViewModel(ProjectViewModel projectViewModel) {
-        this.projectViewModel = projectViewModel;
-    }
-
-    public ColumnViewModel getColumnViewModel() {
-        return columnViewModel;
-    }
-
-    public void setColumnViewModel(ColumnViewModel columnViewModel) {
-        this.columnViewModel = columnViewModel;
-    }
-
-    public TaskViewModel getTaskViewModel() {
-        return taskViewModel;
-    }
-
-    public void setTaskViewModel(TaskViewModel taskViewModel) {
-        this.taskViewModel = taskViewModel;
-    }
-
-    public int getProjectIndex() {
-        return this.projectViewModel.getTabPane().getSelectionModel().getSelectedIndex();
-    }
-
-    public int getColumnIndex(VBox column) {
-        return this.projects.get(this.getProjectIndex()).getColumn().indexOf(this.columnViewModel.getColumnMap().get(column));
-    }
-
-    public int getTaskIndex(VBox task) {
-        return this.projects.get(this.getProjectIndex()).getColumn().get(this.getColumnIndex(this.getColumnViewModel().getColumn())).getTask().indexOf(this.taskViewModel.getTaskMap().get(task));
     }
 
     public ArrayList<Project> getProjects() {
@@ -103,5 +59,34 @@ public class Model {
         return nameable;
     }
 
+    public WorkspaceViewModel getWorkspaceViewModel() {
+        return workspaceViewModel;
+    }
 
+    public ProjectViewModel getProjectViewModel() {
+        return projectViewModel;
+    }
+
+    // Return selected project index
+    public int getProjectIndex() {
+        return this.projectViewModel.getTabPane().getSelectionModel().getSelectedIndex();
+    }
+
+    public ColumnViewModel getColumnViewModel() {
+        return columnViewModel;
+    }
+
+    // Return selected column index
+    public int getColumnIndex(VBox column) {
+        return this.projects.get(this.getProjectIndex()).getColumn().indexOf(this.columnViewModel.getColumnMap().get(column));
+    }
+
+    public TaskViewModel getTaskViewModel() {
+        return taskViewModel;
+    }
+
+    // Return selected task index
+    public int getTaskIndex(VBox task) {
+        return this.projects.get(this.getProjectIndex()).getColumn().get(this.getColumnIndex(this.getColumnViewModel().getColumn())).getTask().indexOf(this.taskViewModel.getTaskMap().get(task));
+    }
 }

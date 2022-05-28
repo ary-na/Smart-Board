@@ -1,8 +1,11 @@
 package app.smartboard.model;
 
 public class NameableFactory {
+
+    // Create nameable object base on nameable type
     public Nameable createNameable(String nameableType, String nameableName) {
 
+        // Create and return nameable on condition
         if (nameableType == null || nameableName.isEmpty())
             return null;
 
@@ -19,6 +22,5 @@ public class NameableFactory {
         }
         return null;
     }
-
 }
 
