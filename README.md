@@ -31,9 +31,6 @@ mvn javafx:run
 **Workspace** view screenshot
 ![Workspace view](src/main/resources/screenshots/workspace.png)
 
-**Edit profile** view screenshot
-![Edit profile view](src/main/resources/screenshots/edit-profile.png)
-
 ## References
 
 A.b, 2022. close fxml window by code, javafx. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/13567019/close-fxml-window-by-code-javafx> [Accessed 13 April 2022].
