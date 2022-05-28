@@ -67,7 +67,7 @@ public class EditTaskController extends BaseController {
         }
 
         // Get completed value and set to checkbox
-        if(this.completed != null)
+        if (this.completed != null)
             this.completed.selectedProperty().set(task.getCompleted());
 
         // Get description
@@ -93,15 +93,19 @@ public class EditTaskController extends BaseController {
 
             // Edit task UI
             taskTitle.setText(this.taskNameTextField.getText().trim());
-            if (this.datePicker != null)
+
+            if (this.datePicker != null && this.datePicker.getValue() != null) {
                 taskDueDate.setText(dateTimeFormatter.format(this.datePicker.getValue()));
+            } else {
+                taskDueDate.setText("");
+            }
 
             // Edit task object
             task.setName(this.taskNameTextField.getText().trim());
             if (datePicker != null)
                 task.setDueDate(datePicker.getValue());
 
-            if(this.completed != null)
+            if (this.completed != null)
                 task.setCompleted(this.completed.selectedProperty().get());
 
             task.setDescription(this.taskDescriptionTextArea.getText());
@@ -124,7 +128,7 @@ public class EditTaskController extends BaseController {
         System.out.println("onAddDueDateHyperlinkClick");
 
         // Check due date HBox children on condition
-        if (!this.dueDateHBox.getChildren().contains(this.datePicker)) {
+        if (!this.dueDateHBox.getChildren().contains(this.datePicker) && !this.dueDateHBox.getChildren().contains(this.completed)) {
 
             this.dueDateLabel.setText("Due date");
             HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
@@ -140,15 +144,20 @@ public class EditTaskController extends BaseController {
                     this.datePicker,
                     this.dueDateHBoxRegion,
                     this.completed
-                    );
+            );
 
             addDueDateHyperlink.setText("Delete");
         } else {
             this.dueDateLabel.setText(null);
             HBox.setHgrow(this.dueDateRegion, Priority.NEVER);
+            this.datePicker.setValue(null);
 
             // Remove children from HBox
-            dueDateHBox.getChildren().removeAll();
+            dueDateHBox.getChildren().removeAll(
+                    this.datePicker,
+                    this.dueDateHBoxRegion,
+                    this.completed
+            );
 
             addDueDateHyperlink.setText("Add due date");
         }

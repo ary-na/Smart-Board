@@ -75,7 +75,7 @@ public class CreateTaskController extends BaseController {
         System.out.println("onAddDueDateHyperlinkClick");
 
         // Check due date HBox children on condition
-        if (!this.dueDateHBox.getChildren().contains(this.datePicker)) {
+        if (!this.dueDateHBox.getChildren().contains(this.datePicker) && !this.dueDateHBox.getChildren().contains(this.completed)) {
 
             this.dueDateLabel.setText("Due date");
             HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
@@ -98,9 +98,14 @@ public class CreateTaskController extends BaseController {
         } else {
             this.dueDateLabel.setText(null);
             HBox.setHgrow(this.dueDateRegion, Priority.NEVER);
+            this.datePicker.setValue(null);
 
             // Remove children from HBox
-            dueDateHBox.getChildren().removeAll();
+            dueDateHBox.getChildren().removeAll(
+                    this.datePicker,
+                    this.dueDateHBoxRegion,
+                    this.completed
+            );
 
             addDueDateHyperlink.setText("Add due date");
         }
