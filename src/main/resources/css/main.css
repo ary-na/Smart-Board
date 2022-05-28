@@ -125,6 +125,47 @@
     -fx-text-fill: #4f5d75;
 }
 
+.label-task-state-no-date {
+    -fx-padding: 2 4 2 4;
+    -fx-background-color: transparent;
+    -fx-background-radius: 4;
+}
+
+.label-task-state-default{
+    -fx-padding: 2 4 2 4;
+    -fx-background-color: transparent;
+    -fx-border-color: #E0E0DD;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+}
+
+.label-task-state-completed{
+    -fx-padding: 2 4 2 4;
+    -fx-background-color: #98DDCA;
+    -fx-background-radius: 4;
+    -fx-text-fill: #2D3142;
+    -fx-border-color: #E0E0DD;
+    -fx-border-radius: 4;
+}
+
+.label-task-state-due{
+    -fx-padding: 2 4 2 4;
+    -fx-background-color: #FFE194;
+    -fx-background-radius: 4;
+    -fx-text-fill: #2D3142;
+    -fx-border-color: #E0E0DD;
+    -fx-border-radius: 4;
+}
+
+.label-task-state-overdue{
+    -fx-padding: 2 4 2 4;
+    -fx-background-color: #FF8C8C;
+    -fx-background-radius: 4;
+    -fx-text-fill: #2D3142;
+    -fx-border-color: #E0E0DD;
+    -fx-border-radius: 4;
+}
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 /* MENU BAR ******************************************************************************************** */

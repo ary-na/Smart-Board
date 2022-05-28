@@ -3,6 +3,7 @@ package app.smartboard.controller;
 import app.smartboard.model.Model;
 import app.smartboard.model.Task;
 import app.smartboard.view.ProjectView;
+import app.smartboard.view.TaskState;
 import app.smartboard.view.TaskView;
 import app.smartboard.view.ViewFactory;
 import javafx.event.ActionEvent;
@@ -22,12 +23,14 @@ public class EditTaskController extends BaseController {
     private Stage stage;
     private Task task;
     public TextField taskNameTextField;
-    public VBox dueDateVBox;
     public Hyperlink addDueDateHyperlink;
     public Label dueDateLabel;
     public Region dueDateRegion;
+    public HBox dueDateHBox;
     private DatePicker datePicker;
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private Region dueDateHBoxRegion;
+    private CheckBox completed;
     public TextArea taskDescriptionTextArea;
     public Label errorLabel;
 
@@ -40,16 +43,34 @@ public class EditTaskController extends BaseController {
         // Get selected task
         task = this.model.getProjects().get(this.model.getProjectIndex()).getColumn().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).getTask().get(this.model.getTaskIndex(this.model.getTaskViewModel().getTask()));
 
-        // Set task data to scene
+        // Get task name and set to text field
         this.taskNameTextField.setText(task.getName());
+
+        // Get task due date and set value to date picker
         if (task.getDueDate() != null) {
             this.dueDateLabel.setText("Due date");
             HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
             this.datePicker = new DatePicker(LocalDate.now());
-            dueDateVBox.getChildren().add(datePicker);
+            this.dueDateHBoxRegion = new Region();
+            this.completed = new CheckBox("Complete");
+
+            // Add children to HBox
+            dueDateHBox.getChildren().addAll(
+                    this.datePicker,
+                    this.dueDateHBoxRegion,
+                    this.completed
+            );
+
+            HBox.setHgrow(this.dueDateHBoxRegion, Priority.ALWAYS);
             addDueDateHyperlink.setText("Delete");
             this.datePicker.setValue(task.getDueDate());
         }
+
+        // Get completed value and set to checkbox
+        if(this.completed != null)
+            this.completed.selectedProperty().set(task.getCompleted());
+
+        // Get description
         this.taskDescriptionTextArea.setText(task.getDescription());
 
     }
@@ -75,13 +96,21 @@ public class EditTaskController extends BaseController {
             if (this.datePicker != null)
                 taskDueDate.setText(dateTimeFormatter.format(this.datePicker.getValue()));
 
-
             // Edit task object
             task.setName(this.taskNameTextField.getText().trim());
             if (datePicker != null)
                 task.setDueDate(datePicker.getValue());
+
+            if(this.completed != null)
+                task.setCompleted(this.completed.selectedProperty().get());
+
             task.setDescription(this.taskDescriptionTextArea.getText());
 
+            // Remove CSS class
+            TaskState.removeCSSClass(taskDueDate);
+
+            // Add CSS class
+            taskDueDate.getStyleClass().add(TaskState.getCSSClass(this.viewFactory.getTaskState(task)));
 
             // Close stage
             this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -94,17 +123,33 @@ public class EditTaskController extends BaseController {
 
         System.out.println("onAddDueDateHyperlinkClick");
 
-        // Get due date VBox children condition
-        if (!this.dueDateVBox.getChildren().contains(this.datePicker)) {
+        // Check due date HBox children on condition
+        if (!this.dueDateHBox.getChildren().contains(this.datePicker)) {
+
             this.dueDateLabel.setText("Due date");
             HBox.setHgrow(this.dueDateRegion, Priority.ALWAYS);
+
             this.datePicker = new DatePicker(LocalDate.now());
-            dueDateVBox.getChildren().add(datePicker);
+            this.dueDateHBoxRegion = new Region();
+
+            HBox.setHgrow(this.dueDateHBoxRegion, Priority.ALWAYS);
+            this.completed = new CheckBox("Complete");
+
+            // Add children to HBox
+            dueDateHBox.getChildren().addAll(
+                    this.datePicker,
+                    this.dueDateHBoxRegion,
+                    this.completed
+                    );
+
             addDueDateHyperlink.setText("Delete");
         } else {
             this.dueDateLabel.setText(null);
             HBox.setHgrow(this.dueDateRegion, Priority.NEVER);
-            dueDateVBox.getChildren().remove(datePicker);
+
+            // Remove children from HBox
+            dueDateHBox.getChildren().removeAll();
+
             addDueDateHyperlink.setText("Add due date");
         }
     }

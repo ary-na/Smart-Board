@@ -26,6 +26,8 @@ Baeldung, 2022. Object Type Casting in Java. [online] Baeldung. Available at: <h
 
 Barosanuemailtest, 2022. Abstract controller and dependencies · barosanuemailtest/JavaFxEmailClientCourse@968af11. [online] GitHub. Available at: <https://github.com/barosanuemailtest/JavaFxEmailClientCourse/commit/968af113fc73cc16454d26ab95db0fa5962b7a34> [Accessed 11 May 2022].
 
+Barosanuemailtest, 2022. Dynamic css · barosanuemailtest/JavaFxEmailClientCourse@695286c. [online] GitHub. Available at: <https://github.com/barosanuemailtest/JavaFxEmailClientCourse/commit/695286c30a82dd7acfa718303d31b3a65301812b> [Accessed 27 May 2022].
+
 Biy, U., 2022. How do I add margin to a JavaFX element using CSS?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16977100/how-do-i-add-margin-to-a-javafx-element-using-css> [Accessed 11 May 2022].
 
 Biy, U., 2022. How to find an element with an ID in JavaFX?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/12201712/how-to-find-an-element-with-an-id-in-javafx> [Accessed 27 May 2022].
@@ -43,6 +45,8 @@ Brian, 2022. How to get the selected Tab from the TabPane with JavaFX?. [online]
 Bucky, 2022. JavaFX Java GUI Tutorial. [online] Youtube.com. Available at: <https://www.youtube.com/watch?v=FLkOX4Eez6o&t=14s> [Accessed 13 April 2022].
 
 Chappell, G. and Hildebrandt, N., 2022. Getting Started with JavaFX: Using FXML to Create a User Interface | JavaFX 2 Tutorials and Documentation. [online] Docs.oracle.com. Available at: <https://docs.oracle.com/javafx/2/get_started/fxml_tutorial.htm> [Accessed 3 April 2022].
+
+Colorhunt.co. 2022. Light Color Palettes - Color Hunt. [online] Available at: <https://colorhunt.co/palettes/light> [Accessed 27 May 2022].
 
 Diwan, A., 2022. Connecting to a MySQL database with Java. [online] Tutorialspoint.com. Available at: <https://www.tutorialspoint.com/connecting-to-a-mysql-database-with-java> [Accessed 11 April 2022].
 
@@ -201,6 +205,8 @@ WEGSY85, 2022. JavaFX Image from resources folder. [online] Stack Overflow. Avai
 W3schools.com. 2022. Java LinkedList. [online] Available at: <https://www.w3schools.com/java/java_linkedlist.asp> [Accessed 27 April 2022].
 
 www.javatpoint.com. 2022. Factory Method Design Pattern - Javatpoint. [online] Available at: <https://www.javatpoint.com/factory-method-design-pattern> [Accessed 27 April 2022].
+
+www.javatpoint.com. 2022. How to Compare Dates in Java - Javatpoint. [online] Available at: <https://www.javatpoint.com/how-to-compare-dates-in-java> [Accessed 27 May 2022].
 
 Zephyr, 2022. JavaFx property binding with multiple objects on on screen. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/53771119/javafx-property-binding-with-multiple-objects-on-on-screen> [Accessed 5 May 2022].
 

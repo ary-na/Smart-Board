@@ -5,16 +5,20 @@ import app.smartboard.controller.*;
 import app.smartboard.model.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.time.LocalDate;
 
 /*
  * Code sourced and adapted from:
  * https://www.udemy.com/course/advanced-programming-with-javafx-build-an-email-client/
  * https://github.com/barosanuemailtest/JavaFxEmailClientCourse/commit/968af113fc73cc16454d26ab95db0fa5962b7a34
+ * https://github.com/barosanuemailtest/JavaFxEmailClientCourse/commit/695286c30a82dd7acfa718303d31b3a65301812b
  */
 
 public class ViewFactory {
@@ -24,6 +28,7 @@ public class ViewFactory {
     private Scene scene;
     private FXMLLoader fxmlLoader;
     private ProjectView projectView;
+    private TaskState taskState = TaskState.DEFAULT;
     private int counter = 0;
 
     public ViewFactory(Model model) {
@@ -213,7 +218,16 @@ public class ViewFactory {
 
         this.projectView = (ProjectView) this.model.getProjectViewModel().getProjectTabs().get(model.getProjectIndex());
         this.projectView.getColumnViews().get(this.model.getColumnIndex(this.model.getColumnViewModel().getColumn())).addTaskView(taskView);
+
         this.model.getTaskViewModel().getTaskMap().put(taskView, (Task) nameable);
+
+        // Get task UI
+        HBox taskContainer = (HBox) taskView.getChildren().get(0);
+        VBox left = (VBox) taskContainer.getChildren().get(0);
+        Label taskDueDate = (Label) left.getChildren().get(1);
+
+        // Add CSS class
+        taskDueDate.getStyleClass().add(TaskState.getCSSClass(this.getTaskState((Task) nameable)));
 
         counter++;
 
@@ -221,6 +235,7 @@ public class ViewFactory {
 
     // Move task
     public void moveTask(Nameable nameable, int targetColumnIndex) {
+
         TaskView taskView = new TaskView((Task) nameable);
         taskView.setId(String.valueOf(counter));
 
@@ -228,7 +243,45 @@ public class ViewFactory {
         this.projectView.getColumnViews().get(targetColumnIndex).addTaskView(taskView);
 
         this.model.getTaskViewModel().getTaskMap().put(taskView, (Task) nameable);
+
+        // Get task UI
+        HBox taskContainer = (HBox) taskView.getChildren().get(0);
+        VBox left = (VBox) taskContainer.getChildren().get(0);
+        Label taskDueDate = (Label) left.getChildren().get(1);
+
+        // Add CSS class
+        taskDueDate.getStyleClass().add(TaskState.getCSSClass(this.getTaskState((Task) nameable)));
+
         counter++;
+    }
+
+    // Get task state
+    public TaskState getTaskState(Task task) {
+
+        LocalDate taskDate;
+        LocalDate today = LocalDate.now();
+
+        if (task.getDueDate() != null) {
+            taskDate = task.getDueDate();
+            if (taskDate.isAfter(today) && !task.getCompleted()) {
+                setTaskState(TaskState.DEFAULT);
+            } else if (task.getCompleted()) {
+                setTaskState(TaskState.COMPLETED);
+            } else if (taskDate.equals(today) && !task.getCompleted()) {
+                setTaskState(TaskState.DUE);
+            } else if (taskDate.isBefore(today) && !task.getCompleted()) {
+                setTaskState(TaskState.OVERDUE);
+            }
+        } else {
+            setTaskState(TaskState.NO_DATE);
+        }
+
+        return taskState;
+    }
+
+    // Set task state
+    public void setTaskState(TaskState taskState) {
+        this.taskState = taskState;
     }
 
     // Close stage
